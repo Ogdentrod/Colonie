@@ -1,13 +1,8 @@
 package fr.benoitsepe.colonie.main;
 
-import org.lwjgl.Sys;
-import org.lwjgl.glfw.*;
-import org.lwjgl.opengl.*;
- 
-import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.glfw.GLFW.glfwGetVersionString;
 
+import org.lwjgl.Sys;
 
 public class Main {
 
@@ -23,5 +18,11 @@ public class Main {
 		moteur.creerStruct(TypeStructures.EOLIENNE); // Tu peux en créer plusieurs si tu veux, j'ai pas encore implémenté les autres structures
         
         System.out.println("Hello LWJGL " + Sys.getVersion() + "!");	
-        }
+        System.out.println(glfwGetVersionString());
+        
+        
+       
+        
+    
+	}
 }
