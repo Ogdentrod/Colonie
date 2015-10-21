@@ -1,7 +1,15 @@
 package fr.benoitsepe.colonie.main;
 
-public class AfficherEtat {
+/**
+ * @author Benoît
+ * Class temporaire pour l'affichage des données. On pourra la remplacer par la GUI
+ */
+public class AfficherEtat { 
 	
+	/**
+	 * @param struct
+	 * Affichage des infos de la structure
+	 */
 	public static void afficherEtat(Structure struct) {
 		System.out.println();
 		System.out.println(struct.getNom());
