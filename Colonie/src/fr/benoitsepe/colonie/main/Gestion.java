@@ -17,12 +17,13 @@ public class Gestion {
 	}
 	
 	public void creerStruct(TypeStructures struct) {
-		Ressources.utiliserRessources(res, struct.getRes());
+		
+		Ressources.utiliserRessources(res, struct.getRes()); // On dépense les ressources (faire les vérif)
 		
 		if(struct == TypeStructures.EOLIENNE) {
 			// Stocker dans une list ou map
 			Eolienne eolienne = new Eolienne();
-			Affichage.afficherStruct(eolienne);
+			Affichage.afficherStruct(eolienne); // instruction temporaire pour affichage
 		}
 
 	}
