@@ -11,7 +11,7 @@ public class Ressources {
 	/**
 	 * Liste des ressources
 	 */
-	private int water, oxygen, wood, iron, iron_ore, elec;
+	private int water, oxygen, iron, iron_ore, elec, wood;
 	
 	
 	public Ressources() {
@@ -22,6 +22,24 @@ public class Ressources {
 		iron_ore = 0;
 		elec = 0;
 	}
+	
+	public Ressources(int water, int oxygen, int iron, int wood) {
+		this.water = water;
+		this.oxygen = oxygen;
+		this.iron = iron;
+		this.wood = wood;
+	}
+	
+	
+	public static void utiliserRessources(Ressources main, Ressources cout) {
+		// FAIRE LES VERIFS D'ABORD
+		
+		main.setWater(main.getWater() - cout.getWater());
+		main.setOxygen(main.getOxygen() - cout.getOxygen());
+		main.setIron(main.getIron() - cout.getIron());
+		main.setWood(main.getWood() - cout.getWood());
+	}
+	
 	
 	public int getElec() {
 		return elec;

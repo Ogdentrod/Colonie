@@ -8,9 +8,8 @@ public class Main {
 		// TODO Auto-generated method stub
 		
 		
-		Ressources res = new Ressources(); // Initialisation des ressources
-		Oxygene s1 = new Oxygene(); // Création d'une structure
-		AfficherEtat.afficherEtat(s1);
+		Gestion moteur = new Gestion();
+		moteur.creerStruct(TypeStructures.EOLIENNE);
 	}
 
 }

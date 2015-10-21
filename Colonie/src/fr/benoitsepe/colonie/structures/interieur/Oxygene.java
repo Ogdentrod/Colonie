@@ -7,7 +7,7 @@ import fr.benoitsepe.colonie.main.Structure;
 public class Oxygene extends Structure implements IStructure{
 
 	public Oxygene() {
-		super("Eolienne");
+		super("Oxygéne");
 	}
 
 	/* (non-Javadoc)
