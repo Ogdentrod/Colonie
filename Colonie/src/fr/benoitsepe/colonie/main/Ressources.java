@@ -1,7 +1,16 @@
 package fr.benoitsepe.colonie.main;
 
+/**
+ * @author Benoît
+ *
+ * CLASSE TEMPORAIRE POUR LES RESSOURCES, y a-t-il un meilleur moyen ?
+ * 
+ */
 public class Ressources {
 
+	/**
+	 * Liste des ressources
+	 */
 	private int water, oxygen, wood, iron, iron_ore, elec;
 	
 	
