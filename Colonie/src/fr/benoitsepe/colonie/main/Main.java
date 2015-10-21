@@ -20,8 +20,9 @@ public class Main {
 		Gestion moteur = new Gestion(); // Init moteur
 		
 		
-		moteur.creerStruct(TypeStructures.EOLIENNE); // Tu peux en créer plusieurs si tu veux, j'ai pas encore implémenté les autres structures
-        
+		moteur.creerStruct(TypeStructures.EOLIENNE, 0, 0); // Tu peux en créer plusieurs si tu veux, j'ai pas encore implémenté les autres structures
+		moteur.creerStruct(TypeStructures.PANNEAU_SOLAIRE, 0, 0);
+		moteur.creerStruct(TypeStructures.REFECTOIRE, 0, 0);
         System.out.println("Hello LWJGL " + Sys.getVersion() + "!");	
         }
 }
