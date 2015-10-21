@@ -1,2 +1,2 @@
 # Colonie
-Projet en dév
+Projet de jeu entre ami
