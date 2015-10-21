@@ -3,13 +3,13 @@ package fr.benoitsepe.colonie.main;
 /**
  * @author Benoît
  *
- * Stockage des ressources
+ * Class ressources
  * 
  */
 public class Ressources {
 
 	/**
-	 * Liste des ressources
+	 * Liste des ressources (à compléter)
 	 */
 	private int water, oxygen, iron, iron_ore, elec, wood;
 	
