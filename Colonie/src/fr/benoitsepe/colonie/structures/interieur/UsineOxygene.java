@@ -4,10 +4,10 @@ import fr.benoitsepe.colonie.main.IStructure;
 import fr.benoitsepe.colonie.main.Ressources;
 import fr.benoitsepe.colonie.main.Structure;
 
-public class Oxygene extends Structure implements IStructure{
+public class UsineOxygene extends Structure implements IStructure{
 
-	public Oxygene() {
-		super("Oxygéne");
+	public UsineOxygene() {
+		super("Usine d'oxygéne");
 	}
 
 	/* (non-Javadoc)

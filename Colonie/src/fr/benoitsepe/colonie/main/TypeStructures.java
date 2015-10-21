@@ -1,13 +1,13 @@
 package fr.benoitsepe.colonie.main;
 
 public enum TypeStructures {
-	EOLIENNE(new Ressources(0, 0, 4, 0));/*
-	PANNEAU_SOLAIRE(new Ressources(water, oxygen, iron, wood)),
-	OXYGENE(new Ressources(water, oxygen, iron, wood)),
-	REFECTOIRE(new Ressources(water, oxygen, iron, wood)),
-	SAS(new Ressources(water, oxygen, iron, wood)),
-	CONNEXION(new Ressources(water, oxygen, iron, wood)),
-	COULOIR(new Ressources(water, oxygen, iron, wood));*/
+	EOLIENNE(new Ressources(0, 0, 20, 0)),
+	PANNEAU_SOLAIRE(new Ressources(0, 0, 20, 0)),
+	USINE_OXYGENE(new Ressources(0, 10, 20, 0)),
+	REFECTOIRE(new Ressources(0, 10, 20, 0)),
+	SAS(new Ressources(0, 20, 20, 0)),
+	CONNEXION(new Ressources(0, 0, 4, 0)),
+	COULOIR(new Ressources(0, 10, 10, 0));
 	
 	private Ressources res;
 	

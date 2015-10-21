@@ -11,23 +11,22 @@ public class Ressources {
 	/**
 	 * Liste des ressources (à compléter)
 	 */
-	private int water, oxygen, iron, iron_ore, elec, wood;
+	private int water, oxygen, iron, iron_ore, elec;
 	
 	
 	public Ressources() {
 		water = 0;
 		oxygen = 0;
-		wood = 10;
 		iron = 10;
 		iron_ore = 0;
 		elec = 0;
 	}
 	
-	public Ressources(int water, int oxygen, int iron, int wood) {
+	public Ressources(int water, int oxygen, int iron, int elec) {
 		this.water = water;
 		this.oxygen = oxygen;
 		this.iron = iron;
-		this.wood = wood;
+		this.elec = elec;
 	}
 	
 	
@@ -37,7 +36,7 @@ public class Ressources {
 		main.setWater(main.getWater() - cout.getWater());
 		main.setOxygen(main.getOxygen() - cout.getOxygen());
 		main.setIron(main.getIron() - cout.getIron());
-		main.setWood(main.getWood() - cout.getWood());
+		main.setElec(main.getElec() - cout.getElec());
 	}
 	
 	
@@ -63,14 +62,6 @@ public class Ressources {
 
 	public void setOxygen(int oxygen) {
 		this.oxygen = oxygen;
-	}
-
-	public int getWood() {
-		return wood;
-	}
-
-	public void setWood(int wood) {
-		this.wood = wood;
 	}
 
 	public int getIron() {
