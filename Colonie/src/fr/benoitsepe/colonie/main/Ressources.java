@@ -3,7 +3,7 @@ package fr.benoitsepe.colonie.main;
 /**
  * @author Benoît
  *
- * CLASSE TEMPORAIRE POUR LES RESSOURCES, y a-t-il un meilleur moyen ?
+ * Stockage des ressources
  * 
  */
 public class Ressources {
