@@ -1,11 +1,27 @@
 package fr.benoitsepe.colonie.main;
 
+
+
+
+/**
+ * @author Benoît
+ * 
+ * Classe mére de toutes les structures intérieurs ou extérieurs
+ * Contient les variables membres indispensables à chaque structure
+ * 
+ * @precaution mettre les variables membres en protected et génerer les getter/setter
+ *
+ */
 public class Structure {
-	protected Etat etat;
-	protected int maintenance;
-	protected String nom;
+	protected Etat etat; // RUNNING ou STOP
+	protected int maintenance; // 0 = cassé, 100=neuf
+	protected String nom; // nom de la structure
 	
 	
+	/**
+	 * @param nom
+	 * Le constructeur doit être appelé depuis la classe fille avec comme paramétre le nom du la structure
+	 */
 	public Structure(String nom) {
 		this.nom = nom;
 		etat = Etat.RUNNING;
