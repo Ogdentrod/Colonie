@@ -11,13 +11,17 @@ public class Ressources {
 	/**
 	 * Liste des ressources (à compléter)
 	 */
-	private int water, oxygen, iron, iron_ore, elec;
+	private int water;
+	private int oxygen;
+	private int iron;
+	private int iron_ore;
+	private int elec;
 	
 	
 	public Ressources() {
 		water = 0;
 		oxygen = 0;
-		iron = 10;
+		iron = 50;
 		iron_ore = 0;
 		elec = 0;
 	}
@@ -37,6 +41,21 @@ public class Ressources {
 		main.setOxygen(main.getOxygen() - cout.getOxygen());
 		main.setIron(main.getIron() - cout.getIron());
 		main.setElec(main.getElec() - cout.getElec());
+	}
+	
+	
+	
+	/**
+	 * @param r cout de la structure
+	 * @return true si le joueur a assez de ressources, false sinon
+	 */
+	public boolean canBuy(Ressources r) {
+		if (this.water >= r.getWater() && this.oxygen >= r.getOxygen() && this.iron >= r.getIron() && this.iron_ore >= r.getIron_ore() && this.elec >= r.getElec()) {
+			return true;
+		} else {
+			return false;
+		}
+		
 	}
 	
 	

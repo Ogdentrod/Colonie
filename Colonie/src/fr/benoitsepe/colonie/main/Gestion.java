@@ -25,40 +25,55 @@ public class Gestion {
 	
 	public void creerStruct(TypeStructures struct, int posX, int posY) {
 		
-		Ressources.utiliserRessources(res, struct.getRes()); // On dépense les ressources (faire les vérif)
-		Structure structCree;
-		
-		switch(struct) {
-			case EOLIENNE:
-				structCree = new Eolienne();
-				break;
-			case PANNEAU_SOLAIRE:
-				structCree = new PanneauSolaire();
-				break;
-			case REFECTOIRE:
-				structCree = new Refectoire();
-				break;
-			case SAS:
-				structCree = new Sas();
-				break;
-			case USINE_OXYGENE:
-				structCree = new UsineOxygene();
-				break;
-			default:
-				System.out.println("ERREUR : Structure non implémentée !");
-				structCree = null;
-				break;
+		if(verifRessources(res, struct)) {
+			Ressources.utiliserRessources(res, struct.getRes());
+			Structure structCree;
 			
+			switch(struct) {
+				case EOLIENNE:
+					structCree = new Eolienne();
+					break;
+				case PANNEAU_SOLAIRE:
+					structCree = new PanneauSolaire();
+					break;
+				case REFECTOIRE:
+					structCree = new Refectoire();
+					break;
+				case SAS:
+					structCree = new Sas();
+					break;
+				case USINE_OXYGENE:
+					structCree = new UsineOxygene();
+					break;
+				default:
+					System.out.println("ERREUR : Structure non implémentée !");
+					structCree = null;
+					break;
+				
+			}
+			
+			structures[posY][posX] = structCree;
+			
+			Affichage.afficherStruct(structCree); // instruction temporaire pour affichage
+			Affichage.afficherRessource(res);
+		} else {
+			System.out.println("Vous n'avez pas assez de ressources :(");
 		}
-		
-		structures[posY][posX] = structCree;
-		
-		Affichage.afficherStruct(structCree); // instruction temporaire pour affichage
-		Affichage.afficherRessource(res);
 
 		
 
 	}
 	
+	
+	public boolean verifRessources(Ressources res, TypeStructures typeStruct) {
+		Ressources besoin = typeStruct.getRes();
+		
+		if (res.canBuy(besoin)) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
 	
 }
