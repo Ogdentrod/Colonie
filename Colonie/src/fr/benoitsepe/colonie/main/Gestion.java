@@ -54,6 +54,7 @@ public class Gestion {
 		structures[posY][posX] = structCree;
 		
 		Affichage.afficherStruct(structCree); // instruction temporaire pour affichage
+		Affichage.afficherRessource(res);
 
 		
 

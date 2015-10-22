@@ -1,8 +1,5 @@
 package fr.benoitsepe.colonie.main;
 
-
-
-
 /**
  * @author Benoît
  * 
