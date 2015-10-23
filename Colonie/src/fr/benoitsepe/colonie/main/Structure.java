@@ -9,7 +9,7 @@ package fr.benoitsepe.colonie.main;
  * @precaution mettre les variables membres en protected et génerer les getter/setter
  *
  */
-public class Structure {
+public class Structure implements IStructure {
 	protected Etat etat; // RUNNING ou STOP
 	protected int maintenance; // 0 = cassé, 100=neuf
 	protected String nom; // nom de la structure
@@ -53,6 +53,13 @@ public class Structure {
 
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+
+	@Override
+	public void utiliser(Ressources res) {
+		// TODO Auto-generated method stub
+		System.out.println("Je ne suis pas implémenté ! " + nom);
 	}
 	
 	

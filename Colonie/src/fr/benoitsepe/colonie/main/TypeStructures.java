@@ -1,6 +1,7 @@
 package fr.benoitsepe.colonie.main;
 
 public enum TypeStructures {
+	RIEN(new Ressources(0, 0, 0, 0)),
 	EOLIENNE(new Ressources(0, 0, 20, 0)),
 	PANNEAU_SOLAIRE(new Ressources(0, 0, 20, 0)),
 	USINE_OXYGENE(new Ressources(0, 10, 20, 0)),
