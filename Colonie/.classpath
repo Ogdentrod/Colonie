@@ -2,10 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="lwjgl(1)/jar/lwjgl.jar" sourcepath="lwjgl(1)/src.zip">
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Slick2D">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/Colonie/lwjgl(1)/doc/javadoc.zip!/"/>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Colonie/lwjgl(1)/native"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Colonie/slick/natives"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
