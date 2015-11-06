@@ -1,4 +1,4 @@
-package fr.kienanbachwa.colonie.affichage;
+package fr.kienanbachwa.colonie.jeu;
 
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -57,14 +57,7 @@ public class Fenetre extends BasicGame
 	    }
 	}
 	
-	public void keyPressed(int key, char c){
-			if(key==14){
-				if(texte.length()>0)
-				texte=texte.substring(0,texte.length()-1);
-			}else{
-				texte=texte+c;
-			}
-			
+	public void keyPressed(int key, char c){			
 			 switch (key) {
 			 
 		        case Input.KEY_UP:    this.direction[0] = true; break;
@@ -99,13 +92,6 @@ public class Fenetre extends BasicGame
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException
 	{
-		/*
-		background.draw(0,0,640,480);
-		g.setColor(Color.red);
-		g.scale(1.5f,1.5f);
-		g.drawString(texte, 180, 80);
-		*/
-		
 		g.scale(zoom, zoom);
 	    g.translate(gc.getWidth() / 2 - (int)this.x,  gc.getHeight() / 2 - (int)this.y); 
 	    mapLoader.getMap().render(0, 0);

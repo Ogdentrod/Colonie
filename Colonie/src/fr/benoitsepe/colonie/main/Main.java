@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
-import fr.kienanbachwa.colonie.affichage.Fenetre;
+import fr.kienanbachwa.colonie.jeu.Fenetre;
 
 public class Main {
 

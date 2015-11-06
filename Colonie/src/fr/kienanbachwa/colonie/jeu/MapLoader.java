@@ -1,4 +1,4 @@
-package fr.kienanbachwa.colonie.affichage;
+package fr.kienanbachwa.colonie.jeu;
 
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
