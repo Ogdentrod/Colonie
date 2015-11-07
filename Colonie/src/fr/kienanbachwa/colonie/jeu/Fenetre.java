@@ -94,6 +94,6 @@ public class Fenetre extends BasicGame
 	{
 		g.scale(zoom, zoom);
 	    g.translate(gc.getWidth() / 2 - (int)this.x,  gc.getHeight() / 2 - (int)this.y); 
-	    mapLoader.getMap().render(0, 0);
+	    //mapLoader.getMap().render(0, 0);
 	}
 }

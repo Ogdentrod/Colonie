@@ -1,5 +1,6 @@
 package fr.benoitsepe.colonie.main;
 
+
 /**
  * @author Benoît
  * 
@@ -13,7 +14,6 @@ public class Structure implements IStructure {
 	protected Etat etat; // RUNNING ou STOP
 	protected int maintenance; // 0 = cassé, 100=neuf
 	protected String nom; // nom de la structure
-	
 	
 	/**
 	 * @param nom
