@@ -1,5 +1,10 @@
 package fr.benoitsepe.colonie.main;
 
+import java.awt.image.BufferedImage;
+
+import javax.imageio.IIOException;
+
+import fr.kienanbachwa.colonie.jeu.SpriteLoader;
 
 /**
  * @author Benoît
@@ -14,15 +19,19 @@ public class Structure implements IStructure {
 	protected Etat etat; // RUNNING ou STOP
 	protected int maintenance; // 0 = cassé, 100=neuf
 	protected String nom; // nom de la structure
+	protected BufferedImage[][] sprites;
+	protected SpriteLoader spriteLoader = new SpriteLoader();
 	
 	/**
 	 * @param nom
 	 * Le constructeur doit être appelé depuis la classe fille avec comme paramétre le nom du la structure
+	 * Constructeur sans image: une image par défaut est chargée pour l'affichage
 	 */
 	public Structure(String nom) {
 		this.nom = nom;
 		etat = Etat.RUNNING;
 		maintenance = 100;
+		sprites = spriteLoader.loadStructureSprites(nom);
 	}
 
 

@@ -4,7 +4,11 @@ import java.util.Hashtable;
 import fr.benoitsepe.colonie.main.Structure;
 
 public class StructureManager {
-    Hashtable<String, Structure> ItemList = new Hashtable<String, Structure>();
+    Hashtable<String, Structure> StructureList;
 
-    
+    public StructureManager(){
+    	 StructureList = new Hashtable<String, Structure>();
+    	 
+    	 
+    }
 }

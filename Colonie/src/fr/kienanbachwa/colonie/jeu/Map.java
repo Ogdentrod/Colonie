@@ -1,9 +1,15 @@
 package fr.kienanbachwa.colonie.jeu;
 
-import java.util.ArrayList;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.tiled.Layer;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 import fr.benoitsepe.colonie.main.Structure;
 
@@ -16,33 +22,41 @@ public class Map {
 	protected int width;
 	/** The height of the map */
 	protected int height;
+	Image grass;
 	
 	public Map(){
-		Structure[][] map = new Structure[5][5];
+			try {
+				grass = new Image("ressources/grass.png");
+			} catch (SlickException e) {
+				e.printStackTrace();
+			}
+
+		Structure[][] map = new Structure[100][100];
 	}
 	
-	public void render(int x, int y, int sx, int sy, int width, int height, Graphics g){
-		g.drawString("Hello", 20, 20);
+	/**
+	 * Affiche une partie de la map (de [minX;minY] à [maxX;maxY]
+	 * width et height: taille des tiles sur le rendu
+	 **/
+	public void render(int minX, int minY, int maxX, int maxY, int width, int height, Graphics g){
+		renderGround(minX, minY, maxX, maxY, width, height, g);
 	}
-/*	
-	public void render(int x, int y, int sx, int sy, int width, int height,
-			boolean lineByLine) {
-		switch (orientation) {
-		case ORTHOGONAL:
-			for (int ty = 0; ty < height; ty++) {
-				for (int i = 0; i < layers.size(); i++) {
-					Layer layer = (Layer) layers.get(i);
-					layer.render(x, y, sx, sy, width, ty, lineByLine,
-							tileWidth, tileHeight);
-				}
+
+	public void renderStructures(int minX, int minY, int maxX, int maxY, int width, int height, Graphics g){
+	    for(int i = minX ; i<maxX; i++){
+			for(int j = minY; j<maxY; j++){
+				
 			}
-			break;
-		case ISOMETRIC:
-			renderIsometricMap(x, y, sx, sy, width, height, null, lineByLine);
-			break;
-		default:
-			// log error or something
 		}
 	}
-*/	
+	
+	public void renderGround(int minX, int minY, int maxX, int maxY, int width, int height, Graphics g){
+	    for(int i = minX ; i<maxX; i++){
+			for(int j = minY; j<maxY; j++){
+				//g.drawImage(grass, i, j, i, j, i+width, j+height);
+				grass.draw(i, j);
+			}
+		}
+	}
+	
 	}

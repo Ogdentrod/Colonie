@@ -7,13 +7,17 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-public class Fenetre extends BasicGame
+import fr.benoitsepe.colonie.main.Gestion;
+import fr.benoitsepe.colonie.main.TypeStructures;
+import fr.benoitsepe.colonie.structures.exterieur.Eolienne;
+
+public class Jeu extends BasicGame
 {
 	public GameContainer gc;
 	String texte = "Surprise!";
 	Image background;
 	Image playerImage;
-	private MapLoader mapLoader;
+	private Map map;
 	
 	private float y;
 	private float x;
@@ -25,7 +29,7 @@ public class Fenetre extends BasicGame
 	private boolean[] direction = new boolean[4];
 	private float zoom = 1;
 	
-	public Fenetre(String gamename)
+	public Jeu(String gamename)
 	{
 		super(gamename);
 	}
@@ -33,16 +37,38 @@ public class Fenetre extends BasicGame
 	@Override
 	public void init(GameContainer gc) throws SlickException {
 		this.gc=gc;
-		mapLoader = new MapLoader();
-		System.out.println(mapLoader.getMap().getTileId(1,1,0));
+		map = new Map();
 		x=gc.getWidth()/2;
 		y=gc.getHeight()/2;
 		
-	    mapSizeY = mapLoader.getMap().getHeight() * mapLoader.getMap().getTileHeight();
-	    mapSizeX = mapLoader.getMap().getWidth() * mapLoader.getMap().getTileWidth();
-
+		Gestion gestion = new Gestion();
+		gestion.creerStruct(TypeStructures.EOLIENNE, 0, 0);	
 	}
 
+	@Override
+	public void update(GameContainer gc, int i) throws SlickException {
+		if(this.direction[0] && (y - gc.getHeight()/2 > 0)){
+			this.y -= .1f * delta;
+		}
+		if(this.direction[1] && (x - gc.getWidth()/2 >0)){
+			this.x -= .1f * delta;
+		}
+		if(this.direction[2] && (y+gc.getHeight()/2 < mapSizeY)){
+			this.y += .1f * delta;
+		}
+		if(this.direction[3] && (x+gc.getWidth()/2 < mapSizeX )){
+			this.x += .1f * delta;
+		}
+	}
+
+	@Override
+	public void render(GameContainer gc, Graphics g) throws SlickException
+	{
+		g.scale(zoom, zoom);
+	    g.translate(gc.getWidth() / 2 - (int)this.x,  gc.getHeight() / 2 - (int)this.y); 
+	    map.render(0, 0, gc.getWidth(), gc.getHeight(), 32, 32, g);
+	}
+	
 	public void keyReleased(int key, char c){
 		if (Input.KEY_ESCAPE==key){
 			gc.exit();
@@ -70,30 +96,5 @@ public class Fenetre extends BasicGame
 		        case Input.KEY_ADD: this.zoom+=0.2f; 
 		        	System.out.println("zoom:"+zoom); break;
 		    }
-	}
-	
-	
-	@Override
-	public void update(GameContainer gc, int i) throws SlickException {
-		if(this.direction[0] && (y - gc.getHeight()/2 > 0)){
-			this.y -= .1f * delta;
-		}
-		if(this.direction[1] && (x - gc.getWidth()/2 >0)){
-			this.x -= .1f * delta;
-		}
-		if(this.direction[2] && (y+gc.getHeight()/2 < mapSizeY)){
-			this.y += .1f * delta;
-		}
-		if(this.direction[3] && (x+gc.getWidth()/2 < mapSizeX )){
-			this.x += .1f * delta;
-		}
-	}
-
-	@Override
-	public void render(GameContainer gc, Graphics g) throws SlickException
-	{
-		g.scale(zoom, zoom);
-	    g.translate(gc.getWidth() / 2 - (int)this.x,  gc.getHeight() / 2 - (int)this.y); 
-	    //mapLoader.getMap().render(0, 0);
 	}
 }
