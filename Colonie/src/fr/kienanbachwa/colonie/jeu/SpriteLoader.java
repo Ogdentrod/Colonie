@@ -6,35 +6,46 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.util.ResourceLoader;
+
+/**
+ *  @description Toutes les tiles d'une structure seront stockées dans une seule image au format png
+ * 	Cette classe découpe ces images pour obtenir les tiles constituant les structures
+ */
 public class SpriteLoader {
-	BufferedImage bigImg;
-	BufferedImage[][] sprites;
+	Image bigImg;
+	Image[][] sprites;
 	int sizeX;
 	int sizeY;
-	final int height = 32;
+	final int height = 32;	
 	final int width = 32;
 	
 	public SpriteLoader(){
 		
 	}
 	
-	public BufferedImage[][] loadStructureSprites(String structName){
-		try {
-			bigImg = ImageIO.read(new File("ressources/"+structName+".png"));
-		} catch (IOException e) {
+	public Image[][] loadStructureSprites(String structName){
 			try {
-				bigImg = ImageIO.read(new File("ressources/brick.png"));
-			} catch (IOException e1) {
-				e1.printStackTrace();
+				bigImg = new Image("ressources/"+structName+".png");
+			} catch (SlickException e) {
+				if (bigImg==null){
+					try {
+						bigImg = new Image("ressources/brick.png");
+					} catch (SlickException e1) {
+						e1.printStackTrace();
+					}
+				}
 			}
-		}
+		
 		sizeX=bigImg.getWidth()/width;
 		sizeY=bigImg.getHeight()/height;
-		sprites = new BufferedImage[sizeX][sizeY];
+		sprites = new Image[sizeX][sizeY];
 		
 		for(int i = 0; i < sizeX; i++){
 			for(int j = 0; j < sizeY; j++){
-				sprites[i][j] = bigImg.getSubimage(i*width, j*height, width, height);
+				sprites[i][j] = bigImg.getSubImage(i*width, j*height, width, height);
 			}
 		}
 		

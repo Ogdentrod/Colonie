@@ -28,6 +28,8 @@ public class Jeu extends BasicGame
 	
 	private boolean[] direction = new boolean[4];
 	private float zoom = 1;
+
+	Gestion gestion;
 	
 	public Jeu(String gamename)
 	{
@@ -41,8 +43,8 @@ public class Jeu extends BasicGame
 		x=gc.getWidth()/2;
 		y=gc.getHeight()/2;
 		
-		Gestion gestion = new Gestion();
-		gestion.creerStruct(TypeStructures.EOLIENNE, 0, 0);	
+		gestion = new Gestion(32, 32);
+		gestion.creerStruct(TypeStructures.EOLIENNE, 2, 2);	
 	}
 
 	@Override
@@ -66,14 +68,13 @@ public class Jeu extends BasicGame
 	{
 		g.scale(zoom, zoom);
 	    g.translate(gc.getWidth() / 2 - (int)this.x,  gc.getHeight() / 2 - (int)this.y); 
-	    map.render(0, 0, gc.getWidth(), gc.getHeight(), 32, 32, g);
+	    map.render(0, 0, gc.getWidth(), gc.getHeight(), 32, 32, g, gestion.getStructures());
 	}
 	
 	public void keyReleased(int key, char c){
 		if (Input.KEY_ESCAPE==key){
 			gc.exit();
 		}
-		
 		 switch (key) {
 		 
 	        case Input.KEY_UP:    this.direction[0] = false; break;

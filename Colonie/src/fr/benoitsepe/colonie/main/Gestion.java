@@ -5,7 +5,6 @@ import fr.benoitsepe.colonie.structures.exterieur.PanneauSolaire;
 import fr.benoitsepe.colonie.structures.interieur.Refectoire;
 import fr.benoitsepe.colonie.structures.interieur.Sas;
 import fr.benoitsepe.colonie.structures.interieur.UsineOxygene;
-import fr.benoitsepe.colonie.structures.liaison.Vide;
 
 /**
  * @author Benoît
@@ -14,22 +13,20 @@ import fr.benoitsepe.colonie.structures.liaison.Vide;
  */
 public class Gestion {
 
-	public static final int ARRAY_LONGUEUR = 50;
-	public static final int ARRAY_HAUTEUR = 50;
-
 	Ressources res;
+	Structure[][] structures;
 
-	Structure[][] structures = new Structure[ARRAY_HAUTEUR][ARRAY_LONGUEUR];
-
-	public Gestion() {
+	public Gestion(int sizeX, int sizeY) {
 		this.res = new Ressources();
+		structures = new Structure[sizeX][sizeY];
 
+/*
 		for (int i = 0; i < structures.length; i++) {
 			for (int j = 0; j < structures[i].length; j++) {
 				structures[i][j] = new Vide();
 			}
 		}
-
+*/
 		Tick thread = new Tick(this.structures, this.res);
 		thread.start();
 	}
@@ -63,6 +60,7 @@ public class Gestion {
 
 			}
 
+			
 			structures[posY][posX] = structCree;
 
 			Affichage.afficherStruct(structCree); // instruction temporaire pour
@@ -85,6 +83,10 @@ public class Gestion {
 
 	}
 
+	public Structure[][] getStructures() {
+		return structures;
+	}
+
 	public class Tick extends Thread {
 
 		Structure[][] structures;
@@ -99,13 +101,13 @@ public class Gestion {
 			while (true) {
 				for (Structure sousTab[] : structures) {
 					for (Structure str : sousTab) {
-						str.utiliser(res);
+						if(str != null)
+							str.utiliser(res);
 					}
 				}
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

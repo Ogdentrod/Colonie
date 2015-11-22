@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.IIOException;
 
+import org.newdawn.slick.Image;
+
 import fr.kienanbachwa.colonie.jeu.SpriteLoader;
 
 /**
@@ -19,7 +21,9 @@ public class Structure implements IStructure {
 	protected Etat etat; // RUNNING ou STOP
 	protected int maintenance; // 0 = cassé, 100=neuf
 	protected String nom; // nom de la structure
-	protected BufferedImage[][] sprites;
+	protected int sizeX; //Taille horizontale de la structure
+	protected int sizeY; //Taille verticale de la structure
+	public Image[][] sprites;
 	protected SpriteLoader spriteLoader = new SpriteLoader();
 	
 	/**
@@ -32,6 +36,22 @@ public class Structure implements IStructure {
 		etat = Etat.RUNNING;
 		maintenance = 100;
 		sprites = spriteLoader.loadStructureSprites(nom);
+		sizeX=1;	//Si la taille de la structure n'est pas modifiée dans la classe fille, elle est égale à 1
+		sizeY=1;
+	}
+
+
+	public Image[][] getSprites() {
+		return sprites;
+	}
+	
+	public int getSizeX() {
+		return sizeX;
+	}
+
+
+	public int getSizeY() {
+		return sizeY;
 	}
 
 
@@ -67,7 +87,6 @@ public class Structure implements IStructure {
 
 	@Override
 	public void utiliser(Ressources res) {
-		// TODO Auto-generated method stub
 		System.out.println("Je ne suis pas implémenté ! " + nom);
 	}
 	
