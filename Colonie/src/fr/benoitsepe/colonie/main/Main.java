@@ -22,6 +22,7 @@ public class Main {
 		catch (SlickException ex)
 		{
 			Logger.getLogger(Jeu.class.getName()).log(Level.SEVERE, null, ex);
+			System.out.println(ex);
 		}
 		
 	}
