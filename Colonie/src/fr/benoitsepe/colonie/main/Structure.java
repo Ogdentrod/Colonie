@@ -1,13 +1,5 @@
 package fr.benoitsepe.colonie.main;
 
-import java.awt.image.BufferedImage;
-
-import javax.imageio.IIOException;
-
-import org.newdawn.slick.Image;
-
-import fr.kienanbachwa.colonie.jeu.SpriteLoader;
-
 /**
  * @author Benoît
  * 
@@ -23,8 +15,6 @@ public class Structure implements IStructure {
 	protected String nom; // nom de la structure
 	protected int sizeX; //Taille horizontale de la structure
 	protected int sizeY; //Taille verticale de la structure
-	public Image[][] sprites;
-	protected SpriteLoader spriteLoader = new SpriteLoader();
 	
 	/**
 	 * @param nom
@@ -35,14 +25,8 @@ public class Structure implements IStructure {
 		this.nom = nom;
 		etat = Etat.RUNNING;
 		maintenance = 100;
-		sprites = spriteLoader.loadStructureSprites(nom);
 		sizeX=1;	//Si la taille de la structure n'est pas modifiée dans la classe fille, elle est égale à 1
 		sizeY=1;
-	}
-
-
-	public Image[][] getSprites() {
-		return sprites;
 	}
 	
 	public int getSizeX() {

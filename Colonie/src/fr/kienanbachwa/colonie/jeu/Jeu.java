@@ -1,101 +1,119 @@
 package fr.kienanbachwa.colonie.jeu;
 
-import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
+import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.util.glu.GLU;
 
-import fr.benoitsepe.colonie.main.Gestion;
-import fr.benoitsepe.colonie.main.TypeStructures;
-import fr.benoitsepe.colonie.structures.exterieur.Eolienne;
+import static org.lwjgl.opengl.GL11.*;
 
-public class Jeu extends BasicGame
-{
-	public GameContainer gc;
-	String texte = "Surprise!";
-	Image background;
-	Image playerImage;
-	private Map map;
+public class Jeu {
 	
-	private float y;
-	private float x;
-	private float delta = 10;
+	public static int scale = 3;
+	public static int width = 720 / scale;
+	public static int height = 480 / scale;
+	public boolean running = false;
 	
-	private int mapSizeX;
-	private int mapSizeY;
+	DisplayMode mode = new DisplayMode(width * scale, height * scale);
+	int time = 0;
 	
-	private boolean[] direction = new boolean[4];
-	private float zoom = 1;
-
-	Gestion gestion;
+	public static boolean tick = false;
+	public static boolean render = false;
 	
-	public Jeu(String gamename)
-	{
-		super(gamename);
+	public static String title = "TEH BEST GAME EVAH";
+	
+	public Jeu(){
+		try {
+			Display.setDisplayMode(mode);
+			Display.setResizable(true);
+			Display.setFullscreen(false);
+			Display.setTitle(title);
+			Display.create();
+			
+			view2D(width, height);
+		} catch (LWJGLException e) {
+			e.printStackTrace();
+		}
 	}
-
-	@Override
-	public void init(GameContainer gc) throws SlickException {
-		this.gc=gc;
-		map = new Map();
-		x=gc.getWidth()/2;
-		y=gc.getHeight()/2;
+	
+	private void view2D(int width, int height){
+		glViewport(0, 0, width*scale, height*scale);
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		GLU.gluOrtho2D(0, width, height, 0);
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+	}
+	public void start(){
+		running=true;
+		loop();
+	}
+	public void tick(){
+		time++;
+	}
+	
+	public void loop(){
 		
-		gestion = new Gestion(32, 32);
-		gestion.creerStruct(TypeStructures.EOLIENNE, 2, 2);	
-	}
-
-	@Override
-	public void update(GameContainer gc, int i) throws SlickException {
-		if(this.direction[0] && (y - gc.getHeight()/2 > 0)){
-			this.y -= .1f * delta;
+		long timer = System.currentTimeMillis();
+		
+		long before = System.nanoTime();
+		double elapsed = 0;
+		double nanoSeconds = 1000000000.0/60.0;
+		
+		int ticks = 0;
+		int frames = 0;
+		
+		while(running){
+			if(Display.isCloseRequested()) stop();
+			Display.update();
+			
+			width = Display.getWidth() / scale;
+			height = Display.getHeight() / scale;
+			
+			tick = false;
+			render = false;
+			
+			long now = System.nanoTime();
+			elapsed = now-before;
+			
+			if(elapsed > nanoSeconds){
+				before += nanoSeconds;
+				tick = true;
+				ticks++;
+			}else{
+				render = true;
+				frames++;
+			}
+			
+			if(tick) tick();
+			if(render) render();
+			
+			if(System.currentTimeMillis() - timer > 1000){
+				timer +=1000;
+				Display.setTitle("ticks:"+ticks+" FPS:"+frames+" | "+title);
+				ticks = 0;
+				frames = 0;
+			}
 		}
-		if(this.direction[1] && (x - gc.getWidth()/2 >0)){
-			this.x -= .1f * delta;
-		}
-		if(this.direction[2] && (y+gc.getHeight()/2 < mapSizeY)){
-			this.y += .1f * delta;
-		}
-		if(this.direction[3] && (x+gc.getWidth()/2 < mapSizeX )){
-			this.x += .1f * delta;
-		}
-	}
-
-	@Override
-	public void render(GameContainer gc, Graphics g) throws SlickException
-	{
-		g.scale(zoom, zoom);
-	    g.translate(gc.getWidth() / 2 - (int)this.x,  gc.getHeight() / 2 - (int)this.y); 
-	    map.render(0, 0, gc.getWidth(), gc.getHeight(), 32, 32, g, gestion.getStructures());
+		exit();
 	}
 	
-	public void keyReleased(int key, char c){
-		if (Input.KEY_ESCAPE==key){
-			gc.exit();
-		}
-		 switch (key) {
-		 
-	        case Input.KEY_UP:    this.direction[0] = false; break;
-	        case Input.KEY_LEFT:  this.direction[1] = false; break;
-	        case Input.KEY_DOWN:  this.direction[2] = false; break;
-	        case Input.KEY_RIGHT: this.direction[3] = false; break;
-	    }
+	public void render(){
+		view2D(width , height);
+
+		glClear(GL_COLOR_BUFFER_BIT);
+		glRectf(16,16,32,32);
 	}
 	
-	public void keyPressed(int key, char c){			
-			 switch (key) {
-			 
-		        case Input.KEY_UP:    this.direction[0] = true; break;
-		        case Input.KEY_LEFT:  this.direction[1] = true; break;
-		        case Input.KEY_DOWN:  this.direction[2] = true; break;
-		        case Input.KEY_RIGHT: this.direction[3] = true; break;
-		        
-		        case Input.KEY_SUBTRACT: this.zoom-=0.2f; 
-		        	System.out.println("zoom:"+zoom); break;
-		        case Input.KEY_ADD: this.zoom+=0.2f; 
-		        	System.out.println("zoom:"+zoom); break;
-		    }
+	public void stop(){
+		running=false;
 	}
+	
+	public void exit(){
+		Display.destroy();
+		System.exit(0);
+	}
+
+	
+	
 }
