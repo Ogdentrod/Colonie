@@ -25,7 +25,7 @@ public class Structure implements IStructure {
 		this.nom = nom;
 		etat = Etat.RUNNING;
 		maintenance = 100;
-		sizeX=1;	//Si la taille de la structure n'est pas modifiée dans la classe fille, elle est égale à 1
+		sizeX=1;	
 		sizeY=1;
 	}
 	
@@ -74,6 +74,8 @@ public class Structure implements IStructure {
 		System.out.println("Je ne suis pas implémenté ! " + nom);
 	}
 	
-	
+	public void connect(Structure struct){
+		
+	}
 
 }

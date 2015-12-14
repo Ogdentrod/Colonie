@@ -7,7 +7,7 @@ import org.lwjgl.util.glu.GLU;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class Jeu {
+public class Component {
 	
 	public static int scale = 3;
 	public static int width = 720 / scale;
@@ -22,7 +22,14 @@ public class Jeu {
 	
 	public static String title = "TEH BEST GAME EVAH";
 	
-	public Jeu(){
+	Game game;
+	
+	public Component(){
+		display();
+		game = new Game();
+	}
+	
+	public void display(){
 		try {
 			Display.setDisplayMode(mode);
 			Display.setResizable(true);
@@ -35,24 +42,33 @@ public class Jeu {
 			e.printStackTrace();
 		}
 	}
-	
-	private void view2D(int width, int height){
-		glViewport(0, 0, width*scale, height*scale);
+	private void view2D(int width, int height) {
+		glViewport(0, 0, width * scale, height * scale);
+		
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		GLU.gluOrtho2D(0, width, height, 0);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
+		
+		glEnable(GL_TEXTURE_2D);
+		
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
+	
 	public void start(){
 		running=true;
 		loop();
 	}
 	public void tick(){
 		time++;
+		game.tick();
 	}
 	
 	public void loop(){
+		
+		game.init();
 		
 		long timer = System.currentTimeMillis();
 		
@@ -100,9 +116,8 @@ public class Jeu {
 	
 	public void render(){
 		view2D(width , height);
-
 		glClear(GL_COLOR_BUFFER_BIT);
-		glRectf(16,16,32,32);
+		game.render();
 	}
 	
 	public void stop(){

@@ -19,16 +19,6 @@ public class Gestion {
 	public Gestion(int sizeX, int sizeY) {
 		this.res = new Ressources();
 		structures = new Structure[sizeX][sizeY];
-
-/*
-		for (int i = 0; i < structures.length; i++) {
-			for (int j = 0; j < structures[i].length; j++) {
-				structures[i][j] = new Vide();
-			}
-		}
-*/
-		Tick thread = new Tick(this.structures, this.res);
-		thread.start();
 	}
 
 	public void creerStruct(TypeStructures struct, int posX, int posY) {
@@ -87,30 +77,13 @@ public class Gestion {
 		return structures;
 	}
 
-	public class Tick extends Thread {
-
-		Structure[][] structures;
-		Ressources res;
-
-		public Tick(Structure[][] structures, Ressources res) {
-			this.structures = structures;
-			this.res = res;
-		}
-
-		public void run() {
-			while (true) {
-				for (Structure sousTab[] : structures) {
-					for (Structure str : sousTab) {
-						if(str != null)
-							str.utiliser(res);
-					}
-				}
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+	public void update() {
+		for (Structure sousTab[] : structures) {
+			for (Structure str : sousTab) {
+				if(str != null)
+					str.utiliser(res);
 			}
 		}
 	}
+	
 }
