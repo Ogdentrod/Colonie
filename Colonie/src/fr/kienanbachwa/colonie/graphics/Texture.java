@@ -1,5 +1,20 @@
 package fr.kienanbachwa.colonie.graphics;
 
+import static org.lwjgl.opengl.GL11.GL_NEAREST;
+import static org.lwjgl.opengl.GL11.GL_RGBA;
+import static org.lwjgl.opengl.GL11.GL_RGBA8;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_MAG_FILTER;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_MIN_FILTER;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_WRAP_S;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_WRAP_T;
+import static org.lwjgl.opengl.GL11.GL_UNSIGNED_BYTE;
+import static org.lwjgl.opengl.GL11.glBindTexture;
+import static org.lwjgl.opengl.GL11.glGenTextures;
+import static org.lwjgl.opengl.GL11.glTexImage2D;
+import static org.lwjgl.opengl.GL11.glTexParameteri;
+import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -9,13 +24,8 @@ import javax.imageio.ImageIO;
 
 import org.lwjgl.BufferUtils;
 
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL12.*;
-
 public class Texture {
-	
-	public static Texture tiles = loadTexture("/textures/Tiles.png");
-	
+		
 	int width, height;
 	int id;
 	
@@ -25,10 +35,12 @@ public class Texture {
 		this.id = id;
 	}
 	
-	public static Texture loadTexture(String path) {
+	public static Texture brick = loadTexture("brick");
+	
+	public static Texture loadTexture(String name) {
 		BufferedImage image = null;
 		try {
-			image = ImageIO.read(Texture.class.getResource(path));
+			image = ImageIO.read(new File("res/"+name+".png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -41,8 +53,8 @@ public class Texture {
 		
 		ByteBuffer buffer = BufferUtils.createByteBuffer(w * h * 4);
 		
-		for (int y = 0; y < w; y++) {
-			for (int x = 0; x < h; x++) {
+		for (int y = 0; y < h; y++) {
+			for (int x = 0; x < w; x++) {
 				int i = pixels[x + y * w];
 				buffer.put((byte) ((i >> 16) & 0xFF));
 				buffer.put((byte) ((i >> 8) & 0xFF));

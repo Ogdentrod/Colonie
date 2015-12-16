@@ -1,5 +1,13 @@
 package fr.benoitsepe.colonie.main;
 
+import static org.lwjgl.opengl.GL11.*;
+
+
+import java.util.Random;
+
+import fr.kienanbachwa.colonie.graphics.Renderer;
+import fr.kienanbachwa.colonie.graphics.Texture;
+
 /**
  * @author Benoît
  * 
@@ -13,8 +21,13 @@ public class Structure implements IStructure {
 	protected Etat etat; // RUNNING ou STOP
 	protected int maintenance; // 0 = cassé, 100=neuf
 	protected String nom; // nom de la structure
-	protected int sizeX; //Taille horizontale de la structure
-	protected int sizeY; //Taille verticale de la structure
+
+	int x;
+	int y;
+	public static int tileSize = 16;
+	Random random;
+	float[] color;
+	int size = 16;
 	
 	/**
 	 * @param nom
@@ -25,17 +38,9 @@ public class Structure implements IStructure {
 		this.nom = nom;
 		etat = Etat.RUNNING;
 		maintenance = 100;
-		sizeX=1;	
-		sizeY=1;
-	}
-	
-	public int getSizeX() {
-		return sizeX;
-	}
-
-
-	public int getSizeY() {
-		return sizeY;
+		random = new Random();
+		
+		color = new float[]{random.nextFloat(), random.nextFloat(), random.nextFloat(), 1.0f};
 	}
 
 
@@ -76,6 +81,16 @@ public class Structure implements IStructure {
 	
 	public void connect(Structure struct){
 		
+	}
+	
+	public void render(int x, int y){
+		Texture.brick.bind();
+
+		glBegin(GL_QUADS);
+			Renderer.quadData(x*size, y*size, size, size, color);
+		glEnd();
+		
+		Texture.brick.unbind();
 	}
 
 }
