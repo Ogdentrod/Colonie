@@ -9,7 +9,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Component {
 	
-	public static int scale = 2;
+	public static int scale = 1;
 	public static int width = 720 / scale;
 	public static int height = 480 / scale;
 	public boolean running = false;
