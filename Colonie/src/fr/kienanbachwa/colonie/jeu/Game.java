@@ -11,7 +11,7 @@ public class Game {
 	Gestion gestion;
 	
 	public Game(){
-		gestion = new Gestion(100,100);
+		gestion = new Gestion(50,50);
 	}
 	
 	public void init(){

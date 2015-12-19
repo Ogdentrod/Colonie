@@ -28,6 +28,7 @@ public class Structure implements IStructure {
 	Random random;
 	float[] color;
 	int size = 16;
+	private Texture texture; 
 	
 	/**
 	 * @param nom
@@ -40,7 +41,9 @@ public class Structure implements IStructure {
 		maintenance = 100;
 		random = new Random();
 		
-		color = new float[]{random.nextFloat(), random.nextFloat(), random.nextFloat(), 1.0f};
+		//color = new float[]{random.nextFloat(), random.nextFloat(), random.nextFloat(), 1.0f};
+		color = new float[]{1,1,1,1};
+		texture = Texture.loadTexture(this.getClass().getSimpleName().toLowerCase());
 	}
 
 
@@ -84,13 +87,13 @@ public class Structure implements IStructure {
 	}
 	
 	public void render(int x, int y){
-		Texture.brick.bind();
+		texture.bind();
 
 		glBegin(GL_QUADS);
 			Renderer.quadData(x*size, y*size, size, size, color);
 		glEnd();
 		
-		Texture.brick.unbind();
+		texture.unbind();
 	}
 
 }

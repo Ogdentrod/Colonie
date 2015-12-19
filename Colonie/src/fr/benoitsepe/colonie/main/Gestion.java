@@ -96,7 +96,6 @@ public class Gestion {
 		
 		for (int x=xMin; x<xMax;x++) {
 			for (int y=yMin; y<yMax; y++) {
-				
 				structures[x][y].render(x, y);
 			}
 		}	

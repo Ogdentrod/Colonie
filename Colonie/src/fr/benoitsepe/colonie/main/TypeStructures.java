@@ -1,5 +1,7 @@
 package fr.benoitsepe.colonie.main;
 
+import fr.kienanbachwa.colonie.graphics.Texture;
+
 public enum TypeStructures {
 	RIEN(new Ressources(0, 0, 0, 0)),
 	EOLIENNE(new Ressources(0, 0, 20, 0)),

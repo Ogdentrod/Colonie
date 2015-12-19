@@ -9,7 +9,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Component {
 	
-	public static int scale = 3;
+	public static int scale = 2;
 	public static int width = 720 / scale;
 	public static int height = 480 / scale;
 	public boolean running = false;
@@ -53,8 +53,8 @@ public class Component {
 		
 		glEnable(GL_TEXTURE_2D);
 		
-		//glEnable(GL_BLEND);
-		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 	
 	public void start(){

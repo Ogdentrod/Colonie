@@ -34,9 +34,7 @@ public class Texture {
 		this.height = height;
 		this.id = id;
 	}
-	
-	public static Texture brick = loadTexture("brick");
-	
+		
 	public static Texture loadTexture(String name) {
 		BufferedImage image = null;
 		try {
