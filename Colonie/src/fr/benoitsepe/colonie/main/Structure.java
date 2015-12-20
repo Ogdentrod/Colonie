@@ -27,7 +27,6 @@ public class Structure implements IStructure {
 	public static int tileSize = 16;
 	Random random;
 	float[] color;
-	int size = 16;
 	private Texture texture; 
 	
 	/**
@@ -90,7 +89,7 @@ public class Structure implements IStructure {
 		texture.bind();
 
 		glBegin(GL_QUADS);
-			Renderer.quadData(x*size, y*size, size, size, color);
+			Renderer.quadData(x*tileSize, y*tileSize, tileSize, tileSize, color);
 		glEnd();
 		
 		texture.unbind();
