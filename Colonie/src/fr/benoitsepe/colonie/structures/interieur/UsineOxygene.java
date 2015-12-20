@@ -7,7 +7,7 @@ import fr.benoitsepe.colonie.main.Structure;
 public class UsineOxygene extends Structure implements IStructure{
 
 	public UsineOxygene() {
-		super("Usine d'oxygéne");
+		super("Usineoxygene");
 	}
 
 	/* (non-Javadoc)

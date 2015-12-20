@@ -1,5 +1,7 @@
 package fr.benoitsepe.colonie.main;
 
+import org.lwjgl.input.Mouse;
+
 import fr.benoitsepe.colonie.structures.exterieur.Eolienne;
 import fr.benoitsepe.colonie.structures.exterieur.PanneauSolaire;
 import fr.benoitsepe.colonie.structures.interieur.Refectoire;
@@ -59,7 +61,7 @@ public class Gestion {
 			}
 
 			
-			structures[posY][posX] = structCree;
+			structures[posX][posY] = structCree;
 			structCree.x = posX;
 			structCree.y = posY;
 
@@ -108,6 +110,17 @@ public class Gestion {
 				if(str != null)
 					str.utiliser(res);
 			}
+		}
+		
+		res.setIron(1000);
+		res.setElec(1000);
+		res.setIron_ore(1000);
+		res.setOxygen(1000);
+		res.setWater(1000);
+		
+		if(Mouse.isButtonDown(0)){
+			System.out.println("Creation structure à ("+Game.mouseXGrid+";"+Game.mouseYGrid+")");
+			this.creerStruct(TypeStructures.USINE_OXYGENE, Game.mouseXGrid, Game.mouseYGrid);
 		}
 	}
 	
