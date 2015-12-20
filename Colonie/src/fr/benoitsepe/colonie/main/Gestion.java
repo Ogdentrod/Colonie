@@ -30,6 +30,12 @@ public class Gestion {
 		res.setOxygen(100000);
 		res.setWater(100000);
 		
+		for(int i=0;i<sizeX;i++){
+			for(int j=0;j<sizeY;j++){
+				//this.creerStruct(TypeStructures.EOLIENNE, i, j);
+			}
+		}
+		
 	}
 
 	public void creerStruct(TypeStructures struct, int posX, int posY) {
