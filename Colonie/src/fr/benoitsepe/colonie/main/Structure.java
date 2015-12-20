@@ -42,7 +42,10 @@ public class Structure implements IStructure {
 		
 		//color = new float[]{random.nextFloat(), random.nextFloat(), random.nextFloat(), 1.0f};
 		color = new float[]{1,1,1,1};
-		texture = Texture.loadTexture(this.getClass().getSimpleName().toLowerCase());
+		
+		System.out.println(TypeStructures.valueOf(nom.toUpperCase()));
+		texture = TypeStructures.valueOf(nom.toUpperCase()).getTexture();
+		
 	}
 
 

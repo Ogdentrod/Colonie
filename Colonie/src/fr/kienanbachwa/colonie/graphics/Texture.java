@@ -24,6 +24,7 @@ import javax.imageio.ImageIO;
 
 import org.lwjgl.BufferUtils;
 
+
 public class Texture {
 		
 	int width, height;
@@ -34,7 +35,9 @@ public class Texture {
 		this.height = height;
 		this.id = id;
 	}
-		
+	
+
+	
 	public static Texture loadTexture(String name) {
 		BufferedImage image = null;
 		try {

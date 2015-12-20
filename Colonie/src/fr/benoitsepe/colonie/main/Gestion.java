@@ -32,7 +32,7 @@ public class Gestion {
 		
 		for(int i=0;i<sizeX;i++){
 			for(int j=0;j<sizeY;j++){
-				//this.creerStruct(TypeStructures.EOLIENNE, i, j);
+				this.creerStruct(TypeStructures.EOLIENNE, i, j);
 			}
 		}
 		
@@ -48,7 +48,7 @@ public class Gestion {
 			case EOLIENNE:
 				structCree = new Eolienne();
 				break;
-			case PANNEAU_SOLAIRE:
+			case PANNEAUSOLAIRE:
 				structCree = new PanneauSolaire();
 				break;
 			case REFECTOIRE:
@@ -57,7 +57,7 @@ public class Gestion {
 			case SAS:
 				structCree = new Sas();
 				break;
-			case USINE_OXYGENE:
+			case USINEOXYGENE:
 				structCree = new UsineOxygene();
 				break;
 			default:
@@ -127,7 +127,7 @@ public class Gestion {
 		
 		if(Mouse.isButtonDown(0)){
 			System.out.println("Creation structure à ("+Game.mouseXGrid+";"+Game.mouseYGrid+")");
-			this.creerStruct(TypeStructures.USINE_OXYGENE, Game.mouseXGrid, Game.mouseYGrid);
+			this.creerStruct(TypeStructures.USINEOXYGENE, Game.mouseXGrid, Game.mouseYGrid);
 		}
 	}
 	
