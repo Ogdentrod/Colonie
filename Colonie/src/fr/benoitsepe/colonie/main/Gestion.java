@@ -24,11 +24,12 @@ public class Gestion {
 		this.res = new Ressources();
 		structures = new Structure[sizeX][sizeY];
 		
-		for (int x=0; x<structures.length;x++) {
-			for (int y=0; y<structures[0].length; y++) {
-				structures[x][y] = new Eolienne();
-			}
-		}	
+		res.setIron(100000);
+		res.setElec(100000);
+		res.setIron_ore(100000);
+		res.setOxygen(100000);
+		res.setWater(100000);
+		
 	}
 
 	public void creerStruct(TypeStructures struct, int posX, int posY) {
@@ -98,7 +99,7 @@ public class Gestion {
 		
 		for (int x=xMin; x<xMax;x++) {
 			for (int y=yMin; y<yMax; y++) {
-				structures[x][y].render(x, y);
+				if(structures[x][y]!=null) structures[x][y].render(x, y);
 			}
 		}	
 	}
