@@ -22,11 +22,7 @@ public class Gestion {
 		this.res = new Ressources();
 		structures = new Structure[sizeX][sizeY];
 		
-		for (int x=0; x<structures.length;x++) {
-			for (int y=0; y<structures[0].length; y++) {
-				structures[x][y] = new Eolienne();
-			}
-		}	
+		
 	}
 
 	public void creerStruct(TypeStructures struct, int posX, int posY) {
