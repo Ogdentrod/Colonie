@@ -2,9 +2,10 @@ package fr.benoitsepe.colonie.structures;
 
 import static org.lwjgl.opengl.GL11.*;
 
-
+import java.util.List;
 import java.util.Random;
 
+import fr.benoitsepe.colonie.main.Coordonnees;
 import fr.benoitsepe.colonie.main.Etat;
 import fr.benoitsepe.colonie.main.IStructure;
 import fr.benoitsepe.colonie.main.Ressources;
@@ -22,11 +23,10 @@ import fr.kienanbachwa.colonie.graphics.Texture;
  */
 public class Structure implements IStructure {
 	protected Etat etat; // RUNNING ou STOP
-	protected int maintenance; // 0 = cassé, 100=neuf
+
 	protected String nom; // nom de la structure
 
-	private int x;
-	private int y;
+	private List<Coordonnees> coos;
 	public static int tileSize = 16;
 	Random random;
 	float[] color;
@@ -37,16 +37,15 @@ public class Structure implements IStructure {
 	 * Le constructeur doit être appelé depuis la classe fille avec comme paramétre le nom du la structure
 	 * Constructeur sans image: une image par défaut est chargée pour l'affichage
 	 */
-	public Structure(String nom) {
+	public Structure(String nom, List<Coordonnees> coos) {
 		this.nom = nom;
-		etat = Etat.RUNNING;
-		maintenance = 100;
+		this.etat = Etat.RUNNING;
+		this.coos =  coos;
 		random = new Random();
 		
 		//color = new float[]{random.nextFloat(), random.nextFloat(), random.nextFloat(), 1.0f};
 		color = new float[]{1,1,1,1};
-		
-		System.out.println(TypeStructures.valueOf(nom.toUpperCase()));
+
 		texture = TypeStructures.valueOf(nom.toUpperCase()).getTexture();
 		
 	}
@@ -61,15 +60,6 @@ public class Structure implements IStructure {
 		this.etat = etat;
 	}
 
-
-	public int getMaintenance() {
-		return maintenance;
-	}
-
-
-	public void setMaintenance(int maintenance) {
-		this.maintenance = maintenance;
-	}
 
 
 	public String getNom() {
@@ -102,23 +92,16 @@ public class Structure implements IStructure {
 	}
 
 
-	public int getX() {
-		return x;
+	public List<Coordonnees> getCoos() {
+		return coos;
 	}
 
 
-	public void setX(int x) {
-		this.x = x;
+	public void setCoos(List<Coordonnees> coos) {
+		this.coos = coos;
 	}
 
 
-	public int getY() {
-		return y;
-	}
-
-
-	public void setY(int y) {
-		this.y = y;
-	}
+	
 
 }

@@ -1,12 +1,15 @@
 package fr.benoitsepe.colonie.structures;
 
+import java.util.List;
+
+import fr.benoitsepe.colonie.main.Coordonnees;
 import fr.benoitsepe.colonie.main.IStructure;
 import fr.benoitsepe.colonie.main.Ressources;
 
 public class UsineOxygene extends Structure implements IStructure{
 
-	public UsineOxygene() {
-		super("Usineoxygene");
+	public UsineOxygene(List<Coordonnees> coos) {
+		super("Usineoxygene", coos);
 	}
 
 	/* (non-Javadoc)

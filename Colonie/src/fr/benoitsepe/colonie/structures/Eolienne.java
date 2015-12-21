@@ -1,12 +1,15 @@
 package fr.benoitsepe.colonie.structures;
 
+import java.util.List;
+
+import fr.benoitsepe.colonie.main.Coordonnees;
 import fr.benoitsepe.colonie.main.IStructure;
 import fr.benoitsepe.colonie.main.Ressources;
 
 public class Eolienne extends Structure implements IStructure{
 
-	public Eolienne() {
-		super("Eolienne");
+	public Eolienne(List<Coordonnees> coos) {
+		super("Eolienne", coos);
 	}
 
 	@Override

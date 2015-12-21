@@ -6,7 +6,8 @@ import fr.kienanbachwa.colonie.graphics.Texture;
 public enum TypeElements {
 
 	SOL(new Ressources(0, 0, 10, 0)), 
-	MUR(new Ressources(5, 0, 10, 0)), 
+	MUR(new Ressources(5, 0, 10, 0)),
+	PORTE(new Ressources(0, 0, 10, 0)),
 	VIDE(new Ressources(0, 0, 0, 0));
 
 	private Ressources res;
