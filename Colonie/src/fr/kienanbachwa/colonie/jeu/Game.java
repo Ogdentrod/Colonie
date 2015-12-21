@@ -67,8 +67,6 @@ public class Game {
 	public void translateViewWithMouse(){
 		int xa=0, ya=0;
 		
-		
-		
 		if(Mouse.isButtonDown(1) && !mouseClicked){
 			dx2 = (int) ((Mouse.getX() + (-xScroll * Component.scale))/Component.scale);
 			dy2 = (int) ( ( Component.height*Component.scale - Mouse.getY() + (-yScroll * Component.scale))/Component.scale);
@@ -76,8 +74,6 @@ public class Game {
 		}else{
 			dx1 = (int) ((Mouse.getX() + (-xScroll * Component.scale))/Component.scale);
 			dy1 = (int) ( ( Component.height*Component.scale - Mouse.getY() + (-yScroll * Component.scale))/Component.scale);
-			
-
 		}
 		
 		if(Mouse.isButtonDown(1)){
@@ -96,6 +92,7 @@ public class Game {
 		if(yScroll+ya>0 || -(yScroll+ya)>sizeMap*Structure.tileSize -Component.height){
 			ya=0;
 		}
+		
 		xScroll+=xa;
 		yScroll+=ya;
 		

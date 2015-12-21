@@ -10,8 +10,8 @@ import static org.lwjgl.opengl.GL11.*;
 public class Component {
 	
 	public static int scale = 3;
-	public static int width = 720 / scale;
-	public static int height = 480 / scale;
+	public static int width = 1024 / scale;
+	public static int height = 576 / scale;
 	public boolean running = false;
 	
 	DisplayMode mode = new DisplayMode(width * scale, height * scale);
