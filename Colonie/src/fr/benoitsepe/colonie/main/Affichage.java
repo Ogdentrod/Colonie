@@ -30,4 +30,12 @@ public class Affichage {
 		System.out.println(" " + res.getIron() + " fer(s)");
 		System.out.println(" " + res.getElec() + " coulombs");
 	}
+
+
+	public static void afficherStruct(Element elem) {
+		// TODO Auto-generated method stub
+		System.out.println();
+		System.out.println(elem.getNom());
+		System.out.println(" Maintenance = " + elem.getMaintenance() + "%");
+	}
 }

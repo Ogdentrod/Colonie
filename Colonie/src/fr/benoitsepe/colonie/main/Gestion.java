@@ -2,6 +2,9 @@ package fr.benoitsepe.colonie.main;
 
 import org.lwjgl.input.Mouse;
 
+import fr.benoitsepe.colonie.elements.Mur;
+import fr.benoitsepe.colonie.elements.Sol;
+import fr.benoitsepe.colonie.elements.Vide;
 import fr.benoitsepe.colonie.structures.exterieur.Eolienne;
 import fr.benoitsepe.colonie.structures.exterieur.PanneauSolaire;
 import fr.benoitsepe.colonie.structures.interieur.Refectoire;
@@ -18,11 +21,11 @@ import fr.kienanbachwa.colonie.jeu.Game;
 public class Gestion {
 
 	Ressources res;
-	Structure[][] structures;
+	Element[][] elems;
 
 	public Gestion(int sizeX, int sizeY) {
 		this.res = new Ressources();
-		structures = new Structure[sizeX][sizeY];
+		elems = new Element[sizeX][sizeY];
 		
 		res.setIron(100000);
 		res.setElec(100000);
@@ -32,12 +35,48 @@ public class Gestion {
 		
 		for(int i=0;i<sizeX;i++){
 			for(int j=0;j<sizeY;j++){
-				this.creerStruct(TypeStructures.EOLIENNE, i, j);
+				this.creerElem(TypeElements.VIDE, i, j);
 			}
 		}
 		
 	}
+	
+	public void creerElem(TypeElements elem, int posX, int posY) {
 
+		if (verifRessources(res, elem)) {
+			Ressources.utiliserRessources(res, elem.getRes());
+			Element elemCree;
+
+			switch (elem) {
+			case MUR:
+				elemCree = new Mur();
+				break;
+			case SOL:
+				elemCree = new Sol();
+				break;
+
+			default:
+				elemCree = new Vide();
+				break;
+
+			}
+
+			
+			elems[posX][posY] = elemCree;
+			elemCree.x = posX;
+			elemCree.y = posY;
+
+			Affichage.afficherStruct(elemCree); // instruction temporaire pour
+													// affichage
+			Affichage.afficherRessource(res);
+		} else {
+			System.out.println("Vous n'avez pas assez de ressources :(");
+		}
+
+	}
+
+	// CHANGEMENTS EN COURS
+	@Deprecated
 	public void creerStruct(TypeStructures struct, int posX, int posY) {
 
 		if (verifRessources(res, struct)) {
@@ -91,34 +130,45 @@ public class Gestion {
 		}
 
 	}
+	
+	public boolean verifRessources(Ressources res, TypeElements elem) {
+		Ressources besoin = elem.getRes();
 
-	public Structure[][] getStructures() {
-		return structures;
+		if (res.canBuy(besoin)) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	public Element[][] getElements() {
+		return elems;
 	}
 
 	public void render(){
 		int xMin = (int)(-Game.xScroll/Structure.tileSize);
 		int yMin = (int)(-Game.yScroll/Structure.tileSize);
 		
-		int xMax = (((int)(-Game.xScroll/Structure.tileSize) + (Component.width/Structure.tileSize) + 1) >= structures.length) ?  structures.length : (int)(-Game.xScroll/Structure.tileSize) + (Component.width/Structure.tileSize) + 1;
-		int yMax = (((int)(-Game.yScroll/Structure.tileSize) + (Component.height/Structure.tileSize) + 1) >= structures[0].length) ? structures[0].length : (int)(-Game.yScroll/Structure.tileSize) + (Component.height/Structure.tileSize) + 1;
+		int xMax = (((int)(-Game.xScroll/Structure.tileSize) + (Component.width/Structure.tileSize) + 1) >= elems.length) ?  elems.length : (int)(-Game.xScroll/Structure.tileSize) + (Component.width/Structure.tileSize) + 1;
+		int yMax = (((int)(-Game.yScroll/Structure.tileSize) + (Component.height/Structure.tileSize) + 1) >= elems[0].length) ? elems[0].length : (int)(-Game.yScroll/Structure.tileSize) + (Component.height/Structure.tileSize) + 1;
 		
 		for (int x=xMin; x<xMax;x++) {
 			for (int y=yMin; y<yMax; y++) {
-				if(structures[x][y]!=null) structures[x][y].render(x, y);
+				if(elems[x][y]!=null) elems[x][y].render(x, y);
 			}
 		}	
 	}
 	
 	
-	public void update() {
+	public void update() {/*
 		for (Structure sousTab[] : structures) {
 			for (Structure str : sousTab) {
 				if(str != null)
 					str.utiliser(res);
 			}
 		}
-		
+		*/
 		res.setIron(1000);
 		res.setElec(1000);
 		res.setIron_ore(1000);
@@ -126,8 +176,8 @@ public class Gestion {
 		res.setWater(1000);
 		
 		if(Mouse.isButtonDown(0)){
-			System.out.println("Creation structure à ("+Game.mouseXGrid+";"+Game.mouseYGrid+")");
-			this.creerStruct(TypeStructures.USINEOXYGENE, Game.mouseXGrid, Game.mouseYGrid);
+			System.out.println("Creation d'un mur à ("+Game.mouseXGrid+";"+Game.mouseYGrid+")");
+			this.creerElem(TypeElements.MUR, Game.mouseXGrid, Game.mouseYGrid);
 		}
 	}
 	

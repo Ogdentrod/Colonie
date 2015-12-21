@@ -2,15 +2,14 @@ package fr.benoitsepe.colonie.main;
 
 import fr.kienanbachwa.colonie.graphics.Texture;
 
+// public Ressources(int water, int oxygen, int iron, int elec)
 public enum TypeStructures {
-	RIEN(new Ressources(0, 0, 0, 0)),
+
 	EOLIENNE(new Ressources(0, 0, 20, 0)),
 	PANNEAUSOLAIRE(new Ressources(0, 0, 20, 0)),
 	USINEOXYGENE(new Ressources(0, 10, 20, 0)),
 	REFECTOIRE(new Ressources(0, 10, 20, 0)),
-	SAS(new Ressources(0, 20, 20, 0)),
-	CONNEXION(new Ressources(0, 0, 4, 0)),
-	COULOIR(new Ressources(0, 10, 10, 0));
+	SAS(new Ressources(0, 20, 20, 0));
 	
 	private Ressources res;
 	private Texture texture;
