@@ -25,7 +25,7 @@ public class Game {
 	}
 	
 	public void tick(){
-		translateView();
+		translateViewWithMouse();
 		gestion.update();
 		
 		mouseYGrid = (int) ( ( Component.height*Component.scale - Mouse.getY() + (-yScroll * Component.scale)) /Structure.tileSize/Component.scale);
@@ -39,7 +39,7 @@ public class Game {
 		drawSelect(Mouse.getX(),Mouse.getY());
 	}
 	
-	public void translateView(){
+	public void translateViewWithKeyBoard(){
 		int xa=0, ya=0;
 		
 		if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) xa=-1;
@@ -55,6 +55,30 @@ public class Game {
 			}
 			xScroll+=xa;
 			yScroll+=ya;
+		
+	}
+	
+	public void translateViewWithMouse(){
+		int xa=0, ya=0;
+		int dx1 = Mouse.getDX();
+		int dy1 = -Mouse.getDY();
+		
+		if(Mouse.isButtonDown(1)){
+			int dx2 = Mouse.getDX();
+			int dy2 = -Mouse.getDY();
+			
+			xa = dx1 - dx2;
+			ya = dy1 - dy2;
+		}
+		
+		if(xScroll+xa>0 || -(xScroll+xa)>(sizeMap*Structure.tileSize - Component.width) ){
+			xa=0;
+		}
+		if(yScroll+ya>0 || -(yScroll+ya)>sizeMap*Structure.tileSize -Component.height){
+			ya=0;
+		}
+		xScroll+=xa;
+		yScroll+=ya;
 		
 	}
 	

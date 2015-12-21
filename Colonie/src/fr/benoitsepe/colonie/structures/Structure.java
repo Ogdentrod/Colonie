@@ -25,8 +25,8 @@ public class Structure implements IStructure {
 	protected int maintenance; // 0 = cassé, 100=neuf
 	protected String nom; // nom de la structure
 
-	int x;
-	int y;
+	private int x;
+	private int y;
 	public static int tileSize = 16;
 	Random random;
 	float[] color;
@@ -99,6 +99,26 @@ public class Structure implements IStructure {
 		glEnd();
 		
 		texture.unbind();
+	}
+
+
+	public int getX() {
+		return x;
+	}
+
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+
+	public int getY() {
+		return y;
+	}
+
+
+	public void setY(int y) {
+		this.y = y;
 	}
 
 }

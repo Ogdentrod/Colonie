@@ -112,8 +112,8 @@ public class Gestion {
 
 			
 			structures[posX][posY] = structCree;
-			structCree.x = posX;
-			structCree.y = posY;
+			structCree.setX(posX);
+			structCree.setY(posY);
 
 			Affichage.afficherStruct(structCree); // instruction temporaire pour
 													// affichage
@@ -187,7 +187,7 @@ public class Gestion {
 			this.creerElem(TypeElements.MUR, Game.mouseXGrid, Game.mouseYGrid);
 		}
 		if(Mouse.isButtonDown(1)){
-			this.creerElem(TypeElements.SOL, Game.mouseXGrid, Game.mouseYGrid);
+			
 		}
 		
 	}
