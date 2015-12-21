@@ -5,7 +5,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import fr.benoitsepe.colonie.main.Gestion;
-import fr.benoitsepe.colonie.main.Structure;
+import fr.benoitsepe.colonie.structures.Structure;
 import fr.kienanbachwa.colonie.graphics.Renderer;
 
 public class Game {

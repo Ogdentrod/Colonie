@@ -1,10 +1,13 @@
-package fr.benoitsepe.colonie.main;
+package fr.benoitsepe.colonie.structures;
 
 import static org.lwjgl.opengl.GL11.*;
 
 
 import java.util.Random;
 
+import fr.benoitsepe.colonie.main.Etat;
+import fr.benoitsepe.colonie.main.IStructure;
+import fr.benoitsepe.colonie.main.Ressources;
 import fr.kienanbachwa.colonie.graphics.Renderer;
 import fr.kienanbachwa.colonie.graphics.Texture;
 

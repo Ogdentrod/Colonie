@@ -1,8 +1,7 @@
-package fr.benoitsepe.colonie.structures.exterieur;
+package fr.benoitsepe.colonie.structures;
 
 import fr.benoitsepe.colonie.main.IStructure;
 import fr.benoitsepe.colonie.main.Ressources;
-import fr.benoitsepe.colonie.main.Structure;
 
 public class PanneauSolaire extends Structure implements IStructure {
 

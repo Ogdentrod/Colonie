@@ -1,4 +1,4 @@
-package fr.benoitsepe.colonie.main;
+package fr.benoitsepe.colonie.elements;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -21,8 +21,8 @@ public class Element {
 	protected int maintenance; // 0 = cassé, 100=neuf
 	protected String nom; // nom de
 
-	int x;
-	int y;
+	private int x;
+	private int y;
 	public static int tileSize = 16;
 	Random random;
 	float[] color;
@@ -78,6 +78,34 @@ public class Element {
 		glEnd();
 		
 		texture.unbind();
+	}
+
+
+
+
+	public int getX() {
+		return x;
+	}
+
+
+
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+
+
+
+	public int getY() {
+		return y;
+	}
+
+
+
+
+	public void setY(int y) {
+		this.y = y;
 	}
 
 }

@@ -2,14 +2,18 @@ package fr.benoitsepe.colonie.main;
 
 import org.lwjgl.input.Mouse;
 
+import fr.benoitsepe.colonie.elements.Element;
 import fr.benoitsepe.colonie.elements.Mur;
 import fr.benoitsepe.colonie.elements.Sol;
+import fr.benoitsepe.colonie.elements.TypeElements;
 import fr.benoitsepe.colonie.elements.Vide;
-import fr.benoitsepe.colonie.structures.exterieur.Eolienne;
-import fr.benoitsepe.colonie.structures.exterieur.PanneauSolaire;
-import fr.benoitsepe.colonie.structures.interieur.Refectoire;
-import fr.benoitsepe.colonie.structures.interieur.Sas;
-import fr.benoitsepe.colonie.structures.interieur.UsineOxygene;
+import fr.benoitsepe.colonie.structures.Eolienne;
+import fr.benoitsepe.colonie.structures.PanneauSolaire;
+import fr.benoitsepe.colonie.structures.Refectoire;
+import fr.benoitsepe.colonie.structures.Sas;
+import fr.benoitsepe.colonie.structures.Structure;
+import fr.benoitsepe.colonie.structures.TypeStructures;
+import fr.benoitsepe.colonie.structures.UsineOxygene;
 import fr.kienanbachwa.colonie.jeu.Component;
 import fr.kienanbachwa.colonie.jeu.Game;
 
@@ -63,8 +67,8 @@ public class Gestion {
 
 			
 			elems[posX][posY] = elemCree;
-			elemCree.x = posX;
-			elemCree.y = posY;
+			elemCree.setX(posX);
+			elemCree.setY(posY);
 
 			Affichage.afficherStruct(elemCree); // instruction temporaire pour
 													// affichage

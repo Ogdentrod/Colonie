@@ -1,13 +1,12 @@
-package fr.benoitsepe.colonie.structures.interieur;
+package fr.benoitsepe.colonie.structures;
 
 import fr.benoitsepe.colonie.main.IStructure;
 import fr.benoitsepe.colonie.main.Ressources;
-import fr.benoitsepe.colonie.main.Structure;
 
-public class Refectoire extends Structure implements IStructure {
+public class Sas extends Structure implements IStructure{
 
-	public Refectoire() {
-		super("Réfectoire");
+	public Sas() {
+		super("S.A.S.");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -16,5 +15,5 @@ public class Refectoire extends Structure implements IStructure {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 }

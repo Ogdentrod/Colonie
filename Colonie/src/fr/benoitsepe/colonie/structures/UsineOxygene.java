@@ -1,8 +1,7 @@
-package fr.benoitsepe.colonie.structures.interieur;
+package fr.benoitsepe.colonie.structures;
 
 import fr.benoitsepe.colonie.main.IStructure;
 import fr.benoitsepe.colonie.main.Ressources;
-import fr.benoitsepe.colonie.main.Structure;
 
 public class UsineOxygene extends Structure implements IStructure{
 

@@ -1,5 +1,8 @@
 package fr.benoitsepe.colonie.main;
 
+import fr.benoitsepe.colonie.elements.Element;
+import fr.benoitsepe.colonie.structures.Structure;
+
 /**
  * @author Benoît
  * Class temporaire pour l'affichage des données. On pourra la remplacer par la GUI
