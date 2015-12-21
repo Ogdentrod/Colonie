@@ -161,7 +161,9 @@ public class Gestion {
 	}
 	
 	
-	public void update() {/*
+	public void update() {
+		
+		/*
 		for (Structure sousTab[] : structures) {
 			for (Structure str : sousTab) {
 				if(str != null)
@@ -169,6 +171,7 @@ public class Gestion {
 			}
 		}
 		*/
+		
 		res.setIron(1000);
 		res.setElec(1000);
 		res.setIron_ore(1000);
@@ -179,6 +182,10 @@ public class Gestion {
 			System.out.println("Creation d'un mur à ("+Game.mouseXGrid+";"+Game.mouseYGrid+")");
 			this.creerElem(TypeElements.MUR, Game.mouseXGrid, Game.mouseYGrid);
 		}
+		if(Mouse.isButtonDown(1)){
+			this.creerElem(TypeElements.SOL, Game.mouseXGrid, Game.mouseYGrid);
+		}
+		
 	}
 	
 }

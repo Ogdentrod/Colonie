@@ -47,12 +47,12 @@ public class Game {
 		if(Keyboard.isKeyDown(Keyboard.KEY_UP)) ya=1;
 		if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)) ya=-1;
 			
-			if(xScroll+xa>0 || -(xScroll+xa)>(sizeMap*Structure.tileSize - Component.width) )
+			if(xScroll+xa>0 || -(xScroll+xa)>(sizeMap*Structure.tileSize - Component.width) ){
 				xa=0;
-			
-			if(yScroll+ya>0 || -(yScroll+ya)<sizeMap*Structure.tileSize -Component.height)
+			}
+			if(yScroll+ya>0 || -(yScroll+ya)>sizeMap*Structure.tileSize -Component.height){
 				ya=0;
-			
+			}
 			xScroll+=xa;
 			yScroll+=ya;
 		
