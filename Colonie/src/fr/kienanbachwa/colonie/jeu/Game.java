@@ -16,6 +16,11 @@ public class Game {
 	public static int sizeMap = 50;
 	Gestion gestion;
 	
+	private int dx1, dy1;
+	private boolean mouseClicked;
+	private int dx2;
+	private int dy2;
+	
 	public Game(){
 		gestion = new Gestion(sizeMap,sizeMap);
 	}
@@ -25,11 +30,12 @@ public class Game {
 	}
 	
 	public void tick(){
+		translateViewWithKeyboard();
 		translateViewWithMouse();
 		gestion.update();
 		
 		mouseYGrid = (int) ( ( Component.height*Component.scale - Mouse.getY() + (-yScroll * Component.scale)) /Structure.tileSize/Component.scale);
-		mouseXGrid =(int) ((Mouse.getX() + (-xScroll * Component.scale))/Structure.tileSize/Component.scale);
+		mouseXGrid = (int) ((Mouse.getX() + (-xScroll * Component.scale))/Structure.tileSize/Component.scale);
 		
 	}
 	
@@ -39,7 +45,7 @@ public class Game {
 		drawSelect(Mouse.getX(),Mouse.getY());
 	}
 	
-	public void translateViewWithKeyBoard(){
+	public void translateViewWithKeyboard(){
 		int xa=0, ya=0;
 		
 		if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) xa=-1;
@@ -60,15 +66,28 @@ public class Game {
 	
 	public void translateViewWithMouse(){
 		int xa=0, ya=0;
-		int dx1 = Mouse.getDX();
-		int dy1 = -Mouse.getDY();
+		
+		
+		
+		if(Mouse.isButtonDown(1) && !mouseClicked){
+			dx2 = (int) ((Mouse.getX() + (-xScroll * Component.scale))/Component.scale);
+			dy2 = (int) ( ( Component.height*Component.scale - Mouse.getY() + (-yScroll * Component.scale))/Component.scale);
+			
+		}else{
+			dx1 = (int) ((Mouse.getX() + (-xScroll * Component.scale))/Component.scale);
+			dy1 = (int) ( ( Component.height*Component.scale - Mouse.getY() + (-yScroll * Component.scale))/Component.scale);
+			
+
+		}
 		
 		if(Mouse.isButtonDown(1)){
-			int dx2 = Mouse.getDX();
-			int dy2 = -Mouse.getDY();
+			mouseClicked=true;
 			
 			xa = dx1 - dx2;
 			ya = dy1 - dy2;
+			
+		}else{
+			mouseClicked=false;
 		}
 		
 		if(xScroll+xa>0 || -(xScroll+xa)>(sizeMap*Structure.tileSize - Component.width) ){
