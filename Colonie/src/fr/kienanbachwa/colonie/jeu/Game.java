@@ -6,6 +6,7 @@ import org.lwjgl.opengl.GL11;
 
 import fr.benoitsepe.colonie.main.Gestion;
 import fr.benoitsepe.colonie.structures.Structure;
+import fr.kienanbachwa.colonie.graphics.Hud;
 import fr.kienanbachwa.colonie.graphics.Renderer;
 
 public class Game {
@@ -15,6 +16,7 @@ public class Game {
 	public static int mouseXGrid, mouseYGrid;
 	public static int sizeMap = 50;
 	Gestion gestion;
+	Hud hud;
 	
 	private int dx1, dy1;
 	private boolean mouseClicked;
@@ -23,16 +25,18 @@ public class Game {
 	
 	public Game(){
 		gestion = new Gestion(sizeMap,sizeMap);
+		hud = new Hud();
 	}
 	
 	public void init(){
-		
+		hud.init();
 	}
 	
 	public void tick(){
 		translateViewWithKeyboard();
 		translateViewWithMouse();
 		gestion.update();
+		hud.update();
 		
 		mouseYGrid = (int) ( ( Component.height*Component.scale - Mouse.getY() + (-yScroll * Component.scale)) /Structure.tileSize/Component.scale);
 		mouseXGrid = (int) ((Mouse.getX() + (-xScroll * Component.scale))/Structure.tileSize/Component.scale);
@@ -43,6 +47,7 @@ public class Game {
 		GL11.glTranslatef(xScroll, yScroll, 0);
 		gestion.render();
 		drawSelect(Mouse.getX(),Mouse.getY());
+		hud.render();
 	}
 	
 	public void translateViewWithKeyboard(){
@@ -61,7 +66,6 @@ public class Game {
 			}
 			xScroll+=xa;
 			yScroll+=ya;
-		
 	}
 	
 	public void translateViewWithMouse(){
@@ -78,10 +82,8 @@ public class Game {
 		
 		if(Mouse.isButtonDown(1)){
 			mouseClicked=true;
-			
 			xa = dx1 - dx2;
 			ya = dy1 - dy2;
-			
 		}else{
 			mouseClicked=false;
 		}
@@ -99,8 +101,6 @@ public class Game {
 	}
 	
 	public void drawSelect(int mouseX, int mouseY){
-		//Renderer.renderBasicQuad(mouseXGrid*Structure.tileSize, mouseYGrid*Structure.tileSize, Structure.tileSize, Structure.tileSize, new float[]{1,0,0,0.5f});
 		Renderer.renderBasicQuad(mouseXGrid*Structure.tileSize, mouseYGrid*Structure.tileSize, Structure.tileSize, Structure.tileSize, new float[]{1,0,0,0.5f});
-
 	}
 }
