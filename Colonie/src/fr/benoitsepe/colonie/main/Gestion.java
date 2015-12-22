@@ -22,11 +22,10 @@ import fr.kienanbachwa.colonie.jeu.Game;
  */
 public class Gestion {
 
-	Ressources res;
+	public static Ressources res = new Ressources();
 	Element[][] elems;
 
 	public Gestion(int sizeX, int sizeY) {
-		this.res = new Ressources();
 		elems = new Element[sizeX][sizeY];
 
 		res.setIron(100000);
@@ -182,12 +181,6 @@ public class Gestion {
 		 * sousTab) { if(str != null) str.utiliser(res); } }
 		 */
 
-		res.setIron(1000);
-		res.setElec(1000);
-		res.setIron_ore(1000);
-		res.setOxygen(1000);
-		res.setWater(1000);
-
 		if (Mouse.isButtonDown(0)) {
 			System.out.println("Creation d'un mur à (" + Game.mouseXGrid + ";" + Game.mouseYGrid + ")");
 			this.creerElem(TypeElements.BATIMENT, Game.mouseXGrid, Game.mouseYGrid);
@@ -230,5 +223,6 @@ public class Gestion {
 			return new Mur();
 		}
 	}
+	
 
 }
