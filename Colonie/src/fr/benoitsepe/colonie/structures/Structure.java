@@ -8,7 +8,7 @@ import java.util.Random;
 import fr.benoitsepe.colonie.main.Coordonnees;
 import fr.benoitsepe.colonie.main.Etat;
 import fr.benoitsepe.colonie.main.IStructure;
-import fr.benoitsepe.colonie.main.Ressources;
+import fr.benoitsepe.colonie.ressources.Ressources;
 import fr.kienanbachwa.colonie.graphics.Renderer;
 import fr.kienanbachwa.colonie.graphics.Texture;
 

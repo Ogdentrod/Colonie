@@ -1,6 +1,6 @@
 package fr.benoitsepe.colonie.elements;
 
-import fr.benoitsepe.colonie.main.Ressources;
+import fr.benoitsepe.colonie.ressources.Ressources;
 import fr.kienanbachwa.colonie.graphics.Texture;
 
 public enum TypeElements {

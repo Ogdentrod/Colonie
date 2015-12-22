@@ -9,6 +9,7 @@ import fr.benoitsepe.colonie.elements.Porte;
 import fr.benoitsepe.colonie.elements.Sol;
 import fr.benoitsepe.colonie.elements.TypeElements;
 import fr.benoitsepe.colonie.elements.Vide;
+import fr.benoitsepe.colonie.ressources.Ressources;
 import fr.benoitsepe.colonie.structures.Structure;
 import fr.benoitsepe.colonie.structures.TypeStructures;
 import fr.kienanbachwa.colonie.jeu.Component;
@@ -204,14 +205,18 @@ public class Gestion {
 		 * G  - x - D
 		 * BG - B - BD
 		 */
-		hg = elems[x-1][y-1];
-		h = elems[x][y-1];
-		hd = elems[x+1][y-1];
-		g = elems[x-1][y];
-		bg = elems[x-1][y+1];
-		b = elems[x][y+1];
-		bd = elems[x+1][y+1];
-		d = elems[x+1][y];
+		try {
+			hg = elems[x-1][y-1];
+			h = elems[x][y-1];
+			hd = elems[x+1][y-1];
+			g = elems[x-1][y];
+			bg = elems[x-1][y+1];
+			b = elems[x][y+1];
+			bd = elems[x+1][y+1];
+			d = elems[x+1][y];
+		} catch(java.lang.IndexOutOfBoundsException e) {
+			return new Mur();
+		}
 		
 		// Si le bloc en question est entouré de batiment, alors c'est un sol, sinon un mur
 		if (hg instanceof Batiment && h instanceof Batiment 

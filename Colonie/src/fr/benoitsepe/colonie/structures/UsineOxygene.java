@@ -4,7 +4,7 @@ import java.util.List;
 
 import fr.benoitsepe.colonie.main.Coordonnees;
 import fr.benoitsepe.colonie.main.IStructure;
-import fr.benoitsepe.colonie.main.Ressources;
+import fr.benoitsepe.colonie.ressources.Ressources;
 
 public class UsineOxygene extends Structure implements IStructure{
 

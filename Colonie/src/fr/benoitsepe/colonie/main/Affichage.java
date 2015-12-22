@@ -1,6 +1,7 @@
 package fr.benoitsepe.colonie.main;
 
 import fr.benoitsepe.colonie.elements.Element;
+import fr.benoitsepe.colonie.ressources.Ressources;
 import fr.benoitsepe.colonie.structures.Structure;
 
 /**

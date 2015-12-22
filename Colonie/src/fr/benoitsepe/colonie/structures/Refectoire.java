@@ -4,7 +4,7 @@ import java.util.List;
 
 import fr.benoitsepe.colonie.main.Coordonnees;
 import fr.benoitsepe.colonie.main.IStructure;
-import fr.benoitsepe.colonie.main.Ressources;
+import fr.benoitsepe.colonie.ressources.Ressources;
 
 public class Refectoire extends Structure implements IStructure {
 

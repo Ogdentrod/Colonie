@@ -1,4 +1,4 @@
-package fr.benoitsepe.colonie.main;
+package fr.benoitsepe.colonie.ressources;
 
 /**
  * @author Benoît
