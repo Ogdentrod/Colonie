@@ -1,6 +1,6 @@
 package fr.benoitsepe.colonie.elements;
 
-public class Sol extends Element{
+public class Sol extends Batiment{
 
 	public Sol() {
 		super("Sol");

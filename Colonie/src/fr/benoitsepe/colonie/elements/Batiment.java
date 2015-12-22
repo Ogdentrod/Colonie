@@ -1,9 +1,9 @@
 package fr.benoitsepe.colonie.elements;
 
-public class Mur extends Batiment{
+public class Batiment extends Element{
 
-	public Mur() {
-		super("Mur");
+	public Batiment(String name) {
+		super(name);
 		// TODO Auto-generated constructor stub
 	}
 
