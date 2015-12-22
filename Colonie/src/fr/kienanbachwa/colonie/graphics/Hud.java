@@ -10,10 +10,10 @@ import fr.kienanbachwa.colonie.jeu.Game;
 public class Hud {
 	
 	List<Button> buttons = new ArrayList<Button>();
-	int sizeX, sizeY;
-	int x0,y0;
-	int x1;
-	int sizeRes = 60;
+	int sizeX, sizeY;	//Taille du hud
+	int x0,y0;		//position d'affichage du hud
+	int x1;			//position d'affichage des ressources
+	int sizeRes = 60;	//taille de l'affichage des ressources
 	public Hud(){
 		
 	}
@@ -28,7 +28,7 @@ public class Hud {
 		sizeX = 228;
 		sizeY = 20;
 		
-		x0 = (int)(-Game.xScroll +(Component.width/2 -sizeX/2));
+		x0 = (int)(-Game.xScroll +(Component.width/2 -sizeX/2));	//Milieu de l'écran
 		y0 =(int)(Component.height-sizeY-Game.yScroll);
 		
 		x1 = x0 +4+ TypeElements.values().length*((sizeX-sizeRes)/TypeElements.values().length);
