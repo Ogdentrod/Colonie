@@ -69,15 +69,15 @@ public class Gestion {
 			elemCree.setY(posY);
 			
 			// On actualise tous les murs/sols
-			if (elemCree instanceof Batiment) {
-				for(int i = 0; i < elems.length; i++){
-					for(int j = 0; j < elems[i].length; j++){
-						if (elems[i][j] instanceof Batiment) {
-							elems[i][j] = SolOuMur(i, j);
-						}
+
+			for(int i = 0; i < elems.length; i++){
+				for(int j = 0; j < elems[i].length; j++){
+					if (elems[i][j] instanceof Batiment) {
+						elems[i][j] = SolOuMur(i, j);
 					}
 				}
 			}
+
 
 			Affichage.afficherStruct(elemCree); // instruction temporaire pour
 												// affichage
