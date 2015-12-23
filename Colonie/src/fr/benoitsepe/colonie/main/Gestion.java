@@ -12,6 +12,7 @@ import fr.benoitsepe.colonie.elements.Vide;
 import fr.benoitsepe.colonie.ressources.Ressources;
 import fr.benoitsepe.colonie.structures.Structure;
 import fr.benoitsepe.colonie.structures.TypeStructures;
+import fr.kienanbachwa.colonie.graphics.Hud;
 import fr.kienanbachwa.colonie.jeu.Component;
 import fr.kienanbachwa.colonie.jeu.Game;
 
@@ -24,6 +25,7 @@ public class Gestion {
 
 	public static Ressources res = new Ressources();
 	Element[][] elems;
+	private boolean clicked;
 
 	public Gestion(int sizeX, int sizeY) {
 		elems = new Element[sizeX][sizeY];
@@ -181,13 +183,12 @@ public class Gestion {
 		 * sousTab) { if(str != null) str.utiliser(res); } }
 		 */
 
-		if (Mouse.isButtonDown(0)) {
+		if (Mouse.isButtonDown(0) && !clicked) {
 			System.out.println("Creation d'un mur à (" + Game.mouseXGrid + ";" + Game.mouseYGrid + ")");
-			this.creerElem(TypeElements.BATIMENT, Game.mouseXGrid, Game.mouseYGrid);
+			this.creerElem(Hud.elementClicked, Game.mouseXGrid, Game.mouseYGrid);
 		}
-		if (Mouse.isButtonDown(1)) {
-
-		}
+		
+		clicked=Mouse.isButtonDown(0);
 
 	}
 

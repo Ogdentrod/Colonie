@@ -20,6 +20,7 @@ public class Hud {
 	int sizeRes = 60;	//taille de l'affichage des ressources
 	int sizeResIcon;
 	Font font;
+	public static TypeElements elementClicked = TypeElements.BATIMENT;
 	
 	public Hud(){
 		try {
@@ -31,7 +32,7 @@ public class Hud {
 	
 	public void init(){
 		for(TypeElements e : TypeElements.values()){
-			buttons.add(new Button(e.getTexture()));
+			buttons.add(new Button(e));
 		}
 		
 		for(TypeRessources res : TypeRessources.values()){
@@ -51,15 +52,16 @@ public class Hud {
 		
 		for(Button b:buttons){
 			b.update(x0 +4+ (buttons.indexOf(b))*((sizeX-sizeRes)/TypeElements.values().length), y0+2, 16, 16);
+			
 		}
 		
 		try {
 			font = new Font("res/stan0753.ttf", 8);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			System.err.println("Police non trouvée");
 			e.printStackTrace();
 		}
-
+		
 	}
 	
 	public void render(){
@@ -72,7 +74,6 @@ public class Hud {
 			b.render();
 		}
 		
-		//Renderer.renderQuad(x1, y0, sizeRes, sizeY, new float[]{1,1,1,1});
 		
 		for(TypeRessources res : ressources){
 			res.getTexture().bind();
