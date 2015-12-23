@@ -184,8 +184,9 @@ public class Gestion {
 		 */
 
 		if (Mouse.isButtonDown(0) && !clicked) {
-			System.out.println("Creation d'un mur à (" + Game.mouseXGrid + ";" + Game.mouseYGrid + ")");
-			this.creerElem(Hud.elementClicked, Game.mouseXGrid, Game.mouseYGrid);
+			
+			//this.creerElem(Hud.elementClicked, Game.mouseXGrid, Game.mouseYGrid);
+			
 		}
 		
 		clicked=Mouse.isButtonDown(0);

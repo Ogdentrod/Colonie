@@ -1,16 +1,17 @@
 TODO:
 
-creation de zone batiment
-correction bug placement de bloc quand clic dans hud
-amélioration graphique du hud (ressources, onglets, positionnement, ...)
-ajout d'onglets élements/structures dans le hud
-creation des structures
-gestion des ressources
-augmenter vitesse déplacement avec clavier
-augmenter taille de l'écran du jeu
-creation personnages (ouvriers, ...)
-ajout temps de construction
-amélioration des textures
+creation de zone batiment -> K
+correction bug placement de bloc quand clic dans hud -> K
+amélioration graphique du hud (ressources, onglets, positionnement, ...) -> K
+ajout d'onglets élements/structures dans le hud -> K
+creation des structures -> B
+gestion des ressources -> B
+augmenter vitesse déplacement avec clavier -> K
+augmenter taille de l'écran du jeu -> K
+creation personnages (ouvriers, ...) -> B
+ajout IA personnages (utilisation de l'IA de l'ancien projet)-> K
+ajout temps de construction -> B
+amélioration des textures -> ?
 
 
 TO BE COMPLETED
