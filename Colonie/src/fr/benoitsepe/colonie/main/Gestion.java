@@ -61,15 +61,15 @@ public class Gestion {
 
 			switch (elem) {
 
-			case BATIMENT:
-				elemCree = SolOuMur(posX, posY);
-				break;
-			case PORTE:
-				elemCree = new Porte();
-				break;
-			default:
-				elemCree = new Vide();
-				break;
+				case BATIMENT:
+					elemCree = SolOuMur(posX, posY);
+					break;
+				case PORTE:
+					elemCree = new Porte();
+					break;
+				default:
+					elemCree = new Vide();
+					break;
 
 			}
 
