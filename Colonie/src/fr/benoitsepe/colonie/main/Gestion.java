@@ -1,5 +1,8 @@
 package fr.benoitsepe.colonie.main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.lwjgl.input.Mouse;
 
 import fr.benoitsepe.colonie.elements.Batiment;
@@ -13,6 +16,7 @@ import fr.benoitsepe.colonie.ressources.Ressources;
 import fr.benoitsepe.colonie.structures.Structure;
 import fr.benoitsepe.colonie.structures.TypeStructures;
 import fr.kienanbachwa.colonie.graphics.Hud;
+import fr.kienanbachwa.colonie.graphics.Renderer;
 import fr.kienanbachwa.colonie.jeu.Component;
 import fr.kienanbachwa.colonie.jeu.Game;
 
@@ -26,6 +30,11 @@ public class Gestion {
 	public static Ressources res = new Ressources();
 	Element[][] elems;
 	private boolean clicked;
+	private int dx2;
+	private int dy2;
+	private int dx1;
+	private int dy1;
+	List<Element> selectedTiles = new ArrayList<Element>();
 
 	public Gestion(int sizeX, int sizeY) {
 		elems = new Element[sizeX][sizeY];
@@ -161,17 +170,33 @@ public class Gestion {
 		int xMin = (int) (-Game.xScroll / Structure.tileSize);
 		int yMin = (int) (-Game.yScroll / Structure.tileSize);
 
-		int xMax = (((int) (-Game.xScroll / Structure.tileSize) + (Component.width / Structure.tileSize)
-				+ 1) >= elems.length) ? elems.length
-						: (int) (-Game.xScroll / Structure.tileSize) + (Component.width / Structure.tileSize) + 2;
-		int yMax = (((int) (-Game.yScroll / Structure.tileSize) + (Component.height / Structure.tileSize)
-				+ 1) >= elems[0].length) ? elems[0].length
-						: (int) (-Game.yScroll / Structure.tileSize) + (Component.height / Structure.tileSize) + 2;
+		int xMax = (((int) (-Game.xScroll / Structure.tileSize) + (Component.width / Structure.tileSize)+ 1) >= elems.length) ? elems.length : (int) (-Game.xScroll / Structure.tileSize) + (Component.width / Structure.tileSize) + 2;
+		int yMax = (((int) (-Game.yScroll / Structure.tileSize) + (Component.height / Structure.tileSize)+ 1) >= elems[0].length) ? elems[0].length : (int) (-Game.yScroll / Structure.tileSize) + (Component.height / Structure.tileSize) + 2;
 
 		for (int x = xMin; x < xMax; x++) {
 			for (int y = yMin; y < yMax; y++) {
 				if (elems[x][y] != null)
 					elems[x][y].render(x, y);
+			}
+		}
+		
+		renderSelectedTiles();
+
+	}
+	
+	public void renderSelectedTiles(){
+		if(Mouse.isButtonDown(0)){			
+//			for(int i=dx1; i!=dx2; i+= ( (dx1-dx2 > 0) ? -1 : 1) ){		//BOUCLE FOR AVEC OPERATEUR TERNAIRE AIIIIGHT
+//				for(int j=dy1; j!=dy2; j+= ( (dy1-dy2 > 0) ? -1 : 1) ){
+//					Hud.elementClicked.getTexture().bind();
+//					Renderer.renderQuad(i*16, j*16, 16, 16, new float[]{1,0,0,0.5f});
+//					Hud.elementClicked.getTexture().unbind();
+//				}
+//			}
+			for(Element e : selectedTiles){
+				e.getTexture().bind();
+				Renderer.renderQuad(e.getX()*16, e.getY()*16, 16, 16, new float[]{1,0,0,0.5f});
+				e.getTexture().unbind();
 			}
 		}
 	}
@@ -182,15 +207,44 @@ public class Gestion {
 		 * for (Structure sousTab[] : structures) { for (Structure str :
 		 * sousTab) { if(str != null) str.utiliser(res); } }
 		 */
-
-		if (Mouse.isButtonDown(0) && !clicked) {
-			
+		
+		if(Mouse.isButtonDown(0) && !clicked){
 			//this.creerElem(Hud.elementClicked, Game.mouseXGrid, Game.mouseYGrid);
-			
+			dx2 = Game.mouseXGrid;
+			dy2 = Game.mouseYGrid;
+		}else{	
+			dx1 = Game.mouseXGrid;
+			dy1 = Game.mouseYGrid;
 		}
 		
-		clicked=Mouse.isButtonDown(0);
-
+		if(Mouse.isButtonDown(0)){
+			clicked=true;
+			selectedTiles.clear();
+			
+			for(int i=dx1; i!=dx2; i+= ( (dx1-dx2 > 0) ? -1 : 1) ){		//BOUCLE FOR AVEC OPERATEUR TERNAIRE AIIIIGHT
+				for(int j=dy1; j!=dy2; j+= ( (dy1-dy2 > 0) ? -1 : 1) ){
+					selectedTiles.add(this.elems[i][j]);
+				}
+			}
+			
+//			int i=dx1;
+//			int j=dy1;
+//			
+//			while(i!=dx2){
+//				i+= ( (dx1-dx2 > 0) ? -1 : 1);
+//				while(j!=dy2){
+//					j+= ( (dy1-dy2 > 0) ? -1 : 1);
+//					selectedTiles.add(this.elems[i][j]);
+//				}
+//			}
+			
+		}else{
+			clicked=false;
+			dx2 = Game.mouseXGrid;
+			dy2 = Game.mouseYGrid;
+			selectedTiles.clear();
+		}
+		
 	}
 
 	private Element SolOuMur(int x, int y) {

@@ -107,5 +107,9 @@ public class Element {
 	public void setY(int y) {
 		this.y = y;
 	}
+	
+	public Texture getTexture(){
+		return texture;
+	}
 
 }
