@@ -1,6 +1,7 @@
 package fr.kienanbachwa.colonie.jeu;
 
 import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.util.glu.GLU;
@@ -9,12 +10,12 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Component {
 	
-	public static int scale = 3;
-	public static int width = 1024 / scale;
-	public static int height = 576 / scale;
+	public static float scale = 3;
+	public static int width = (int) (1024 / scale);
+	public static int height = (int) (576 / scale);
 	public boolean running = false;
 	
-	DisplayMode mode = new DisplayMode(width * scale, height * scale);
+	DisplayMode mode = new DisplayMode((int)(width * scale), (int)(height * scale));
 	int time = 0;
 	
 	public static boolean tick = false;
@@ -43,7 +44,7 @@ public class Component {
 		}
 	}
 	private void view2D(int width, int height) {
-		glViewport(0, 0, width * scale, height * scale);
+		glViewport(0, 0, (int)(width * scale), (int)(height * scale));
 		
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
@@ -63,7 +64,10 @@ public class Component {
 	}
 	public void tick(){
 		time++;
-		game.tick();
+		game.update();
+		
+		if(Keyboard.isKeyDown(Keyboard.KEY_SUBTRACT) && Component.scale>1) Component.scale-=0.1f;
+		if(Keyboard.isKeyDown(Keyboard.KEY_ADD) && scale<10) Component.scale+=0.1f;
 	}
 	
 	public void loop(){
@@ -83,8 +87,8 @@ public class Component {
 			if(Display.isCloseRequested()) stop();
 			Display.update();
 			
-			width = Display.getWidth() / scale;
-			height = Display.getHeight() / scale;
+			width = (int)(Display.getWidth() / scale);
+			height = (int)(Display.getHeight() / scale);
 			
 			tick = false;
 			render = false;

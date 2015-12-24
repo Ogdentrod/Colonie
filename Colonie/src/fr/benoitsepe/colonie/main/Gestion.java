@@ -35,6 +35,11 @@ public class Gestion {
 	private int dx1;
 	private int dy1;
 	List<Element> selectedTiles = new ArrayList<Element>();
+	private int xMin;
+	private int yMin;
+	private int yMax;
+	private int xMax;
+
 
 	public Gestion(int sizeX, int sizeY) {
 		elems = new Element[sizeX][sizeY];
@@ -167,11 +172,11 @@ public class Gestion {
 	}
 
 	public void render() {
-		int xMin = (int) (-Game.xScroll / Structure.tileSize);
-		int yMin = (int) (-Game.yScroll / Structure.tileSize);
+		xMin = (int) (-Game.xScroll / Structure.tileSize);
+		yMin = (int) (-Game.yScroll / Structure.tileSize);
 
-		int xMax = (((int) (-Game.xScroll / Structure.tileSize) + (Component.width / Structure.tileSize)+ 1) >= elems.length) ? elems.length : (int) (-Game.xScroll / Structure.tileSize) + (Component.width / Structure.tileSize) + 2;
-		int yMax = (((int) (-Game.yScroll / Structure.tileSize) + (Component.height / Structure.tileSize)+ 1) >= elems[0].length) ? elems[0].length : (int) (-Game.yScroll / Structure.tileSize) + (Component.height / Structure.tileSize) + 2;
+		xMax = (((int) (-Game.xScroll / Structure.tileSize) + (Component.width / Structure.tileSize)+ 1) >= elems.length) ? elems.length : (int) (-Game.xScroll / Structure.tileSize) + (Component.width / Structure.tileSize) + 2;
+		yMax = (((int) (-Game.yScroll / Structure.tileSize) + (Component.height / Structure.tileSize)+ 1) >= elems[0].length) ? elems[0].length : (int) (-Game.yScroll / Structure.tileSize) + (Component.height / Structure.tileSize) + 2;
 
 		for (int x = xMin; x < xMax; x++) {
 			for (int y = yMin; y < yMax; y++) {
@@ -209,7 +214,6 @@ public class Gestion {
 		 */
 		
 		if(Mouse.isButtonDown(0) && !clicked){
-			//this.creerElem(Hud.elementClicked, Game.mouseXGrid, Game.mouseYGrid);
 			dx2 = Game.mouseXGrid;
 			dy2 = Game.mouseYGrid;
 		}else{	
@@ -220,31 +224,36 @@ public class Gestion {
 		if(Mouse.isButtonDown(0)){
 			clicked=true;
 			selectedTiles.clear();
+			selectedTiles.add(elems[dx2][dy2]);
 			
-			for(int i=dx1; i!=dx2; i+= ( (dx1-dx2 > 0) ? -1 : 1) ){		//BOUCLE FOR AVEC OPERATEUR TERNAIRE AIIIIGHT
-				for(int j=dy1; j!=dy2; j+= ( (dy1-dy2 > 0) ? -1 : 1) ){
-					selectedTiles.add(this.elems[i][j]);
-				}
-			}
-			
-//			int i=dx1;
-//			int j=dy1;
-//			
-//			while(i!=dx2){
-//				i+= ( (dx1-dx2 > 0) ? -1 : 1);
-//				while(j!=dy2){
-//					j+= ( (dy1-dy2 > 0) ? -1 : 1);
-//					selectedTiles.add(this.elems[i][j]);
-//				}
-//			}
+			selectTiles();
 			
 		}else{
 			clicked=false;
 			dx2 = Game.mouseXGrid;
 			dy2 = Game.mouseYGrid;
+			
+			for(Element e : selectedTiles){
+				creerElem(Hud.elementClicked, e.getX(), e.getY());
+			}
+			
 			selectedTiles.clear();
 		}
 		
+	}
+	
+	private void selectTiles(){
+		for(int j=dy1; j!=dy2; j+= ( (dy1-dy2 > 0) ? -1 : 1) ){
+			if(!selectedTiles.contains(elems[dx2][j])) selectedTiles.add(this.elems[dx2][j]);
+		}
+
+		
+		for(int i=dx1; i<dx2 || i>dx2; i+= ( (dx1-dx2 > 0) ? -1 : 1) ){		//BOUCLE FOR AVEC OPERATEUR TERNAIRE AIIIIGHT
+			if(!selectedTiles.contains(elems[i][dy2])) selectedTiles.add(this.elems[i][dy2]);
+			for(int j=dy1; j<dy2 || j>dy2; j+= ( (dy1-dy2 > 0) ? -1 : 1) ){
+				if(!selectedTiles.contains(elems[i][j])) selectedTiles.add(this.elems[i][j]);
+			}
+		}
 	}
 
 	private Element SolOuMur(int x, int y) {
