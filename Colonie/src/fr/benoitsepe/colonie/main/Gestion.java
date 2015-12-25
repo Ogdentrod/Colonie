@@ -191,13 +191,6 @@ public class Gestion {
 	
 	public void renderSelectedTiles(){
 		if(Mouse.isButtonDown(0)){			
-//			for(int i=dx1; i!=dx2; i+= ( (dx1-dx2 > 0) ? -1 : 1) ){		//BOUCLE FOR AVEC OPERATEUR TERNAIRE AIIIIGHT
-//				for(int j=dy1; j!=dy2; j+= ( (dy1-dy2 > 0) ? -1 : 1) ){
-//					Hud.elementClicked.getTexture().bind();
-//					Renderer.renderQuad(i*16, j*16, 16, 16, new float[]{1,0,0,0.5f});
-//					Hud.elementClicked.getTexture().unbind();
-//				}
-//			}
 			for(Element e : selectedTiles){
 				e.getTexture().bind();
 				Renderer.renderQuad(e.getX()*16, e.getY()*16, 16, 16, new float[]{1,0,0,0.5f});
