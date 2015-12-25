@@ -65,7 +65,6 @@ public class Gestion {
 			Element elemCree;
 
 			switch (elem) {
-
 				case BATIMENT:
 					elemCree = SolOuMur(posX, posY);
 					break;
@@ -75,9 +74,7 @@ public class Gestion {
 				default:
 					elemCree = new Vide();
 					break;
-
 			}
-			if(posX==0 && posY==0) System.out.println("a");
 			elems[posX][posY] = elemCree;
 			elemCree.setX(posX);
 			elemCree.setY(posY);
@@ -190,10 +187,10 @@ public class Gestion {
 	}
 	
 	public void renderSelectedTiles(){
-		if(Mouse.isButtonDown(0)){			
+		if(Mouse.isButtonDown(0) && !Hud.mouseOnHud){			
 			for(Element e : selectedTiles){
 				Hud.elementClicked.getTexture().bind();
-				Renderer.renderQuad(e.getX()*16, e.getY()*16, 16, 16, new float[]{1,0,0,0.1f});
+				Renderer.renderQuad(e.getX()*16, e.getY()*16, 16, 16, new float[]{0,0,1,0.5f});
 				Hud.elementClicked.getTexture().unbind();
 			}
 		}
@@ -206,7 +203,7 @@ public class Gestion {
 		 * sousTab) { if(str != null) str.utiliser(res); } }
 		 */
 		
-		if(Mouse.isButtonDown(0) && !clicked){
+		if(Mouse.isButtonDown(0) && !Hud.mouseOnHud && !clicked){
 			dx2 = Game.mouseXGrid;
 			dy2 = Game.mouseYGrid;
 		}else{	
@@ -214,13 +211,10 @@ public class Gestion {
 			dy1 = Game.mouseYGrid;
 		}
 		
-		if(Mouse.isButtonDown(0)){
+		if(Mouse.isButtonDown(0) && !Hud.mouseOnHud){
 			clicked=true;
-			selectedTiles.clear();
-			selectedTiles.add(elems[dx2][dy2]);
-			
 			selectTiles();
-			
+
 		}else{
 			clicked=false;
 			dx2 = Game.mouseXGrid;
@@ -236,9 +230,14 @@ public class Gestion {
 	}
 	
 	private void selectTiles(){
+		selectedTiles.clear();
+		
+		if(!selectedTiles.contains(elems[dx2][dy2])) selectedTiles.add(elems[dx2][dy2]);
+		
 		for(int j=dy1; j!=dy2; j+= ( (dy1-dy2 > 0) ? -1 : 1) ){
 			if(!selectedTiles.contains(elems[dx2][j])) selectedTiles.add(this.elems[dx2][j]);
 		}
+
 
 		
 		for(int i=dx1; i<dx2 || i>dx2; i+= ( (dx1-dx2 > 0) ? -1 : 1) ){		//BOUCLE FOR AVEC OPERATEUR TERNAIRE AIIIIGHT
@@ -248,8 +247,7 @@ public class Gestion {
 			}
 		}
 		
-		
-		
+
 	}
 
 	private Element SolOuMur(int x, int y) {

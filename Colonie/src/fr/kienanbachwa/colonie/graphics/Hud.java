@@ -3,6 +3,8 @@ package fr.kienanbachwa.colonie.graphics;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.input.Mouse;
+
 import fr.benoitsepe.colonie.elements.TypeElements;
 import fr.benoitsepe.colonie.main.Gestion;
 import fr.benoitsepe.colonie.ressources.TypeRessources;
@@ -20,6 +22,7 @@ public class Hud {
 	int sizeRes = 60;	//taille de l'affichage des ressources
 	int sizeResIcon;
 	Font font;
+	public static boolean mouseOnHud;
 	public static TypeElements elementClicked = TypeElements.BATIMENT;
 	
 	public Hud(){
@@ -62,6 +65,15 @@ public class Hud {
 			b.update(x0 +4+ (buttons.indexOf(b))*((sizeX-sizeRes)/TypeElements.values().length), y0+2, 16, 16);
 			
 		}
+		
+		if(Mouse.getX() > x0*Component.scale && Mouse.getX()<(x0+sizeX)*Component.scale && Mouse.getY()<y0){
+			mouseOnHud=true;
+		}else{
+			mouseOnHud=false;
+		}
+		
+		System.out.println(mouseOnHud);
+
 		
 	}
 	
