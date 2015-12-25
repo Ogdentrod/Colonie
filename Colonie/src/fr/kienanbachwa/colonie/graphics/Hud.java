@@ -38,6 +38,14 @@ public class Hud {
 		for(TypeRessources res : TypeRessources.values()){
 			ressources.add(res);
 		}
+		
+		try {												//THIS WAS TAKING MEMORY
+			font = new Font("res/stan0753.ttf", 8);
+		} catch (Exception e) {
+			System.err.println("Police non trouvée");
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public void update(){
@@ -53,13 +61,6 @@ public class Hud {
 		for(Button b:buttons){
 			b.update(x0 +4+ (buttons.indexOf(b))*((sizeX-sizeRes)/TypeElements.values().length), y0+2, 16, 16);
 			
-		}
-		
-		try {
-			font = new Font("res/stan0753.ttf", 8);
-		} catch (Exception e) {
-			System.err.println("Police non trouvée");
-			e.printStackTrace();
 		}
 		
 	}

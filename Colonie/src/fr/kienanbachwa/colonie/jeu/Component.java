@@ -68,6 +68,7 @@ public class Component {
 		
 		if(Keyboard.isKeyDown(Keyboard.KEY_SUBTRACT) && Component.scale>1) Component.scale-=0.1f;
 		if(Keyboard.isKeyDown(Keyboard.KEY_ADD) && scale<10) Component.scale+=0.1f;
+		
 	}
 	
 	public void loop(){
