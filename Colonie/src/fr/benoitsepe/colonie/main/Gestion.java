@@ -77,7 +77,7 @@ public class Gestion {
 					break;
 
 			}
-
+			if(posX==0 && posY==0) System.out.println("a");
 			elems[posX][posY] = elemCree;
 			elemCree.setX(posX);
 			elemCree.setY(posY);
@@ -93,7 +93,7 @@ public class Gestion {
 			}
 
 
-			Affichage.afficherStruct(elemCree); // instruction temporaire pour
+			//Affichage.afficherStruct(elemCree); // instruction temporaire pour
 												// affichage
 
 		} else {
@@ -192,9 +192,9 @@ public class Gestion {
 	public void renderSelectedTiles(){
 		if(Mouse.isButtonDown(0)){			
 			for(Element e : selectedTiles){
-				e.getTexture().bind();
-				Renderer.renderQuad(e.getX()*16, e.getY()*16, 16, 16, new float[]{1,0,0,0.5f});
-				e.getTexture().unbind();
+				Hud.elementClicked.getTexture().bind();
+				Renderer.renderQuad(e.getX()*16, e.getY()*16, 16, 16, new float[]{1,0,0,0.1f});
+				Hud.elementClicked.getTexture().unbind();
 			}
 		}
 	}
@@ -247,6 +247,9 @@ public class Gestion {
 				if(!selectedTiles.contains(elems[i][j])) selectedTiles.add(this.elems[i][j]);
 			}
 		}
+		
+		
+		
 	}
 
 	private Element SolOuMur(int x, int y) {

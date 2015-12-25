@@ -41,7 +41,6 @@ public class Element {
 		//color = new float[]{random.nextFloat(), random.nextFloat(), random.nextFloat(), 1.0f};
 		color = new float[]{1,1,1,1};
 		
-		System.out.println(TypeElements.valueOf(nom.toUpperCase()));
 		texture = TypeElements.valueOf(nom.toUpperCase()).getTexture();
 		
 	}
