@@ -69,10 +69,10 @@ public class Gestion {
 					elemCree = SolOuMur(posX, posY);
 					break;
 				case PORTE:
-					elemCree = new Porte();
+					elemCree = new Porte(posX, posY);
 					break;
 				default:
-					elemCree = new Vide();
+					elemCree = new Vide(posX, posY);
 					break;
 			}
 			elems[posX][posY] = elemCree;
@@ -267,7 +267,7 @@ public class Gestion {
 			bd = elems[x+1][y+1];
 			d = elems[x+1][y];
 		} catch(java.lang.IndexOutOfBoundsException e) {
-			return new Mur();
+			return new Mur(x, y);
 		}
 		
 		// Si le bloc en question est entouré de batiment, alors c'est un sol, sinon un mur
@@ -276,10 +276,10 @@ public class Gestion {
 				&& bg instanceof Batiment && b instanceof Batiment 
 				&& bd instanceof Batiment && d instanceof Batiment) {
 			
-			return new Sol();
+			return new Sol(x, y);
 			
 		} else {
-			return new Mur();
+			return new Mur(x, y);
 		}
 	}
 	

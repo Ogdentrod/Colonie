@@ -33,8 +33,10 @@ public class Element {
 	 * Le constructeur doit être appelé depuis la classe fille avec comme paramétre le nom du la structure
 	 * Constructeur sans image: une image par défaut est chargée pour l'affichage
 	 */
-	public Element(String nom) {
+	public Element(String nom, int posX, int posY) {
 		this.nom = nom;
+		this.x = posX;
+		this.y = posY;
 		maintenance = 100;
 		random = new Random();
 		
