@@ -1,6 +1,6 @@
 TODO:
 
-creation de zone batiment -> K	DONE: Régler bug du placement de bloc à 0;0
+creation de zone batiment -> K	DONE
 correction bug placement de bloc quand clic dans hud -> K DONE
 amélioration graphique du hud (ressources, onglets, positionnement, ...) -> K
 ajout d'onglets élements/structures dans le hud -> K

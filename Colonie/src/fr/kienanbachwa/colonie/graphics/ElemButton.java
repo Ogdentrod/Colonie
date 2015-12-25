@@ -6,12 +6,16 @@ import fr.benoitsepe.colonie.elements.TypeElements;
 import fr.kienanbachwa.colonie.jeu.Component;
 import fr.kienanbachwa.colonie.jeu.Game;
 
-public class Button {
+public class ElemButton {
+
 	boolean clicked = false;
 	Texture texture;
+	TypeElements typeElement;
 	int x,y,w,h;
 	
-	public Button(){
+	public ElemButton(TypeElements e){
+		typeElement = e;
+		this.texture=e.getTexture();
 	}
 	
 	public boolean update(int x, int y, int w, int h){
@@ -22,6 +26,7 @@ public class Button {
 		
 		if(Mouse.isButtonDown(0) && Mouse.getX()/Component.scale -Game.xScroll>x && Mouse.getX()/Component.scale -Game.xScroll<x+w && Component.height-(Mouse.getY()/Component.scale)-Game.yScroll>y ){
 			clicked=true;
+			Hud.elementClicked=this.typeElement;
 		}else{
 			clicked=false;
 		}
@@ -29,7 +34,6 @@ public class Button {
 	}
 	
 	public void render(){
-		
 		if(  Mouse.getX()/Component.scale -Game.xScroll>x && Mouse.getX()/Component.scale -Game.xScroll<x+w && Component.height-(Mouse.getY()/Component.scale)-Game.yScroll>y ){
 			Renderer.renderQuad(x,y,w,h, new float[]{1,1,1,0.5f});
 		}
@@ -37,7 +41,6 @@ public class Button {
 		if(clicked){
 			Renderer.renderQuad(x,y,w,h, new float[]{1,0,0,0.5f});
 		}
-		
 	}
 	
 	public void setTexture(Texture texture){
@@ -48,4 +51,3 @@ public class Button {
 		return texture;
 	}
 }
-

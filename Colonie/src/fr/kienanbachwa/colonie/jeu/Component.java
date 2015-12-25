@@ -2,6 +2,7 @@ package fr.kienanbachwa.colonie.jeu;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.util.glu.GLU;
@@ -24,6 +25,7 @@ public class Component {
 	public static String title = "TEH BEST GAME EVAH";
 	
 	Game game;
+	private int wheel;
 	
 	public Component(){
 		display();
@@ -65,9 +67,10 @@ public class Component {
 	public void tick(){
 		time++;
 		game.update();
-		
-		if(Keyboard.isKeyDown(Keyboard.KEY_SUBTRACT) && Component.scale>1) Component.scale-=0.1f;
-		if(Keyboard.isKeyDown(Keyboard.KEY_ADD) && scale<10) Component.scale+=0.1f;
+
+		wheel = Mouse.getDWheel();
+		if((Keyboard.isKeyDown(Keyboard.KEY_ADD) || wheel>0) && scale<10) Component.scale+=0.1f;
+		if((Keyboard.isKeyDown(Keyboard.KEY_SUBTRACT) || wheel<0) && Component.scale>1) Component.scale-=0.1f;
 		
 	}
 	
