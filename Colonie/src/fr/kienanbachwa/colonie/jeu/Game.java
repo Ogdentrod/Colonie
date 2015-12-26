@@ -49,6 +49,8 @@ public class Game {
 		GL11.glTranslatef(xScroll, yScroll, 0);
 		gestion.render();
 		drawSelect(Mouse.getX(),Mouse.getY());
+		
+		GL11.glTranslatef(-xScroll, -yScroll, 0);
 		hud.render();
 	}
 	
@@ -103,6 +105,6 @@ public class Game {
 	}
 	
 	public void drawSelect(int mouseX, int mouseY){
-		Renderer.renderBasicQuad(mouseXGrid*Structure.tileSize, mouseYGrid*Structure.tileSize, Structure.tileSize, Structure.tileSize, new float[]{1,0,0,0.5f});
+		Renderer.renderQuad(mouseXGrid*Structure.tileSize, mouseYGrid*Structure.tileSize, Structure.tileSize, Structure.tileSize, new float[]{1,0,0,0.5f});
 	}
 }

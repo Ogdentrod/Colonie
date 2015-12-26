@@ -6,7 +6,7 @@ import fr.benoitsepe.colonie.elements.TypeElements;
 import fr.kienanbachwa.colonie.jeu.Component;
 import fr.kienanbachwa.colonie.jeu.Game;
 
-public class Button {
+public class Button extends Thing{
 
 	boolean clicked = false;
 	boolean hovered = false;
@@ -16,13 +16,13 @@ public class Button {
 		
 	}
 	
-	public boolean update(int x, int y, int w, int h){
+	public void update(int x, int y, int w, int h){
 		this.x=x;
 		this.y=y;
 		this.w=w;
 		this.h=h;
 		
-		if(Mouse.getX()/Component.scale -Game.xScroll>x && Mouse.getX()/Component.scale -Game.xScroll<x+w && Component.height-(Mouse.getY()/Component.scale)-Game.yScroll>y && Component.height-(Mouse.getY()/Component.scale)-Game.yScroll<y+h){
+		if(Mouse.getX()/Component.scale>x && Mouse.getX()/Component.scale<x+w && Component.height-(Mouse.getY()/Component.scale)>y && Component.height-(Mouse.getY()/Component.scale)<y+h){
 			hovered=true;
 		}else{
 			hovered=false;
@@ -32,10 +32,7 @@ public class Button {
 			clicked=true;
 		}else{
 			clicked=false;
-		}
-				
-		return clicked;
-		
+		}		
 	}
 	
 	public void render(){

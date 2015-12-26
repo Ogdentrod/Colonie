@@ -16,18 +16,12 @@ public class Hud {
 	List<ElemButton> buttons = new ArrayList<ElemButton>();
 	List<TypeRessources> ressources = new ArrayList<TypeRessources>();
 	
-	private int sizeX, sizeY;	//Taille du hud
-	private int x0,y0;		//position d'affichage du hud
-	private int xRes;			//position d'affichage des ressources
-	private int sizeRes = 60;	//taille de l'affichage des ressources
-	private int sizeResIcon;
 	private Font font;
-	private int y1;
-	private int sizeTab = 10;		//Taille des onglets
 	public static boolean mouseOnHud;
 	public static TypeElements elementClicked = TypeElements.BATIMENT;
 	
-	
+	int x,y,w,h;
+	Panneau pan;
 	public Hud(){
 		try {
 			font = new Font("res/minecraft_font.ttf", 6);
@@ -35,10 +29,9 @@ public class Hud {
 			e.printStackTrace();
 		}
 		
-		sizeX = 228;
-		sizeY = 60;
-		sizeResIcon = 8;
-		
+		w=Component.width;
+		h=(Component.height/16)*4;
+		pan = new Panneau(x,y-10,w,h);
 	}
 	
 	public void init(){
@@ -57,52 +50,40 @@ public class Hud {
 			e.printStackTrace();
 		}
 		
+		for(ElemButton eb : buttons){
+			pan.add(eb);
+		}
 	}
 	
 	public void update(){
 		//Position en haut à gauche du hud
-		x0 = (int)(-Game.xScroll +(Component.width/2 -sizeX/2));		
-		y0 =(int)(Component.height-sizeY-Game.yScroll);					
+		x = 0;		
+		y =(int)(Component.height-h);	
+		w=Component.width;
+				
+//		for(ElemButton b:buttons){
+//			b.update(x +(buttons.indexOf(b))*((w)/TypeElements.values().length), y, 16, 16);
+//		}
 		
-		//Position d'affichage des autres trucs
-		y1=y0+sizeTab ;
-		
-		//Position d'affichage des ressources
-		xRes = x0 +4+ TypeElements.values().length*((sizeX-sizeRes)/TypeElements.values().length);
-		
-		for(ElemButton b:buttons){
-			b.update(x0 +4+ (buttons.indexOf(b))*((sizeX-sizeRes)/TypeElements.values().length), y1+2, 16, 16);
-		}
-		
-		if(Mouse.getX() > x0*Component.scale+Game.xScroll && Mouse.getX()<(x0+sizeX)*Component.scale+Game.xScroll && Mouse.getY()<(y0+sizeY)*Component.scale+Game.yScroll){
+		if(Mouse.getX() > x*Component.scale && Mouse.getX()<(x+w)*Component.scale && Mouse.getY() < (Component.height-y)*Component.scale && Mouse.getY()> (Component.height-y-h)*Component.scale){
 			mouseOnHud=true;
 		}else{
 			mouseOnHud=false;
 		}		
+		
+		pan.update(x,y+10,(w/4)*3,h);
 	}
 	
 	public void render(){
-		Renderer.renderQuad(x0, y0, sizeX, sizeY, new float[]{0,0,1,0.6f});
-		
-		for(ElemButton b:buttons){
-			b.getTexture().bind();
-			Renderer.renderQuad(x0 +4+ (buttons.indexOf(b))*((sizeX-sizeRes)/TypeElements.values().length), y1+2, 16, 16, new float[]{1,1,1,1});
-			b.getTexture().unbind();
-			b.render();
-		}
-		
-		
-		for(TypeRessources res : ressources){
-			res.getTexture().bind();
-			Renderer.renderQuad(xRes + 1, y1 + ressources.indexOf(res)*sizeResIcon, sizeResIcon, sizeResIcon, new float[]{1,1,1,1});
-			res.getTexture().unbind();
-		}
-		
-		font.drawText(String.valueOf(Gestion.res.getWater()), xRes+1+sizeResIcon, y1+sizeResIcon*0);
-		font.drawText(String.valueOf(Gestion.res.getOxygen()), xRes+1+sizeResIcon, y1+sizeResIcon*1);
-		font.drawText(String.valueOf(Gestion.res.getIron()), xRes+1+sizeResIcon, y1+sizeResIcon*2);
-		font.drawText(String.valueOf(Gestion.res.getElec()), xRes+1+sizeResIcon, y1+sizeResIcon*3);
+		Renderer.renderQuad(x, y, w, h, new float[]{0,0,1,0.6f});
+		pan.render();
 
+//		for(ElemButton b:buttons){
+//			b.getTexture().bind();
+//			Renderer.renderQuad(x +(buttons.indexOf(b))*((w)/TypeElements.values().length), y, 16, 16, new float[]{1,1,1,1});
+//			b.getTexture().unbind();
+//			b.render();
+//		}
 	}
 		
 

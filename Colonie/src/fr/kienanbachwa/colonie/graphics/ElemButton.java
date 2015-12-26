@@ -11,15 +11,16 @@ public class ElemButton extends Button{
 	int x,y,w,h;
 	
 	public ElemButton(TypeElements e){
+		super();
 		typeElement = e;
 		this.texture=e.getTexture();
 	}
 	
-	public boolean update(int x, int y, int w, int h){
+	public void update(int x, int y, int w, int h){
 		super.update(x, y, w, h);
-		if(clicked)	Hud.elementClicked=this.typeElement;
-		
-		return clicked;	
+		if(clicked){
+			Hud.elementClicked=this.typeElement;
+		}
 	}
 	
 	public void setTexture(Texture texture){
