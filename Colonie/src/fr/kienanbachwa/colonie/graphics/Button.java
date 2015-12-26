@@ -7,11 +7,13 @@ import fr.kienanbachwa.colonie.jeu.Component;
 import fr.kienanbachwa.colonie.jeu.Game;
 
 public class Button {
+
 	boolean clicked = false;
-	Texture texture;
+	boolean hovered = false;
 	int x,y,w,h;
 	
 	public Button(){
+		
 	}
 	
 	public boolean update(int x, int y, int w, int h){
@@ -20,32 +22,29 @@ public class Button {
 		this.w=w;
 		this.h=h;
 		
-		if(Mouse.isButtonDown(0) && Mouse.getX()/Component.scale -Game.xScroll>x && Mouse.getX()/Component.scale -Game.xScroll<x+w && Component.height-(Mouse.getY()/Component.scale)-Game.yScroll>y ){
+		if(Mouse.getX()/Component.scale -Game.xScroll>x && Mouse.getX()/Component.scale -Game.xScroll<x+w && Component.height-(Mouse.getY()/Component.scale)-Game.yScroll>y && Component.height-(Mouse.getY()/Component.scale)-Game.yScroll<y+h){
+			hovered=true;
+		}else{
+			hovered=false;
+		}
+		
+		if(Mouse.isButtonDown(0) && hovered){
 			clicked=true;
 		}else{
 			clicked=false;
 		}
+				
 		return clicked;
+		
 	}
 	
 	public void render(){
-		
-		if(  Mouse.getX()/Component.scale -Game.xScroll>x && Mouse.getX()/Component.scale -Game.xScroll<x+w && Component.height-(Mouse.getY()/Component.scale)-Game.yScroll>y ){
+		if(hovered){
 			Renderer.renderQuad(x,y,w,h, new float[]{1,1,1,0.5f});
 		}
 		
-		if(clicked){
+		if(hovered && clicked){
 			Renderer.renderQuad(x,y,w,h, new float[]{1,0,0,0.5f});
 		}
-		
-	}
-	
-	public void setTexture(Texture texture){
-		this.texture=texture;
-	}
-	
-	public Texture getTexture(){
-		return texture;
 	}
 }
-

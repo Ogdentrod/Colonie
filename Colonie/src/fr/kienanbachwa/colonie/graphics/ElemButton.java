@@ -1,14 +1,11 @@
 package fr.kienanbachwa.colonie.graphics;
 
-import org.lwjgl.input.Mouse;
-
 import fr.benoitsepe.colonie.elements.TypeElements;
-import fr.kienanbachwa.colonie.jeu.Component;
-import fr.kienanbachwa.colonie.jeu.Game;
 
-public class ElemButton {
+public class ElemButton extends Button{
 
 	boolean clicked = false;
+	boolean hovered = false;
 	Texture texture;
 	TypeElements typeElement;
 	int x,y,w,h;
@@ -19,28 +16,10 @@ public class ElemButton {
 	}
 	
 	public boolean update(int x, int y, int w, int h){
-		this.x=x;
-		this.y=y;
-		this.w=w;
-		this.h=h;
+		super.update(x, y, w, h);
+		if(clicked)	Hud.elementClicked=this.typeElement;
 		
-		if(Mouse.isButtonDown(0) && Mouse.getX()/Component.scale -Game.xScroll>x && Mouse.getX()/Component.scale -Game.xScroll<x+w && Component.height-(Mouse.getY()/Component.scale)-Game.yScroll>y ){
-			clicked=true;
-			Hud.elementClicked=this.typeElement;
-		}else{
-			clicked=false;
-		}
-		return clicked;
-	}
-	
-	public void render(){
-		if(  Mouse.getX()/Component.scale -Game.xScroll>x && Mouse.getX()/Component.scale -Game.xScroll<x+w && Component.height-(Mouse.getY()/Component.scale)-Game.yScroll>y ){
-			Renderer.renderQuad(x,y,w,h, new float[]{1,1,1,0.5f});
-		}
-		
-		if(clicked){
-			Renderer.renderQuad(x,y,w,h, new float[]{1,0,0,0.5f});
-		}
+		return clicked;	
 	}
 	
 	public void setTexture(Texture texture){

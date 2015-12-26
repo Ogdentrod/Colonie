@@ -18,11 +18,12 @@ public class Hud {
 	
 	private int sizeX, sizeY;	//Taille du hud
 	private int x0,y0;		//position d'affichage du hud
-	private int x1;			//position d'affichage des ressources
+	private int xRes;			//position d'affichage des ressources
 	private int sizeRes = 60;	//taille de l'affichage des ressources
 	private int sizeResIcon;
 	private Font font;
 	private int y1;
+	private int sizeTab = 10;		//Taille des onglets
 	public static boolean mouseOnHud;
 	public static TypeElements elementClicked = TypeElements.BATIMENT;
 	
@@ -42,7 +43,7 @@ public class Hud {
 	
 	public void init(){
 		for(TypeElements e : TypeElements.values()){
-			buttons.add(new ElemButton(e));
+			buttons.add(new ElemButton(e));				//Boutons d'élements
 		}
 		
 		for(TypeRessources res : TypeRessources.values()){
@@ -59,24 +60,25 @@ public class Hud {
 	}
 	
 	public void update(){
-		x0 = (int)(-Game.xScroll +(Component.width/2 -sizeX/2));
-		y0 =(int)(Component.height-sizeY-Game.yScroll);
+		//Position en haut à gauche du hud
+		x0 = (int)(-Game.xScroll +(Component.width/2 -sizeX/2));		
+		y0 =(int)(Component.height-sizeY-Game.yScroll);					
 		
-		y1=y0+10;
+		//Position d'affichage des autres trucs
+		y1=y0+sizeTab ;
 		
-		x1 = x0 +4+ TypeElements.values().length*((sizeX-sizeRes)/TypeElements.values().length);
+		//Position d'affichage des ressources
+		xRes = x0 +4+ TypeElements.values().length*((sizeX-sizeRes)/TypeElements.values().length);
 		
 		for(ElemButton b:buttons){
 			b.update(x0 +4+ (buttons.indexOf(b))*((sizeX-sizeRes)/TypeElements.values().length), y1+2, 16, 16);
-			
 		}
 		
-		if(Mouse.getX() > x0*Component.scale && Mouse.getX()<(x0+sizeX)*Component.scale && Mouse.getY()<y0+sizeY && Mouse.isInsideWindow()){
+		if(Mouse.getX() > x0*Component.scale+Game.xScroll && Mouse.getX()<(x0+sizeX)*Component.scale+Game.xScroll && Mouse.getY()<(y0+sizeY)*Component.scale+Game.yScroll){
 			mouseOnHud=true;
 		}else{
 			mouseOnHud=false;
 		}		
-		System.out.println(Mouse.getY());
 	}
 	
 	public void render(){
@@ -92,14 +94,14 @@ public class Hud {
 		
 		for(TypeRessources res : ressources){
 			res.getTexture().bind();
-			Renderer.renderQuad(x1 + 1, y1 + ressources.indexOf(res)*sizeResIcon, sizeResIcon, sizeResIcon, new float[]{1,1,1,1});
+			Renderer.renderQuad(xRes + 1, y1 + ressources.indexOf(res)*sizeResIcon, sizeResIcon, sizeResIcon, new float[]{1,1,1,1});
 			res.getTexture().unbind();
 		}
 		
-		font.drawText(String.valueOf(Gestion.res.getWater()), x1+1+sizeResIcon, y1+sizeResIcon*0);
-		font.drawText(String.valueOf(Gestion.res.getOxygen()), x1+1+sizeResIcon, y1+sizeResIcon*1);
-		font.drawText(String.valueOf(Gestion.res.getIron()), x1+1+sizeResIcon, y1+sizeResIcon*2);
-		font.drawText(String.valueOf(Gestion.res.getElec()), x1+1+sizeResIcon, y1+sizeResIcon*3);
+		font.drawText(String.valueOf(Gestion.res.getWater()), xRes+1+sizeResIcon, y1+sizeResIcon*0);
+		font.drawText(String.valueOf(Gestion.res.getOxygen()), xRes+1+sizeResIcon, y1+sizeResIcon*1);
+		font.drawText(String.valueOf(Gestion.res.getIron()), xRes+1+sizeResIcon, y1+sizeResIcon*2);
+		font.drawText(String.valueOf(Gestion.res.getElec()), xRes+1+sizeResIcon, y1+sizeResIcon*3);
 
 	}
 		
