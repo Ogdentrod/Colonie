@@ -2,11 +2,15 @@ package fr.benoitsepe.colonie.main;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import org.lwjgl.input.Mouse;
 
 import fr.benoitsepe.colonie.elements.Batiment;
 import fr.benoitsepe.colonie.elements.Element;
+import fr.benoitsepe.colonie.elements.Etat;
 import fr.benoitsepe.colonie.elements.Mur;
 import fr.benoitsepe.colonie.elements.Porte;
 import fr.benoitsepe.colonie.elements.Sol;
@@ -39,11 +43,13 @@ public class Gestion {
 	private int yMin;
 	private int yMax;
 	private int xMax;
-
+	private Construction construction;
+	
 
 	public Gestion(int sizeX, int sizeY) {
 		elems = new Element[sizeX][sizeY];
-
+		construction = new Construction();
+		
 		res.setIron(100000);
 		res.setElec(100000);
 		res.setIron_ore(100000);
@@ -52,7 +58,8 @@ public class Gestion {
 
 		for (int i = 0; i < sizeX; i++) {
 			for (int j = 0; j < sizeY; j++) {
-				this.creerElem(TypeElements.VIDE, i, j);
+				elems[i][j] = new Vide(i, j);
+				elems[i][j].setEtat(Etat.OPERATIONNAL);
 			}
 		}
 
@@ -76,11 +83,13 @@ public class Gestion {
 					break;
 			}
 			elems[posX][posY] = elemCree;
-			elemCree.setX(posX);
-			elemCree.setY(posY);
+
+			construction.offer(elemCree); // ajout de l'élément à la liste de construction
+			
+			
+			
 			
 			// On actualise tous les murs/sols
-
 			for(int i = 0; i < elems.length; i++){
 				for(int j = 0; j < elems[i].length; j++){
 					if (elems[i][j] instanceof Batiment) {

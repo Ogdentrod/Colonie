@@ -20,6 +20,7 @@ import fr.kienanbachwa.colonie.graphics.Texture;
 public class Element {
 	protected int maintenance; // 0 = cassé, 100=neuf
 	protected String nom; // nom de
+	protected Etat etat;
 
 	private int x;
 	private int y;
@@ -37,17 +38,46 @@ public class Element {
 		this.nom = nom;
 		this.x = posX;
 		this.y = posY;
-		maintenance = 100;
-		random = new Random();
+		this.maintenance = 100;
 		
-		//color = new float[]{random.nextFloat(), random.nextFloat(), random.nextFloat(), 1.0f};
+		this.etat = Etat.QUEUED;
+		
+		
+		/*
+		random = new Random();
+		color = new float[]{random.nextFloat(), random.nextFloat(), random.nextFloat(), 1.0f};
+		*/
 		color = new float[]{1,1,1,1};
 		
-		texture = TypeElements.valueOf(nom.toUpperCase()).getTexture();
+		texture = Texture.loadTexture(this.etat.toString().toLowerCase());
 		
 	}
 
 
+
+
+	/**
+	 * @return the etat
+	 */
+	public Etat getEtat() {
+		return etat;
+	}
+
+
+
+
+	/**
+	 * @param etat the etat to set
+	 */
+	public void setEtat(Etat etat) {
+		this.etat = etat;
+		
+		if (etat != Etat.QUEUED && etat != Etat.CONSTRUCTION) {
+			texture = TypeElements.valueOf(nom.toUpperCase()).getTexture();
+		} else {
+			texture = Texture.loadTexture(this.etat.toString().toLowerCase());
+		}
+	}
 
 
 	public int getMaintenance() {
@@ -107,6 +137,10 @@ public class Element {
 
 	public void setY(int y) {
 		this.y = y;
+	}
+	
+	public void setTexture(Texture text) {
+		this.texture = text;
 	}
 	
 	public Texture getTexture(){

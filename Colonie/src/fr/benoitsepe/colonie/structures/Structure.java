@@ -5,8 +5,8 @@ import static org.lwjgl.opengl.GL11.*;
 import java.util.List;
 import java.util.Random;
 
+import fr.benoitsepe.colonie.elements.Etat;
 import fr.benoitsepe.colonie.main.Coordonnees;
-import fr.benoitsepe.colonie.main.Etat;
 import fr.benoitsepe.colonie.main.IStructure;
 import fr.benoitsepe.colonie.ressources.Ressources;
 import fr.kienanbachwa.colonie.graphics.Renderer;
@@ -39,7 +39,7 @@ public class Structure implements IStructure {
 	 */
 	public Structure(String nom, List<Coordonnees> coos) {
 		this.nom = nom;
-		this.etat = Etat.RUNNING;
+		//this.etat = Etat.RUNNING;
 		this.coos =  coos;
 		random = new Random();
 		

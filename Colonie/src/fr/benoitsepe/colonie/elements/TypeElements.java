@@ -18,7 +18,7 @@ public enum TypeElements {
 		this.res = res;
 		texture = Texture.loadTexture(this.toString().toLowerCase());
 	}
-
+	
 	public Ressources getRes() {
 		return res;
 	}
