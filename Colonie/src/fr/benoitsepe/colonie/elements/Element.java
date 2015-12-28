@@ -22,6 +22,7 @@ public class Element {
 	protected String nom; // nom de
 	protected Etat etat;
 
+	
 	private int x;
 	private int y;
 	public static int tileSize = 16;
@@ -49,7 +50,7 @@ public class Element {
 		*/
 		color = new float[]{1,1,1,1};
 		
-		texture = Texture.loadTexture(this.etat.toString().toLowerCase());
+		texture = Etat.valueOf(this.etat.toString()).getTexture();
 		
 	}
 
@@ -75,7 +76,7 @@ public class Element {
 		if (etat != Etat.QUEUED && etat != Etat.CONSTRUCTION) {
 			texture = TypeElements.valueOf(nom.toUpperCase()).getTexture();
 		} else {
-			texture = Texture.loadTexture(this.etat.toString().toLowerCase());
+			texture = Etat.valueOf(this.etat.toString()).getTexture();
 		}
 	}
 
