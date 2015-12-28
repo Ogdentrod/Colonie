@@ -241,9 +241,13 @@ public class Gestion {
 
 		
 		for(int i=dx1; i<dx2 || i>dx2; i+= ( (dx1-dx2 > 0) ? -1 : 1) ){		//BOUCLE FOR AVEC OPERATEUR TERNAIRE AIIIIGHT
-			if(!selectedTiles.contains(elems[i][dy2])) selectedTiles.add(this.elems[i][dy2]);
-			for(int j=dy1; j<dy2 || j>dy2; j+= ( (dy1-dy2 > 0) ? -1 : 1) ){
-				if(!selectedTiles.contains(elems[i][j])) selectedTiles.add(this.elems[i][j]);
+			try {
+				if(!selectedTiles.contains(elems[i][dy2])) selectedTiles.add(this.elems[i][dy2]);
+				for(int j=dy1; j<dy2 || j>dy2; j+= ( (dy1-dy2 > 0) ? -1 : 1) ){
+					if(!selectedTiles.contains(elems[i][j])) selectedTiles.add(this.elems[i][j]);
+				}
+			} catch(java.lang.ArrayIndexOutOfBoundsException e) {
+				
 			}
 		}
 		
