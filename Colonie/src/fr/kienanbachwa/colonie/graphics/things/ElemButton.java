@@ -1,11 +1,11 @@
-package fr.kienanbachwa.colonie.graphics;
+package fr.kienanbachwa.colonie.graphics.things;
 
 import fr.benoitsepe.colonie.elements.TypeElements;
+import fr.kienanbachwa.colonie.graphics.Hud;
+import fr.kienanbachwa.colonie.graphics.Texture;
 
 public class ElemButton extends Button{
 
-	boolean clicked = false;
-	boolean hovered = false;
 	Texture texture;
 	TypeElements typeElement;
 	int x,y,w,h;

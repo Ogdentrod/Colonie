@@ -8,6 +8,7 @@ import org.lwjgl.input.Mouse;
 import fr.benoitsepe.colonie.elements.TypeElements;
 import fr.benoitsepe.colonie.main.Gestion;
 import fr.benoitsepe.colonie.ressources.TypeRessources;
+import fr.kienanbachwa.colonie.graphics.things.ElemButton;
 import fr.kienanbachwa.colonie.jeu.Component;
 import fr.kienanbachwa.colonie.jeu.Game;
 

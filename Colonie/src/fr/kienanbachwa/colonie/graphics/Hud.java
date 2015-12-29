@@ -8,6 +8,7 @@ import org.lwjgl.input.Mouse;
 import fr.benoitsepe.colonie.elements.TypeElements;
 import fr.benoitsepe.colonie.main.Gestion;
 import fr.benoitsepe.colonie.ressources.TypeRessources;
+import fr.kienanbachwa.colonie.graphics.things.ElemButton;
 import fr.kienanbachwa.colonie.jeu.Component;
 import fr.kienanbachwa.colonie.jeu.Game;
 
@@ -21,7 +22,12 @@ public class Hud {
 	public static TypeElements elementClicked = TypeElements.BATIMENT;
 	
 	int x,y,w,h;
-	Panneau pan;
+	Panneau panElem;
+	Panneau panStructures;
+	Panneau panRessources;
+	Panneau panOnglets;
+	int page =1;
+	
 	public Hud(){
 		try {
 			font = new Font("res/minecraft_font.ttf", 6);
@@ -31,7 +37,9 @@ public class Hud {
 		
 		w=Component.width;
 		h=(Component.height/16)*4;
-		pan = new Panneau(x,y-10,w,h);
+		panElem = new Panneau(x,y-10,w,h,1);
+		panStructures = new Panneau(x,y-10,w,h,1);
+		panRessources = new Panneau(x+panElem.w,y,16,16,2);
 	}
 	
 	public void init(){
@@ -51,19 +59,19 @@ public class Hud {
 		}
 		
 		for(ElemButton eb : buttons){
-			pan.add(eb);
+			panElem.add(eb);
 		}
+		
+
 	}
 	
 	public void update(){
 		//Position en haut à gauche du hud
+		h=(Component.height/16)*4;
 		x = 0;		
 		y =(int)(Component.height-h);	
 		w=Component.width;
-				
-//		for(ElemButton b:buttons){
-//			b.update(x +(buttons.indexOf(b))*((w)/TypeElements.values().length), y, 16, 16);
-//		}
+
 		
 		if(Mouse.getX() > x*Component.scale && Mouse.getX()<(x+w)*Component.scale && Mouse.getY() < (Component.height-y)*Component.scale && Mouse.getY()> (Component.height-y-h)*Component.scale){
 			mouseOnHud=true;
@@ -71,19 +79,20 @@ public class Hud {
 			mouseOnHud=false;
 		}		
 		
-		pan.update(x,y+10,(w/4)*3,h);
+		panElem.update(x,y+10,(w/4)*3,h-10);
+		panElem.update(x,y+10,(w/4)*3,h-10);
+		panRessources.update(x+panElem.w, y, w-panElem.w, h);
 	}
 	
 	public void render(){
 		Renderer.renderQuad(x, y, w, h, new float[]{0,0,1,0.6f});
-		pan.render();
+		if(page==1)
+			panElem.render();
+		if(page==2)
+			panStructures.render();
+		
+		panRessources.render();
 
-//		for(ElemButton b:buttons){
-//			b.getTexture().bind();
-//			Renderer.renderQuad(x +(buttons.indexOf(b))*((w)/TypeElements.values().length), y, 16, 16, new float[]{1,1,1,1});
-//			b.getTexture().unbind();
-//			b.render();
-//		}
 	}
 		
 

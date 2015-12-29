@@ -1,26 +1,21 @@
-package fr.kienanbachwa.colonie.graphics;
+package fr.kienanbachwa.colonie.graphics.things;
 
 import org.lwjgl.input.Mouse;
 
-import fr.benoitsepe.colonie.elements.TypeElements;
+import fr.kienanbachwa.colonie.graphics.Renderer;
 import fr.kienanbachwa.colonie.jeu.Component;
-import fr.kienanbachwa.colonie.jeu.Game;
 
 public class Button extends Thing{
 
 	boolean clicked = false;
 	boolean hovered = false;
-	int x,y,w,h;
 	
 	public Button(){
-		
+		super();
 	}
 	
 	public void update(int x, int y, int w, int h){
-		this.x=x;
-		this.y=y;
-		this.w=w;
-		this.h=h;
+		super.update(x, y, w, h);
 		
 		if(Mouse.getX()/Component.scale>x && Mouse.getX()/Component.scale<x+w && Component.height-(Mouse.getY()/Component.scale)>y && Component.height-(Mouse.getY()/Component.scale)<y+h){
 			hovered=true;
@@ -29,13 +24,17 @@ public class Button extends Thing{
 		}
 		
 		if(Mouse.isButtonDown(0) && hovered){
-			clicked=true;
+			this.clicked=true;
 		}else{
-			clicked=false;
+			this.clicked=false;
 		}		
 	}
 	
 	public void render(){
+		if(this.getTexture()!=null) this.getTexture().bind();
+		Renderer.renderQuad(x, y, w, h, new float[]{1,1,1,1});
+		if(this.getTexture()!=null) this.getTexture().unbind();
+		
 		if(hovered){
 			Renderer.renderQuad(x,y,w,h, new float[]{1,1,1,0.5f});
 		}
