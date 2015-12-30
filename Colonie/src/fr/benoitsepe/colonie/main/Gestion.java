@@ -43,12 +43,16 @@ public class Gestion {
 	private int yMin;
 	private int yMax;
 	private int xMax;
-	private Construction construction;
+	private LinkedBlockingQueue<Element> queue;
+	private long time;
+	private Element enConstruction = null;
 	
 
 	public Gestion(int sizeX, int sizeY) {
 		elems = new Element[sizeX][sizeY];
-		construction = new Construction();
+		
+		queue = new LinkedBlockingQueue<Element>();
+		time = 0;
 		
 		res.setIron(100000);
 		res.setElec(100000);
@@ -84,7 +88,7 @@ public class Gestion {
 			}
 			elems[posX][posY] = elemCree;
 
-			construction.offer(elemCree); // ajout de l'élément à la liste de construction
+			queue.offer(elemCree); // ajout de l'élément à la liste de construction
 			
 			
 			
@@ -206,6 +210,25 @@ public class Gestion {
 	}
 
 	public void update() {
+		
+		
+		// CONSTRUCTION
+		if(!queue.isEmpty() || enConstruction != null) {
+			
+			// On a toujours pas commencé la construction (élément ajouté à l'instant)
+			if(enConstruction == null) {
+				time = System.currentTimeMillis();
+				enConstruction = queue.poll();
+				elems[enConstruction.getX()][enConstruction.getY()].setEtat(Etat.CONSTRUCTION);
+			} else {
+				if(System.currentTimeMillis() - time > enConstruction.getTempsConstruction()) { // Si le temps de construction est fini
+					elems[enConstruction.getX()][enConstruction.getY()].setEtat(Etat.OPERATIONNAL);
+					enConstruction = null;
+				}
+			}
+			
+			
+		}
 
 		/*
 		 * for (Structure sousTab[] : structures) { for (Structure str :
@@ -240,30 +263,37 @@ public class Gestion {
 	
 	private void selectTiles(){
 		selectedTiles.clear();
-		
-		if(!selectedTiles.contains(elems[dx2][dy2])) selectedTiles.add(elems[dx2][dy2]);
-		
-		for(int j=dy1; j!=dy2; j+= ( (dy1-dy2 > 0) ? -1 : 1) ){
-			if(!selectedTiles.contains(elems[dx2][j])) selectedTiles.add(this.elems[dx2][j]);
-		}
-
-
-		
-		for(int i=dx1; i<dx2 || i>dx2; i+= ( (dx1-dx2 > 0) ? -1 : 1) ){		//BOUCLE FOR AVEC OPERATEUR TERNAIRE AIIIIGHT
-			try {
+		try {
+			if(!selectedTiles.contains(elems[dx2][dy2])) selectedTiles.add(elems[dx2][dy2]);
+			
+			for(int j=dy1; j!=dy2; j+= ( (dy1-dy2 > 0) ? -1 : 1) ){
+				if(!selectedTiles.contains(elems[dx2][j])) selectedTiles.add(this.elems[dx2][j]);
+			}
+	
+	
+			
+			for(int i=dx1; i<dx2 || i>dx2; i+= ( (dx1-dx2 > 0) ? -1 : 1) ){		//BOUCLE FOR AVEC OPERATEUR TERNAIRE AIIIIGHT
+	
 				if(!selectedTiles.contains(elems[i][dy2])) selectedTiles.add(this.elems[i][dy2]);
-				for(int j=dy1; j<dy2 || j>dy2; j+= ( (dy1-dy2 > 0) ? -1 : 1) ){
-					if(!selectedTiles.contains(elems[i][j])) selectedTiles.add(this.elems[i][j]);
+					for(int j=dy1; j<dy2 || j>dy2; j+= ( (dy1-dy2 > 0) ? -1 : 1) ){
+						if(!selectedTiles.contains(elems[i][j])) selectedTiles.add(this.elems[i][j]);
 				}
-			} catch(java.lang.ArrayIndexOutOfBoundsException e) {
 				
 			}
+		} catch(java.lang.ArrayIndexOutOfBoundsException e) {
+			
 		}
-		
-
 	}
 
 	private Element SolOuMur(int x, int y) {
+		
+		boolean batiment;
+		if (elems[x][y] instanceof Batiment && elems[x][y].getEtat() == Etat.OPERATIONNAL) {
+			batiment = true;
+		} else {
+			batiment = false;
+		}
+		
 		Element hg, h, hd, g, bg, b, bd, d;
 		/*
 		 * HG - H - HD
@@ -280,7 +310,11 @@ public class Gestion {
 			bd = elems[x+1][y+1];
 			d = elems[x+1][y];
 		} catch(java.lang.IndexOutOfBoundsException e) {
-			return new Mur(x, y);
+			if (batiment) {
+				return new Mur(x, y, Etat.OPERATIONNAL);
+			} else {
+				return new Mur(x, y);
+			}
 		}
 		
 		// Si le bloc en question est entouré de batiment, alors c'est un sol, sinon un mur
@@ -288,11 +322,18 @@ public class Gestion {
 				&& hd instanceof Batiment && g instanceof Batiment 
 				&& bg instanceof Batiment && b instanceof Batiment 
 				&& bd instanceof Batiment && d instanceof Batiment) {
-			
-			return new Sol(x, y);
+			if (batiment) {
+				return new Sol(x, y, elems[x][y].getEtat());
+			} else {
+				return new Sol(x, y);
+			}
 			
 		} else {
-			return new Mur(x, y);
+			if (batiment) {
+				return new Mur(x, y, elems[x][y].getEtat());
+			} else {
+				return new Mur(x, y);
+			}
 		}
 	}
 	

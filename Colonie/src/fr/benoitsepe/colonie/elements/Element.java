@@ -21,12 +21,15 @@ public class Element {
 	protected int maintenance; // 0 = cassé, 100=neuf
 	protected String nom; // nom de
 	protected Etat etat;
-
+	protected long tempsConstruction;
 	
+	
+
+
 	private int x;
 	private int y;
 	public static int tileSize = 16;
-	Random random;
+
 	float[] color;
 	private Texture texture; 
 	
@@ -35,19 +38,18 @@ public class Element {
 	 * Le constructeur doit être appelé depuis la classe fille avec comme paramétre le nom du la structure
 	 * Constructeur sans image: une image par défaut est chargée pour l'affichage
 	 */
-	public Element(String nom, int posX, int posY) {
+	public Element(String nom, long tempsConstruction, int posX, int posY, Etat etat) {
 		this.nom = nom;
 		this.x = posX;
 		this.y = posY;
+		this.tempsConstruction = tempsConstruction;
+		
 		this.maintenance = 100;
 		
-		this.etat = Etat.QUEUED;
+		this.etat = etat;
 		
-		
-		/*
-		random = new Random();
-		color = new float[]{random.nextFloat(), random.nextFloat(), random.nextFloat(), 1.0f};
-		*/
+
+	
 		color = new float[]{1,1,1,1};
 		
 		texture = Etat.valueOf(this.etat.toString()).getTexture();
@@ -78,6 +80,8 @@ public class Element {
 		} else {
 			texture = Etat.valueOf(this.etat.toString()).getTexture();
 		}
+		
+		
 	}
 
 
@@ -134,15 +138,17 @@ public class Element {
 	}
 
 
-
+	/**
+	 * @return the tempsConstruction
+	 */
+	public long getTempsConstruction() {
+		return tempsConstruction;
+	}
 
 	public void setY(int y) {
 		this.y = y;
 	}
 	
-	public void setTexture(Texture text) {
-		this.texture = text;
-	}
 	
 	public Texture getTexture(){
 		return texture;
