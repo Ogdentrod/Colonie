@@ -23,6 +23,11 @@ public class Game {
 	private int dy2;
 	private int xa;
 	private int ya;
+	private int wheel;
+	private float zoom=1;
+	private int middleX;
+	private int middleY;
+	public static double zoomScaled;
 	
 	public Game(){
 		gestion = new Gestion(sizeMap,sizeMap);
@@ -36,17 +41,26 @@ public class Game {
 		translateViewWithMouse();
 		gestion.update();
 		
-		mouseYGrid = (int) ( ( Component.height*Component.scale - Mouse.getY() + (-yScroll * Component.scale)) /Structure.tileSize/Component.scale);
-		mouseXGrid = (int) ((Mouse.getX() + (-xScroll * Component.scale))/Structure.tileSize/Component.scale);
-
+		mouseYGrid = (int) ( ( Component.height*Component.scale - Mouse.getY() + (-yScroll * Component.scale*zoom)) /Structure.tileSize/Component.scale/zoom);
+		mouseXGrid = (int) ((Mouse.getX() + (-xScroll * Component.scale*zoom))/Structure.tileSize/Component.scale/zoom);
+		
 	}
 	
 	public void render(){
+		middleX = Component.width/2;
+		middleY = Component.height/2;
+		wheel = Mouse.getDWheel();
+		if((Keyboard.isKeyDown(Keyboard.KEY_ADD) || wheel>0) && zoom<2) zoom+=0.01f;
+		if((Keyboard.isKeyDown(Keyboard.KEY_SUBTRACT) || wheel<0) && zoom>0.5f) zoom-=0.01f;
+		//GL11.glTranslatef(middleX, middleY, 0);	Zoom au milieu mais c'est chiant pour la position de la souris
+		GL11.glScaled(zoom, zoom, 0);
+		//GL11.glTranslatef(-middleX, -middleY, 0);
+
 		GL11.glTranslatef(xScroll, yScroll, 0);
 		gestion.render();
-		drawSelect(Mouse.getX(),Mouse.getY());
+		drawSelect(Mouse.getX(),Mouse.getY());	
 		
-		GL11.glTranslatef(-xScroll, -yScroll, 0);
+		System.out.println(middleX);
 	}
 	
 	public void translateViewWithKeyboard(){

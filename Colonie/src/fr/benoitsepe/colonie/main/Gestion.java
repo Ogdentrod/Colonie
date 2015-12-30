@@ -182,16 +182,24 @@ public class Gestion {
 	}
 
 	public void render() {
+//		xMin = (int) (-Game.xScroll / Structure.tileSize);
+//		yMin = (int) (-Game.yScroll / Structure.tileSize);
+//
+//		xMax = (((int) (-Game.xScroll / Structure.tileSize) + (Component.width / Structure.tileSize)+ 1) >= elems.length) ? elems.length : (int) (-Game.xScroll / Structure.tileSize) + (Component.width / Structure.tileSize) + 2;
+//		yMax = (((int) (-Game.yScroll / Structure.tileSize) + (Component.height / Structure.tileSize)+ 1) >= elems[0].length) ? elems[0].length : (int) (-Game.yScroll / Structure.tileSize) + (Component.height / Structure.tileSize) + 2;
+
 		xMin = (int) (-Game.xScroll / Structure.tileSize);
 		yMin = (int) (-Game.yScroll / Structure.tileSize);
 
 		xMax = (((int) (-Game.xScroll / Structure.tileSize) + (Component.width / Structure.tileSize)+ 1) >= elems.length) ? elems.length : (int) (-Game.xScroll / Structure.tileSize) + (Component.width / Structure.tileSize) + 2;
 		yMax = (((int) (-Game.yScroll / Structure.tileSize) + (Component.height / Structure.tileSize)+ 1) >= elems[0].length) ? elems[0].length : (int) (-Game.yScroll / Structure.tileSize) + (Component.height / Structure.tileSize) + 2;
 
+		
 		for (int x = xMin; x < xMax; x++) {
 			for (int y = yMin; y < yMax; y++) {
-				if (elems[x][y] != null)
+				if (elems[x][y] != null){
 					elems[x][y].render(x, y);
+				}
 			}
 		}
 		

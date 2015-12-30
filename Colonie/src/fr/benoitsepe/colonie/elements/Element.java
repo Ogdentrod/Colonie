@@ -22,8 +22,8 @@ public class Element {
 	protected String nom; // nom de
 	protected Etat etat;
 	protected long tempsConstruction;
-	
-	
+
+
 
 
 	private int x;
@@ -32,7 +32,7 @@ public class Element {
 
 	float[] color;
 	private Texture texture; 
-	
+
 	/**
 	 * @param nom
 	 * Le constructeur doit être appelé depuis la classe fille avec comme paramétre le nom du la structure
@@ -43,21 +43,21 @@ public class Element {
 		this.x = posX;
 		this.y = posY;
 		this.tempsConstruction = tempsConstruction;
-		
-		this.maintenance = 100;
-		
-		this.etat = etat;
-		
 
-	
+		this.maintenance = 100;
+
+		this.etat = etat;
+
+
+
 		color = new float[]{1,1,1,1};
-		
+
 		if (etat != Etat.QUEUED && etat != Etat.CONSTRUCTION) {
 			texture = TypeElements.valueOf(nom.toUpperCase()).getTexture();
 		} else {
 			texture = Etat.valueOf(this.etat.toString()).getTexture();
 		}
-		
+
 	}
 
 
@@ -78,14 +78,14 @@ public class Element {
 	 */
 	public void setEtat(Etat etat) {
 		this.etat = etat;
-		
+
 		if (etat != Etat.QUEUED && etat != Etat.CONSTRUCTION) {
 			texture = TypeElements.valueOf(nom.toUpperCase()).getTexture();
 		} else {
 			texture = Etat.valueOf(this.etat.toString()).getTexture();
 		}
-		
-		
+
+
 	}
 
 
@@ -109,14 +109,14 @@ public class Element {
 	}
 
 
-	
+
 	public void render(int x, int y){
 		texture.bind();
 
 		glBegin(GL_QUADS);
-			Renderer.quadData(x*tileSize, y*tileSize, tileSize, tileSize, color);
+		Renderer.quadData(x*tileSize, y*tileSize, tileSize, tileSize, color);
 		glEnd();
-		
+
 		texture.unbind();
 	}
 
@@ -152,8 +152,8 @@ public class Element {
 	public void setY(int y) {
 		this.y = y;
 	}
-	
-	
+
+
 	public Texture getTexture(){
 		return texture;
 	}

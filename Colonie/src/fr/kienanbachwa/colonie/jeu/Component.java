@@ -16,6 +16,7 @@ public class Component {
 	public static float scale = 3;
 	public static int width = (int) (1024 / scale);
 	public static int height = (int) (576 / scale);
+		
 	public boolean running = false;
 	
 	DisplayMode mode = new DisplayMode((int)(width * scale), (int)(height * scale));
@@ -27,8 +28,8 @@ public class Component {
 	public static String title = "TEH BEST GAME EVAH";
 	
 	Game game;
-	private int wheel;
 	Hud hud;
+	private int wheel;
 	
 	public Component(){
 		display();
@@ -50,6 +51,21 @@ public class Component {
 		}
 	}
 	private void view2D(int width, int height) {
+		glViewport(0, (int)(height/4*scale), (int)(width * scale), (int)(height/4*3 * scale));
+		
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		GLU.gluOrtho2D(0, width, (int)(height/4*3), 0);
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		
+		glEnable(GL_TEXTURE_2D);
+		
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	}
+	
+	private void view2DHud(int width, int height) {
 		glViewport(0, 0, (int)(width * scale), (int)(height * scale));
 		
 		glMatrixMode(GL_PROJECTION);
@@ -69,10 +85,6 @@ public class Component {
 		loop();
 	}
 	public void tick(){
-		wheel = Mouse.getDWheel();
-		if((Keyboard.isKeyDown(Keyboard.KEY_ADD) || wheel>0) && scale<10)Component.scale+=0.1f;
-		if((Keyboard.isKeyDown(Keyboard.KEY_SUBTRACT) || wheel<0) && Component.scale>1) Component.scale-=0.1f;
-		
 		time++;
 		game.update();
 		hud.update();		
@@ -131,7 +143,8 @@ public class Component {
 		view2D(width , height);
 		glClear(GL_COLOR_BUFFER_BIT);
 		game.render();
-		//view2D(width*scale, height*scale);
+		
+		view2DHud(width, height);
 		hud.render();
 	}
 	
