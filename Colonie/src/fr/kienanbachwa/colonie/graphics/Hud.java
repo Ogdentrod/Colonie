@@ -67,10 +67,10 @@ public class Hud {
 	
 	public void update(){
 		//Position en haut à gauche du hud
-		h=(Component.height/16)*4;
+		h=(int)((576/Component.scale)/4);
 		x = 0;		
-		y =(int)(Component.height-h);	
-		w=Component.width;
+		y =(int)((576/Component.scale)-h);	
+		w=(int)(1024 / Component.scale);
 
 		
 		if(Mouse.getX() > x*Component.scale && Mouse.getX()<(x+w)*Component.scale && Mouse.getY() < (Component.height-y)*Component.scale && Mouse.getY()> (Component.height-y-h)*Component.scale){
@@ -79,8 +79,8 @@ public class Hud {
 			mouseOnHud=false;
 		}		
 		
-		panElem.update(x,y+10,(w/4)*3,h-10);
-		panElem.update(x,y+10,(w/4)*3,h-10);
+		panElem.update(x,(int)(y+(30/Component.scale)),w/4*3,(int)(h-(30/Component.scale)));
+		//panStructures.update(x,y+10,w/4*3,h-10);
 		panRessources.update(x+panElem.w, y, w-panElem.w, h);
 	}
 	

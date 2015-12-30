@@ -7,6 +7,8 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.util.glu.GLU;
 
+import fr.kienanbachwa.colonie.graphics.Hud;
+
 import static org.lwjgl.opengl.GL11.*;
 
 public class Component {
@@ -26,10 +28,12 @@ public class Component {
 	
 	Game game;
 	private int wheel;
+	Hud hud;
 	
 	public Component(){
 		display();
 		game = new Game();
+		hud = new Hud();
 	}
 	
 	public void display(){
@@ -65,18 +69,19 @@ public class Component {
 		loop();
 	}
 	public void tick(){
-		time++;
-		game.update();
-
 		wheel = Mouse.getDWheel();
-		if((Keyboard.isKeyDown(Keyboard.KEY_ADD) || wheel>0) && scale<10) Component.scale+=0.1f;
+		if((Keyboard.isKeyDown(Keyboard.KEY_ADD) || wheel>0) && scale<10)Component.scale+=0.1f;
 		if((Keyboard.isKeyDown(Keyboard.KEY_SUBTRACT) || wheel<0) && Component.scale>1) Component.scale-=0.1f;
 		
+		time++;
+		game.update();
+		hud.update();		
 	}
 	
 	public void loop(){
 		
 		game.init();
+		hud.init();
 		
 		long timer = System.currentTimeMillis();
 		
@@ -126,6 +131,8 @@ public class Component {
 		view2D(width , height);
 		glClear(GL_COLOR_BUFFER_BIT);
 		game.render();
+		//view2D(width*scale, height*scale);
+		hud.render();
 	}
 	
 	public void stop(){

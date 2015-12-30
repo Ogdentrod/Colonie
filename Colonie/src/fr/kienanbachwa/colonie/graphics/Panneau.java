@@ -34,7 +34,7 @@ public class Panneau {
 		
 		if(type==1){
 			for(Thing b : array){
-				b.update(x + (w/array.size()/2)*(array.indexOf(b)*2+1)-8, y+(h/2)-8, 16, 16);
+				b.update(x + (w/array.size()/2)*(array.indexOf(b)*2+1)-(int)(24/Component.scale), y+(h/2)-(int)(24/Component.scale), (int)(48/Component.scale), (int)(48/Component.scale));
 			}
 		}
 		if(type==2){

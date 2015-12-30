@@ -16,7 +16,6 @@ public class Game {
 	public static int mouseXGrid, mouseYGrid;
 	public static int sizeMap = 50;
 	Gestion gestion;
-	Hud hud;
 	
 	private int dx1, dy1;
 	private boolean mouseClicked;
@@ -27,18 +26,15 @@ public class Game {
 	
 	public Game(){
 		gestion = new Gestion(sizeMap,sizeMap);
-		hud = new Hud();
 	}
 	
 	public void init(){
-		hud.init();
 	}
 	
 	public void update(){
 		translateViewWithKeyboard();
 		translateViewWithMouse();
 		gestion.update();
-		hud.update();
 		
 		mouseYGrid = (int) ( ( Component.height*Component.scale - Mouse.getY() + (-yScroll * Component.scale)) /Structure.tileSize/Component.scale);
 		mouseXGrid = (int) ((Mouse.getX() + (-xScroll * Component.scale))/Structure.tileSize/Component.scale);
@@ -51,7 +47,6 @@ public class Game {
 		drawSelect(Mouse.getX(),Mouse.getY());
 		
 		GL11.glTranslatef(-xScroll, -yScroll, 0);
-		hud.render();
 	}
 	
 	public void translateViewWithKeyboard(){
