@@ -191,8 +191,8 @@ public class Gestion {
 		xMin = (int) (-Game.xScroll / Structure.tileSize);
 		yMin = (int) (-Game.yScroll / Structure.tileSize);
 
-		xMax = (((int) (-Game.xScroll / Structure.tileSize) + (Component.width / Structure.tileSize)+ 1) >= elems.length) ? elems.length : (int) (-Game.xScroll / Structure.tileSize) + (Component.width / Structure.tileSize) + 2;
-		yMax = (((int) (-Game.yScroll / Structure.tileSize) + (Component.height / Structure.tileSize)+ 1) >= elems[0].length) ? elems[0].length : (int) (-Game.yScroll / Structure.tileSize) + (Component.height / Structure.tileSize) + 2;
+		xMax = (((int) (-Game.xScroll / Structure.tileSize) + (Component.width / Structure.tileSize/Game.zoom)+ 3) >= elems.length) ? elems.length : (int) (-Game.xScroll / Structure.tileSize) + (int)(Component.width / Structure.tileSize/Game.zoom) + 3;
+		yMax = (((int) (-Game.yScroll / Structure.tileSize) + (Component.height / Structure.tileSize/Game.zoom)+ 3) >= elems[0].length) ? elems[0].length : (int) (-Game.yScroll / Structure.tileSize) + (int)(Component.height / Structure.tileSize/Game.zoom) + 2;
 
 		
 		for (int x = xMin; x < xMax; x++) {

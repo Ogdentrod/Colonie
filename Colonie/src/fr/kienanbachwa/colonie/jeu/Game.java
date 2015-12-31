@@ -24,10 +24,10 @@ public class Game {
 	private int xa;
 	private int ya;
 	private int wheel;
-	private float zoom=1;
+	public static float zoom=1;
 	private int middleX;
 	private int middleY;
-	public static double zoomScaled;
+	private int speed=2;
 	
 	public Game(){
 		gestion = new Gestion(sizeMap,sizeMap);
@@ -60,16 +60,15 @@ public class Game {
 		gestion.render();
 		drawSelect(Mouse.getX(),Mouse.getY());	
 		
-		System.out.println(middleX);
 	}
 	
 	public void translateViewWithKeyboard(){
 		xa=0; ya=0;
 		
-		if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) xa=-1;
-		if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)) xa=1;
-		if(Keyboard.isKeyDown(Keyboard.KEY_UP)) ya=1;
-		if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)) ya=-1;
+		if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) xa=-speed;
+		if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)) xa=speed;
+		if(Keyboard.isKeyDown(Keyboard.KEY_UP)) ya=speed;
+		if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)) ya=-speed;
 			
 			if(xScroll+xa>0 || -(xScroll+xa)>(sizeMap*Structure.tileSize - Component.width) ){
 				xa=0;
