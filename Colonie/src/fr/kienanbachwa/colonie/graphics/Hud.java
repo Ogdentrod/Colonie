@@ -40,6 +40,7 @@ public class Hud {
 		panElem = new Panneau(x,y-10,w,h,1);
 		panStructures = new Panneau(x,y-10,w,h,1);
 		panRessources = new Panneau(x+panElem.w,y,16,16,2);
+		panOnglets = new Panneau(x,y,w,10,2);
 	}
 	
 	public void init(){
@@ -79,8 +80,9 @@ public class Hud {
 		}		
 		
 		panElem.update(x,(int)(y+(30/Component.scale)),w/4*3,(int)(h-(30/Component.scale)));
-		//panStructures.update(x,y+10,w/4*3,h-10);
+		panStructures.update(x,(int)(y+(30/Component.scale)),w/4*3,(int)(h-(30/Component.scale)));
 		panRessources.update(x+panElem.w, y, w-panElem.w, h);
+		panOnglets.update(x, y, w, 10);
 	}
 	
 	public void render(){

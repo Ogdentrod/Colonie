@@ -49,17 +49,43 @@ public class Game {
 	public void render(){
 		middleX = Component.width/2;
 		middleY = Component.height/2;
-		wheel = Mouse.getDWheel();
-		if((Keyboard.isKeyDown(Keyboard.KEY_ADD) || wheel>0) && zoom<2) zoom+=0.01f;
-		if((Keyboard.isKeyDown(Keyboard.KEY_SUBTRACT) || wheel<0) && zoom>0.5f) zoom-=0.01f;
-		//GL11.glTranslatef(middleX, middleY, 0);	Zoom au milieu mais c'est chiant pour la position de la souris
-		GL11.glScaled(zoom, zoom, 0);
-		//GL11.glTranslatef(-middleX, -middleY, 0);
+
+		zoom();
+		System.out.println(xa);
 
 		GL11.glTranslatef(xScroll, yScroll, 0);
 		gestion.render();
 		drawSelect(Mouse.getX(),Mouse.getY());	
 		
+	}
+	
+	public void zoom(){
+		wheel = Mouse.getDWheel();
+		if((Keyboard.isKeyDown(Keyboard.KEY_ADD) || wheel>0) && zoom<2){
+			zoom+=0.01f;
+		}
+		if((Keyboard.isKeyDown(Keyboard.KEY_SUBTRACT) || wheel<0) && zoom>0.5f){
+			zoom-=0.01f;
+		}
+		
+		//GL11.glTranslatef(middleX, middleY, 0);	//Zoom au milieu mais c'est chiant pour la position de la souris
+		GL11.glScaled(zoom, zoom, 0);
+		//GL11.glTranslatef(-middleX, -middleY, 0);
+		
+		if(xScroll+xa>0){
+			xScroll-=5;
+		}
+		
+		if( -(xScroll+xa)>(sizeMap*Structure.tileSize - Component.width/zoom) ){
+			xScroll+=5;
+		}
+		
+		if(yScroll+ya>0){
+			yScroll-=5;
+		}
+		if(-(yScroll+ya)>sizeMap*Structure.tileSize -Component.height/zoom){
+			yScroll+=5;
+		}
 	}
 	
 	public void translateViewWithKeyboard(){
@@ -69,15 +95,15 @@ public class Game {
 		if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)) xa=speed;
 		if(Keyboard.isKeyDown(Keyboard.KEY_UP)) ya=speed;
 		if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)) ya=-speed;
-			
-			if(xScroll+xa>0 || -(xScroll+xa)>(sizeMap*Structure.tileSize - Component.width) ){
-				xa=0;
-			}
-			if(yScroll+ya>0 || -(yScroll+ya)>sizeMap*Structure.tileSize -Component.height){
-				ya=0;
-			}
-			xScroll+=xa;
-			yScroll+=ya;
+		
+		if(xScroll+xa>0 || -(xScroll+xa)>(sizeMap*Structure.tileSize - Component.width/zoom) ){
+			xa=0;
+		}
+		if(yScroll+ya>0 || -(yScroll+ya)>sizeMap*Structure.tileSize -Component.height/zoom){
+			ya=0;
+		}
+		xScroll+=xa;
+		yScroll+=ya;
 	}
 	
 	public void translateViewWithMouse(){
@@ -100,15 +126,16 @@ public class Game {
 			mouseClicked=false;
 		}
 		
-		if(xScroll+xa>0 || -(xScroll+xa)>(sizeMap*Structure.tileSize - Component.width) ){
+		if(xScroll+xa>0 || -(xScroll+xa)>(sizeMap*Structure.tileSize - Component.width/zoom) ){
 			xa=0;
 		}
-		if(yScroll+ya>0 || -(yScroll+ya)>sizeMap*Structure.tileSize -Component.height){
+		if(yScroll+ya>0 || -(yScroll+ya)>sizeMap*Structure.tileSize -Component.height/zoom){
 			ya=0;
 		}
 		
 		xScroll+=xa;
 		yScroll+=ya;
+
 		
 	}
 	
