@@ -1,8 +1,8 @@
 package fr.benoitsepe.colonie.main;
 
-import fr.benoitsepe.colonie.elements.Element;
 import fr.benoitsepe.colonie.ressources.Ressources;
 import fr.benoitsepe.colonie.structures.Structure;
+import fr.benoitsepe.colonie.zone.Zone;
 
 /**
  * @author Benoît
@@ -14,7 +14,7 @@ public class Affichage {
 	 * @param struct
 	 * Affichage des infos de la structure
 	 */
-	public static void afficherStruct(Structure struct) {
+	public static void afficherStruct(Zone struct) {
 		System.out.println();
 		System.out.println(struct.getNom());
 		System.out.println(" Etat = " + struct.getEtat());
@@ -36,7 +36,7 @@ public class Affichage {
 	}
 
 
-	public static void afficherStruct(Element elem) {
+	public static void afficherStruct(Structure elem) {
 		// TODO Auto-generated method stub
 		System.out.println();
 		System.out.println(elem.getNom());

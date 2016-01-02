@@ -1,17 +1,17 @@
 package fr.kienanbachwa.colonie.graphics.things;
 
-import fr.benoitsepe.colonie.elements.TypeElements;
 import fr.benoitsepe.colonie.structures.TypeStructures;
+import fr.benoitsepe.colonie.zone.TypeZones;
 import fr.kienanbachwa.colonie.graphics.Hud;
 import fr.kienanbachwa.colonie.graphics.Texture;
 
 public class StructButton extends Button{
 
 	Texture texture;
-	TypeStructures typeStructure;
+	TypeZones typeStructure;
 	int x,y,w,h;
 	
-	public StructButton(TypeStructures e){
+	public StructButton(TypeZones e){
 		super();
 		typeStructure = e;
 		this.texture=e.getTexture();

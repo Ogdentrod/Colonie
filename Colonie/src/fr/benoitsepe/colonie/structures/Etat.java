@@ -1,4 +1,4 @@
-package fr.benoitsepe.colonie.elements;
+package fr.benoitsepe.colonie.structures;
 
 import fr.benoitsepe.colonie.ressources.Ressources;
 import fr.kienanbachwa.colonie.graphics.Texture;

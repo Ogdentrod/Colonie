@@ -1,16 +1,16 @@
 package fr.benoitsepe.colonie.personnages;
 
-import fr.benoitsepe.colonie.elements.Element;
+import fr.benoitsepe.colonie.structures.Structure;
 
 public class Ouvrier extends Personnage{
 	
-	private Element occupation;
+	private Structure occupation;
 	
 	public Ouvrier() {
 		super();
 	}
 	
-	public void utiliser(Element tache) {
+	public void utiliser(Structure tache) {
 		
 	}
 	

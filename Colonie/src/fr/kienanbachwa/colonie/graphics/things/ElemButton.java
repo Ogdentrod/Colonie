@@ -1,16 +1,16 @@
 package fr.kienanbachwa.colonie.graphics.things;
 
-import fr.benoitsepe.colonie.elements.TypeElements;
+import fr.benoitsepe.colonie.structures.TypeStructures;
 import fr.kienanbachwa.colonie.graphics.Hud;
 import fr.kienanbachwa.colonie.graphics.Texture;
 
 public class ElemButton extends Button{
 
 	Texture texture;
-	TypeElements typeElement;
+	TypeStructures typeElement;
 	int x,y,w,h;
 	
-	public ElemButton(TypeElements e){
+	public ElemButton(TypeStructures e){
 		super();
 		typeElement = e;
 		this.texture=e.getTexture();

@@ -1,7 +1,7 @@
-package fr.benoitsepe.colonie.main;
+package fr.benoitsepe.colonie.zone;
 
 import fr.benoitsepe.colonie.ressources.Ressources;
 
-public interface IStructure {
+public interface IZone {
 	void utiliser(Ressources res);
 }

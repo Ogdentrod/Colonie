@@ -1,6 +1,6 @@
-package fr.benoitsepe.colonie.elements;
+package fr.benoitsepe.colonie.structures;
 
-public class Vide extends Element {
+public class Vide extends Structure {
 
 	public Vide(int x, int y) {
 		super("Vide", 0, x, y, Etat.QUEUED);

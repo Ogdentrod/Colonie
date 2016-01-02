@@ -1,6 +1,6 @@
-package fr.benoitsepe.colonie.elements;
+package fr.benoitsepe.colonie.structures;
 
-public class Batiment extends Element{
+public class Batiment extends Structure{
 
 	public Batiment(String name, int x, int y, Etat etat) {
 		super(name, 100, x, y, etat);

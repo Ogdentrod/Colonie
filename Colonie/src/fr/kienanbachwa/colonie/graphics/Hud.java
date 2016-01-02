@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.lwjgl.input.Mouse;
 
-import fr.benoitsepe.colonie.elements.TypeElements;
 import fr.benoitsepe.colonie.main.Gestion;
 import fr.benoitsepe.colonie.ressources.TypeRessources;
 import fr.benoitsepe.colonie.structures.TypeStructures;
+import fr.benoitsepe.colonie.zone.TypeZones;
 import fr.kienanbachwa.colonie.graphics.things.ElemButton;
 import fr.kienanbachwa.colonie.jeu.Component;
 import fr.kienanbachwa.colonie.jeu.Game;
@@ -17,11 +17,11 @@ public class Hud {
 	
 	List<ElemButton> buttons = new ArrayList<ElemButton>();
 	List<TypeRessources> ressources = new ArrayList<TypeRessources>();
-	List<TypeStructures> structures = new ArrayList<TypeStructures>();
+	List<TypeZones> structures = new ArrayList<TypeZones>();
 
 	private Font font;
 	public static boolean mouseOnHud;
-	public static TypeElements elementClicked = TypeElements.BATIMENT;
+	public static TypeStructures elementClicked = TypeStructures.BATIMENT;
 	
 	int x,y,w,h;
 	Panneau panElem;
@@ -46,7 +46,7 @@ public class Hud {
 	}
 	
 	public void init(){
-		for(TypeElements e : TypeElements.values()){
+		for(TypeStructures e : TypeStructures.values()){
 			buttons.add(new ElemButton(e));				//Boutons d'élements
 		}
 		
@@ -54,7 +54,7 @@ public class Hud {
 			ressources.add(res);
 		}
 		
-		for(TypeStructures struct : TypeStructures.values()){
+		for(TypeZones struct : TypeZones.values()){
 			structures.add(struct);
 		}
 		

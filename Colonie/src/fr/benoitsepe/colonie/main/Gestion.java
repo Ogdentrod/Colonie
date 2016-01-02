@@ -8,17 +8,17 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import org.lwjgl.input.Mouse;
 
-import fr.benoitsepe.colonie.elements.Batiment;
-import fr.benoitsepe.colonie.elements.Element;
-import fr.benoitsepe.colonie.elements.Etat;
-import fr.benoitsepe.colonie.elements.Mur;
-import fr.benoitsepe.colonie.elements.Porte;
-import fr.benoitsepe.colonie.elements.Sol;
-import fr.benoitsepe.colonie.elements.TypeElements;
-import fr.benoitsepe.colonie.elements.Vide;
 import fr.benoitsepe.colonie.ressources.Ressources;
+import fr.benoitsepe.colonie.structures.Batiment;
 import fr.benoitsepe.colonie.structures.Structure;
+import fr.benoitsepe.colonie.structures.Etat;
+import fr.benoitsepe.colonie.structures.Mur;
+import fr.benoitsepe.colonie.structures.Porte;
+import fr.benoitsepe.colonie.structures.Sol;
 import fr.benoitsepe.colonie.structures.TypeStructures;
+import fr.benoitsepe.colonie.structures.Vide;
+import fr.benoitsepe.colonie.zone.Zone;
+import fr.benoitsepe.colonie.zone.TypeZones;
 import fr.kienanbachwa.colonie.graphics.Hud;
 import fr.kienanbachwa.colonie.graphics.Renderer;
 import fr.kienanbachwa.colonie.jeu.Component;
@@ -32,26 +32,26 @@ import fr.kienanbachwa.colonie.jeu.Game;
 public class Gestion {
 
 	public static Ressources res = new Ressources();
-	Element[][] elems;
+	Structure[][] structs;
 	private boolean clicked;
 	private int dx2;
 	private int dy2;
 	private int dx1;
 	private int dy1;
-	List<Element> selectedTiles = new ArrayList<Element>();
+	List<Structure> selectedTiles = new ArrayList<Structure>();
 	private int xMin;
 	private int yMin;
 	private int yMax;
 	private int xMax;
-	private LinkedBlockingQueue<Element> queue;
+	private LinkedBlockingQueue<Structure> queue;
 	private long time;
-	private Element enConstruction = null;
+	private Structure enConstruction = null;
 	
 
 	public Gestion(int sizeX, int sizeY) {
-		elems = new Element[sizeX][sizeY];
+		structs = new Structure[sizeX][sizeY];
 		
-		queue = new LinkedBlockingQueue<Element>();
+		queue = new LinkedBlockingQueue<Structure>();
 		time = 0;
 		
 		res.setIron(100000);
@@ -62,18 +62,18 @@ public class Gestion {
 
 		for (int i = 0; i < sizeX; i++) {
 			for (int j = 0; j < sizeY; j++) {
-				elems[i][j] = new Vide(i, j);
-				elems[i][j].setEtat(Etat.OPERATIONNAL);
+				structs[i][j] = new Vide(i, j);
+				structs[i][j].setEtat(Etat.OPERATIONNAL);
 			}
 		}
 
 	}
 
-	public void creerElem(TypeElements elem, int posX, int posY) {
+	public void creerElem(TypeStructures elem, int posX, int posY) {
 
 		if (verifRessources(res, elem)) {
 			Ressources.utiliserRessources(res, elem.getRes());
-			Element elemCree;
+			Structure elemCree;
 
 			switch (elem) {
 				case BATIMENT:
@@ -86,7 +86,7 @@ public class Gestion {
 					elemCree = new Vide(posX, posY);
 					break;
 			}
-			elems[posX][posY] = elemCree;
+			structs[posX][posY] = elemCree;
 
 			queue.offer(elemCree); // ajout de l'élément à la liste de construction
 			
@@ -94,10 +94,10 @@ public class Gestion {
 			
 			
 			// On actualise tous les murs/sols
-			for(int i = 0; i < elems.length; i++){
-				for(int j = 0; j < elems[i].length; j++){
-					if (elems[i][j] instanceof Batiment) {
-						elems[i][j] = SolOuMur(i, j);
+			for(int i = 0; i < structs.length; i++){
+				for(int j = 0; j < structs[i].length; j++){
+					if (structs[i][j] instanceof Batiment) {
+						structs[i][j] = SolOuMur(i, j);
 					}
 				}
 			}
@@ -155,8 +155,8 @@ public class Gestion {
 
 	}
 	*/
-	public boolean verifRessources(Ressources res, TypeStructures typeStruct) {
-		Ressources besoin = typeStruct.getRes();
+	public boolean verifRessources(Ressources res, TypeZones typeZone) {
+		Ressources besoin = typeZone.getRes();
 
 		if (res.canBuy(besoin)) {
 			return true;
@@ -166,8 +166,8 @@ public class Gestion {
 
 	}
 
-	public boolean verifRessources(Ressources res, TypeElements elem) {
-		Ressources besoin = elem.getRes();
+	public boolean verifRessources(Ressources res, TypeStructures struct) {
+		Ressources besoin = struct.getRes();
 
 		if (res.canBuy(besoin)) {
 			return true;
@@ -177,8 +177,8 @@ public class Gestion {
 
 	}
 
-	public Element[][] getElements() {
-		return elems;
+	public Structure[][] getStructures() {
+		return structs;
 	}
 
 	public void render() {
@@ -188,21 +188,21 @@ public class Gestion {
 //		xMax = (((int) (-Game.xScroll / Structure.tileSize) + (Component.width / Structure.tileSize)+ 1) >= elems.length) ? elems.length : (int) (-Game.xScroll / Structure.tileSize) + (Component.width / Structure.tileSize) + 2;
 //		yMax = (((int) (-Game.yScroll / Structure.tileSize) + (Component.height / Structure.tileSize)+ 1) >= elems[0].length) ? elems[0].length : (int) (-Game.yScroll / Structure.tileSize) + (Component.height / Structure.tileSize) + 2;
 
-		xMin = (int) (-Game.xScroll / Structure.tileSize);
-		yMin = (int) (-Game.yScroll / Structure.tileSize);
+		xMin = (int) (-Game.xScroll / Zone.tileSize);
+		yMin = (int) (-Game.yScroll / Zone.tileSize);
 
-		xMax = (((int) (-Game.xScroll / Structure.tileSize) + (Component.width / Structure.tileSize/Game.zoom)+ 3) >= elems.length) ? elems.length : (int) (-Game.xScroll / Structure.tileSize) + (int)(Component.width / Structure.tileSize/Game.zoom) + 3;
-		yMax = (((int) (-Game.yScroll / Structure.tileSize) + (Component.height / Structure.tileSize/Game.zoom)+ 3) >= elems[0].length) ? elems[0].length : (int) (-Game.yScroll / Structure.tileSize) + (int)(Component.height / Structure.tileSize/Game.zoom) + 2;
+		xMax = (((int) (-Game.xScroll / Zone.tileSize) + (Component.width / Zone.tileSize/Game.zoom)+ 3) >= structs.length) ? structs.length : (int) (-Game.xScroll / Zone.tileSize) + (int)(Component.width / Zone.tileSize/Game.zoom) + 3;
+		yMax = (((int) (-Game.yScroll / Zone.tileSize) + (Component.height / Zone.tileSize/Game.zoom)+ 3) >= structs[0].length) ? structs[0].length : (int) (-Game.yScroll / Zone.tileSize) + (int)(Component.height / Zone.tileSize/Game.zoom) + 2;
 
 		
 		for (int x = xMin; x < xMax; x++) {
 			for (int y = yMin; y < yMax; y++) {
-				if (elems[x][y] != null){
-					elems[x][y].render(x, y);
-					if (elems[x][y].getEtat() == Etat.QUEUED || elems[x][y].getEtat() == Etat.CONSTRUCTION) {
-						Etat.valueOf(elems[x][y].getEtat().toString()).getTexture().bind();
+				if (structs[x][y] != null){
+					structs[x][y].render(x, y);
+					if (structs[x][y].getEtat() == Etat.QUEUED || structs[x][y].getEtat() == Etat.CONSTRUCTION) {
+						Etat.valueOf(structs[x][y].getEtat().toString()).getTexture().bind();
 						Renderer.renderQuad(x*16, y*16, 16, 16, new float[]{1,1,1,1});
-						Etat.valueOf(elems[x][y].getEtat().toString()).getTexture().unbind();
+						Etat.valueOf(structs[x][y].getEtat().toString()).getTexture().unbind();
 
 					}
 				}
@@ -215,7 +215,7 @@ public class Gestion {
 	
 	public void renderSelectedTiles(){
 		if(Mouse.isButtonDown(0) && !Hud.mouseOnHud){			
-			for(Element e : selectedTiles){
+			for(Structure e : selectedTiles){
 				Hud.elementClicked.getTexture().bind();
 				Renderer.renderQuad(e.getX()*16, e.getY()*16, 16, 16, new float[]{0,0,1,0.5f});
 				Hud.elementClicked.getTexture().unbind();
@@ -233,10 +233,10 @@ public class Gestion {
 			if(enConstruction == null) {
 				time = System.currentTimeMillis();
 				enConstruction = queue.poll();
-				elems[enConstruction.getX()][enConstruction.getY()].setEtat(Etat.CONSTRUCTION);
+				structs[enConstruction.getX()][enConstruction.getY()].setEtat(Etat.CONSTRUCTION);
 			} else {
 				if(System.currentTimeMillis() - time > enConstruction.getTempsConstruction()) { // Si le temps de construction est fini
-					elems[enConstruction.getX()][enConstruction.getY()].setEtat(Etat.OPERATIONNAL);
+					structs[enConstruction.getX()][enConstruction.getY()].setEtat(Etat.OPERATIONNAL);
 					enConstruction = null;
 				}
 			}
@@ -266,7 +266,7 @@ public class Gestion {
 			dx2 = Game.mouseXGrid;
 			dy2 = Game.mouseYGrid;
 			
-			for(Element e : selectedTiles){
+			for(Structure e : selectedTiles){
 				creerElem(Hud.elementClicked, e.getX(), e.getY());
 			}
 			
@@ -278,19 +278,19 @@ public class Gestion {
 	private void selectTiles(){
 		selectedTiles.clear();
 		try {
-			if(!selectedTiles.contains(elems[dx2][dy2])) selectedTiles.add(elems[dx2][dy2]);
+			if(!selectedTiles.contains(structs[dx2][dy2])) selectedTiles.add(structs[dx2][dy2]);
 			
 			for(int j=dy1; j!=dy2; j+= ( (dy1-dy2 > 0) ? -1 : 1) ){
-				if(!selectedTiles.contains(elems[dx2][j])) selectedTiles.add(this.elems[dx2][j]);
+				if(!selectedTiles.contains(structs[dx2][j])) selectedTiles.add(this.structs[dx2][j]);
 			}
 	
 	
 			
 			for(int i=dx1; i<dx2 || i>dx2; i+= ( (dx1-dx2 > 0) ? -1 : 1) ){		//BOUCLE FOR AVEC OPERATEUR TERNAIRE AIIIIGHT
 	
-				if(!selectedTiles.contains(elems[i][dy2])) selectedTiles.add(this.elems[i][dy2]);
+				if(!selectedTiles.contains(structs[i][dy2])) selectedTiles.add(this.structs[i][dy2]);
 					for(int j=dy1; j<dy2 || j>dy2; j+= ( (dy1-dy2 > 0) ? -1 : 1) ){
-						if(!selectedTiles.contains(elems[i][j])) selectedTiles.add(this.elems[i][j]);
+						if(!selectedTiles.contains(structs[i][j])) selectedTiles.add(this.structs[i][j]);
 				}
 				
 			}
@@ -299,30 +299,30 @@ public class Gestion {
 		}
 	}
 
-	private Element SolOuMur(int x, int y) {
+	private Structure SolOuMur(int x, int y) {
 		
 		boolean batiment;
-		if (elems[x][y] instanceof Batiment && elems[x][y].getEtat() == Etat.OPERATIONNAL) {
+		if (structs[x][y] instanceof Batiment && structs[x][y].getEtat() == Etat.OPERATIONNAL) {
 			batiment = true;
 		} else {
 			batiment = false;
 		}
 		
-		Element hg, h, hd, g, bg, b, bd, d;
+		Structure hg, h, hd, g, bg, b, bd, d;
 		/*
 		 * HG - H - HD
 		 * G  - x - D
 		 * BG - B - BD
 		 */
 		try {
-			hg = elems[x-1][y-1];
-			h = elems[x][y-1];
-			hd = elems[x+1][y-1];
-			g = elems[x-1][y];
-			bg = elems[x-1][y+1];
-			b = elems[x][y+1];
-			bd = elems[x+1][y+1];
-			d = elems[x+1][y];
+			hg = structs[x-1][y-1];
+			h = structs[x][y-1];
+			hd = structs[x+1][y-1];
+			g = structs[x-1][y];
+			bg = structs[x-1][y+1];
+			b = structs[x][y+1];
+			bd = structs[x+1][y+1];
+			d = structs[x+1][y];
 		} catch(java.lang.IndexOutOfBoundsException e) {
 			if (batiment) {
 				return new Mur(x, y, Etat.OPERATIONNAL);
@@ -337,14 +337,14 @@ public class Gestion {
 				&& bg instanceof Batiment && b instanceof Batiment 
 				&& bd instanceof Batiment && d instanceof Batiment) {
 			if (batiment) {
-				return new Sol(x, y, elems[x][y].getEtat());
+				return new Sol(x, y, structs[x][y].getEtat());
 			} else {
 				return new Sol(x, y);
 			}
 			
 		} else {
 			if (batiment) {
-				return new Mur(x, y, elems[x][y].getEtat());
+				return new Mur(x, y, structs[x][y].getEtat());
 			} else {
 				return new Mur(x, y);
 			}

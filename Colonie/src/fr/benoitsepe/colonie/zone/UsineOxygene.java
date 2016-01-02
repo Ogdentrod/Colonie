@@ -1,12 +1,11 @@
-package fr.benoitsepe.colonie.structures;
+package fr.benoitsepe.colonie.zone;
 
 import java.util.List;
 
 import fr.benoitsepe.colonie.main.Coordonnees;
-import fr.benoitsepe.colonie.main.IStructure;
 import fr.benoitsepe.colonie.ressources.Ressources;
 
-public class UsineOxygene extends Structure implements IStructure{
+public class UsineOxygene extends Zone implements IZone{
 
 	public UsineOxygene(List<Coordonnees> coos) {
 		super("Usineoxygene", coos);

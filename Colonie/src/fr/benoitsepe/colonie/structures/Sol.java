@@ -1,4 +1,4 @@
-package fr.benoitsepe.colonie.elements;
+package fr.benoitsepe.colonie.structures;
 
 public class Sol extends Batiment{
 

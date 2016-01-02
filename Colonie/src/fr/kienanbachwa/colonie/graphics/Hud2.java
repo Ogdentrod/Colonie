@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.lwjgl.input.Mouse;
 
-import fr.benoitsepe.colonie.elements.TypeElements;
 import fr.benoitsepe.colonie.main.Gestion;
 import fr.benoitsepe.colonie.ressources.TypeRessources;
+import fr.benoitsepe.colonie.structures.TypeStructures;
 import fr.kienanbachwa.colonie.graphics.things.ElemButton;
 import fr.kienanbachwa.colonie.jeu.Component;
 import fr.kienanbachwa.colonie.jeu.Game;
@@ -26,7 +26,7 @@ public class Hud2 {
 	private int y1;
 	private int sizeTab = 10;		//Taille des onglets
 	public static boolean mouseOnHud;
-	public static TypeElements elementClicked = TypeElements.BATIMENT;
+	public static TypeStructures elementClicked = TypeStructures.BATIMENT;
 	
 	
 	public Hud2(){
@@ -43,7 +43,7 @@ public class Hud2 {
 	}
 	
 	public void init(){
-		for(TypeElements e : TypeElements.values()){
+		for(TypeStructures e : TypeStructures.values()){
 			buttons.add(new ElemButton(e));				//Boutons d'élements
 		}
 		
@@ -69,10 +69,10 @@ public class Hud2 {
 		y1=y0+sizeTab ;
 		
 		//Position d'affichage des ressources
-		xRes = x0 +4+ TypeElements.values().length*((sizeX-sizeRes)/TypeElements.values().length);
+		xRes = x0 +4+ TypeStructures.values().length*((sizeX-sizeRes)/TypeStructures.values().length);
 		
 		for(ElemButton b:buttons){
-			b.update(x0 +4+ (buttons.indexOf(b))*((sizeX-sizeRes)/TypeElements.values().length), y1+2, 16, 16);
+			b.update(x0 +4+ (buttons.indexOf(b))*((sizeX-sizeRes)/TypeStructures.values().length), y1+2, 16, 16);
 		}
 		
 		if(Mouse.getX() > x0*Component.scale+Game.xScroll && Mouse.getX()<(x0+sizeX)*Component.scale+Game.xScroll && Mouse.getY()<(y0+sizeY)*Component.scale+Game.yScroll){
@@ -87,7 +87,7 @@ public class Hud2 {
 		
 		for(ElemButton b:buttons){
 			b.getTexture().bind();
-			Renderer.renderQuad(x0 +4+ (buttons.indexOf(b))*((sizeX-sizeRes)/TypeElements.values().length), y1+2, 16, 16, new float[]{1,1,1,1});
+			Renderer.renderQuad(x0 +4+ (buttons.indexOf(b))*((sizeX-sizeRes)/TypeStructures.values().length), y1+2, 16, 16, new float[]{1,1,1,1});
 			b.getTexture().unbind();
 			b.render();
 		}

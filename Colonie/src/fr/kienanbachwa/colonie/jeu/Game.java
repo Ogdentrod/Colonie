@@ -5,7 +5,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import fr.benoitsepe.colonie.main.Gestion;
-import fr.benoitsepe.colonie.structures.Structure;
+import fr.benoitsepe.colonie.zone.Zone;
 import fr.kienanbachwa.colonie.graphics.Hud;
 import fr.kienanbachwa.colonie.graphics.Renderer;
 
@@ -41,8 +41,8 @@ public class Game {
 		translateViewWithMouse();
 		gestion.update();
 		
-		mouseYGrid = (int) ( ( Component.height*Component.scale - Mouse.getY() + (-yScroll * Component.scale*zoom)) /Structure.tileSize/Component.scale/zoom);
-		mouseXGrid = (int) ((Mouse.getX() + (-xScroll * Component.scale*zoom))/Structure.tileSize/Component.scale/zoom);
+		mouseYGrid = (int) ( ( Component.height*Component.scale - Mouse.getY() + (-yScroll * Component.scale*zoom)) /Zone.tileSize/Component.scale/zoom);
+		mouseXGrid = (int) ((Mouse.getX() + (-xScroll * Component.scale*zoom))/Zone.tileSize/Component.scale/zoom);
 		
 	}
 	
@@ -75,14 +75,14 @@ public class Game {
 			xScroll-=5;
 		}
 		
-		if( -(xScroll+xa)>(sizeMap*Structure.tileSize - Component.width/zoom) ){
+		if( -(xScroll+xa)>(sizeMap*Zone.tileSize - Component.width/zoom) ){
 			xScroll+=5;
 		}
 		
 		if(yScroll+ya>0){
 			yScroll-=5;
 		}
-		if(-(yScroll+ya)>sizeMap*Structure.tileSize -Component.height/zoom){
+		if(-(yScroll+ya)>sizeMap*Zone.tileSize -Component.height/zoom){
 			yScroll+=5;
 		}
 	}
@@ -95,10 +95,10 @@ public class Game {
 		if(Keyboard.isKeyDown(Keyboard.KEY_UP)) ya=speed;
 		if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)) ya=-speed;
 		
-		if(xScroll+xa>0 || -(xScroll+xa)>(sizeMap*Structure.tileSize - Component.width/zoom) ){
+		if(xScroll+xa>0 || -(xScroll+xa)>(sizeMap*Zone.tileSize - Component.width/zoom) ){
 			xa=0;
 		}
-		if(yScroll+ya>0 || -(yScroll+ya)>sizeMap*Structure.tileSize -Component.height/zoom){
+		if(yScroll+ya>0 || -(yScroll+ya)>sizeMap*Zone.tileSize -Component.height/zoom){
 			ya=0;
 		}
 		xScroll+=xa;
@@ -125,10 +125,10 @@ public class Game {
 			mouseClicked=false;
 		}
 		
-		if(xScroll+xa>0 || -(xScroll+xa)>(sizeMap*Structure.tileSize - Component.width/zoom) ){
+		if(xScroll+xa>0 || -(xScroll+xa)>(sizeMap*Zone.tileSize - Component.width/zoom) ){
 			xa=0;
 		}
-		if(yScroll+ya>0 || -(yScroll+ya)>sizeMap*Structure.tileSize -Component.height/zoom){
+		if(yScroll+ya>0 || -(yScroll+ya)>sizeMap*Zone.tileSize -Component.height/zoom){
 			ya=0;
 		}
 		
@@ -139,6 +139,6 @@ public class Game {
 	}
 	
 	public void drawSelect(int mouseX, int mouseY){
-		Renderer.renderQuad(mouseXGrid*Structure.tileSize, mouseYGrid*Structure.tileSize, Structure.tileSize, Structure.tileSize, new float[]{1,0,0,0.5f});
+		Renderer.renderQuad(mouseXGrid*Zone.tileSize, mouseYGrid*Zone.tileSize, Zone.tileSize, Zone.tileSize, new float[]{1,0,0,0.5f});
 	}
 }

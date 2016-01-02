@@ -1,15 +1,14 @@
-package fr.benoitsepe.colonie.structures;
+package fr.benoitsepe.colonie.zone;
 
 import java.util.List;
 
 import fr.benoitsepe.colonie.main.Coordonnees;
-import fr.benoitsepe.colonie.main.IStructure;
 import fr.benoitsepe.colonie.ressources.Ressources;
 
-public class Sas extends Structure implements IStructure{
+public class Refectoire extends Zone implements IZone {
 
-	public Sas(List<Coordonnees> coos) {
-		super("S.A.S.", coos);
+	public Refectoire(List<Coordonnees> coos) {
+		super("Réfectoire", coos);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -18,5 +17,5 @@ public class Sas extends Structure implements IStructure{
 		// TODO Auto-generated method stub
 		
 	}
-	
+
 }

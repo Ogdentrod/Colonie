@@ -1,6 +1,6 @@
 package fr.benoitsepe.colonie.personnages;
 
-import fr.benoitsepe.colonie.elements.Element;
+import fr.benoitsepe.colonie.structures.Structure;
 
 public class Personnage {
 

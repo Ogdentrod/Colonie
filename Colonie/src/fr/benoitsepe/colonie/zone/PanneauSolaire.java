@@ -1,12 +1,11 @@
-package fr.benoitsepe.colonie.structures;
+package fr.benoitsepe.colonie.zone;
 
 import java.util.List;
 
 import fr.benoitsepe.colonie.main.Coordonnees;
-import fr.benoitsepe.colonie.main.IStructure;
 import fr.benoitsepe.colonie.ressources.Ressources;
 
-public class PanneauSolaire extends Structure implements IStructure {
+public class PanneauSolaire extends Zone implements IZone {
 
 	public PanneauSolaire(List<Coordonnees> coos) {
 		super("Panneau Solaire", coos);
