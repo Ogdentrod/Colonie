@@ -51,7 +51,6 @@ public class Game {
 		middleY = Component.height/2;
 
 		zoom();
-		System.out.println(xa);
 
 		GL11.glTranslatef(xScroll, yScroll, 0);
 		gestion.render();

@@ -199,6 +199,12 @@ public class Gestion {
 			for (int y = yMin; y < yMax; y++) {
 				if (elems[x][y] != null){
 					elems[x][y].render(x, y);
+					if (elems[x][y].getEtat() == Etat.QUEUED || elems[x][y].getEtat() == Etat.CONSTRUCTION) {
+						Etat.valueOf(elems[x][y].getEtat().toString()).getTexture().bind();
+						Renderer.renderQuad(x*16, y*16, 16, 16, new float[]{1,1,1,1});
+						Etat.valueOf(elems[x][y].getEtat().toString()).getTexture().unbind();
+
+					}
 				}
 			}
 		}

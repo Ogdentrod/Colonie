@@ -52,11 +52,8 @@ public class Element {
 
 		color = new float[]{1,1,1,1};
 
-		if (etat != Etat.QUEUED && etat != Etat.CONSTRUCTION) {
 			texture = TypeElements.valueOf(nom.toUpperCase()).getTexture();
-		} else {
-			texture = Etat.valueOf(this.etat.toString()).getTexture();
-		}
+
 
 	}
 
@@ -79,11 +76,11 @@ public class Element {
 	public void setEtat(Etat etat) {
 		this.etat = etat;
 
-		if (etat != Etat.QUEUED && etat != Etat.CONSTRUCTION) {
-			texture = TypeElements.valueOf(nom.toUpperCase()).getTexture();
-		} else {
-			texture = Etat.valueOf(this.etat.toString()).getTexture();
-		}
+//		if (etat != Etat.QUEUED && etat != Etat.CONSTRUCTION) {
+//			texture = TypeElements.valueOf(nom.toUpperCase()).getTexture();
+//		} else {
+//			texture = Etat.valueOf(this.etat.toString()).getTexture();
+//		}
 
 
 	}

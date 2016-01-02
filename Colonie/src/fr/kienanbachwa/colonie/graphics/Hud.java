@@ -8,6 +8,7 @@ import org.lwjgl.input.Mouse;
 import fr.benoitsepe.colonie.elements.TypeElements;
 import fr.benoitsepe.colonie.main.Gestion;
 import fr.benoitsepe.colonie.ressources.TypeRessources;
+import fr.benoitsepe.colonie.structures.TypeStructures;
 import fr.kienanbachwa.colonie.graphics.things.ElemButton;
 import fr.kienanbachwa.colonie.jeu.Component;
 import fr.kienanbachwa.colonie.jeu.Game;
@@ -16,7 +17,8 @@ public class Hud {
 	
 	List<ElemButton> buttons = new ArrayList<ElemButton>();
 	List<TypeRessources> ressources = new ArrayList<TypeRessources>();
-	
+	List<TypeStructures> structures = new ArrayList<TypeStructures>();
+
 	private Font font;
 	public static boolean mouseOnHud;
 	public static TypeElements elementClicked = TypeElements.BATIMENT;
@@ -50,6 +52,10 @@ public class Hud {
 		
 		for(TypeRessources res : TypeRessources.values()){
 			ressources.add(res);
+		}
+		
+		for(TypeStructures struct : TypeStructures.values()){
+			structures.add(struct);
 		}
 		
 		try {												//THIS WAS TAKING MEMORY
