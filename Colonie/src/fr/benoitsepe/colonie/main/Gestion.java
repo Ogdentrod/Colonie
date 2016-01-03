@@ -69,47 +69,46 @@ public class Gestion {
 
 	}
 
-	public void creerElem(TypeStructures struct, int posX, int posY) {
-
-		if (verifRessources(res, struct)) {
-			Ressources.utiliserRessources(res, struct.getRes());
-			Structure structCree;
-
-			switch (struct) {
-				case BATIMENT:
-					structCree = SolOuMur(posX, posY);
-					break;
-				case PORTE:
-					structCree = new Porte(posX, posY);
-					break;
-				default:
-					structCree = new Vide(posX, posY);
-					break;
-			}
-			structs[posX][posY] = structCree;
-
-			queue.offer(structCree); // ajout de l'élément à la liste de construction
-			
-			
-			
-			
-			// On actualise tous les murs/sols
-			for(int i = 0; i < structs.length; i++){
-				for(int j = 0; j < structs[i].length; j++){
-					if (structs[i][j] instanceof Batiment) {
-						structs[i][j] = SolOuMur(i, j);
+	public void creerStruct(TypeStructures struct, int posX, int posY) {
+		if (struct != TypeStructures.valueOf(structs[posX][posY].getNom().toUpperCase())) { // erreur batiments
+			if (verifRessources(res, struct)) {
+				Ressources.utiliserRessources(res, struct.getRes());
+				Structure structCree;
+	
+				switch (struct) {
+					case BATIMENT:
+						structCree = SolOuMur(posX, posY);
+						break;
+					case PORTE:
+						structCree = new Porte(posX, posY);
+						break;
+					default:
+						structCree = new Vide(posX, posY);
+						break;
+				}
+				structs[posX][posY] = structCree;
+				queue.offer(structCree); // ajout de l'élément à la liste de construction
+				
+				
+				
+				
+				// On actualise tous les murs/sols
+				for(int i = 0; i < structs.length; i++){
+					for(int j = 0; j < structs[i].length; j++){
+						if (structs[i][j] instanceof Batiment) {
+							structs[i][j] = SolOuMur(i, j);
+						}
 					}
 				}
+	
+	
+				//Affichage.afficherStruct(elemCree); // instruction temporaire pour
+													// affichage
+	
+			} else {
+				System.out.println("Vous n'avez pas assez de ressources :(");
 			}
-
-
-			//Affichage.afficherStruct(elemCree); // instruction temporaire pour
-												// affichage
-
-		} else {
-			System.out.println("Vous n'avez pas assez de ressources :(");
 		}
-
 	}
 
 	// CHANGEMENTS EN COURS
@@ -267,7 +266,7 @@ public class Gestion {
 			dy2 = Game.mouseYGrid;
 			
 			for(Structure e : selectedTiles){
-				creerElem(Hud.elementClicked, e.getX(), e.getY());
+				creerStruct(Hud.elementClicked, e.getX(), e.getY());
 			}
 			
 			selectedTiles.clear();
