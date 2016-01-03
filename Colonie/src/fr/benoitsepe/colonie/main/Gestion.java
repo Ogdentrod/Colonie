@@ -69,26 +69,26 @@ public class Gestion {
 
 	}
 
-	public void creerElem(TypeStructures elem, int posX, int posY) {
+	public void creerElem(TypeStructures struct, int posX, int posY) {
 
-		if (verifRessources(res, elem)) {
-			Ressources.utiliserRessources(res, elem.getRes());
-			Structure elemCree;
+		if (verifRessources(res, struct)) {
+			Ressources.utiliserRessources(res, struct.getRes());
+			Structure structCree;
 
-			switch (elem) {
+			switch (struct) {
 				case BATIMENT:
-					elemCree = SolOuMur(posX, posY);
+					structCree = SolOuMur(posX, posY);
 					break;
 				case PORTE:
-					elemCree = new Porte(posX, posY);
+					structCree = new Porte(posX, posY);
 					break;
 				default:
-					elemCree = new Vide(posX, posY);
+					structCree = new Vide(posX, posY);
 					break;
 			}
-			structs[posX][posY] = elemCree;
+			structs[posX][posY] = structCree;
 
-			queue.offer(elemCree); // ajout de l'élément à la liste de construction
+			queue.offer(structCree); // ajout de l'élément à la liste de construction
 			
 			
 			
