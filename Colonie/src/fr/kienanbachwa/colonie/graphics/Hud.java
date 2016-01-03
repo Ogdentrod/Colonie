@@ -5,30 +5,30 @@ import java.util.List;
 
 import org.lwjgl.input.Mouse;
 
-import fr.benoitsepe.colonie.main.Gestion;
 import fr.benoitsepe.colonie.ressources.TypeRessources;
 import fr.benoitsepe.colonie.structures.TypeStructures;
 import fr.benoitsepe.colonie.zone.TypeZones;
-import fr.kienanbachwa.colonie.graphics.things.ElemButton;
+import fr.kienanbachwa.colonie.graphics.things.OngletButton;
+import fr.kienanbachwa.colonie.graphics.things.StructButton;
 import fr.kienanbachwa.colonie.jeu.Component;
-import fr.kienanbachwa.colonie.jeu.Game;
 
 public class Hud {
 	
-	List<ElemButton> buttons = new ArrayList<ElemButton>();
+	List<StructButton> buttons = new ArrayList<StructButton>();
 	List<TypeRessources> ressources = new ArrayList<TypeRessources>();
-	List<TypeZones> structures = new ArrayList<TypeZones>();
+	List<TypeZones> zones = new ArrayList<TypeZones>();
 
-	private Font font;
+	Font font;
 	public static boolean mouseOnHud;
 	public static TypeStructures elementClicked = TypeStructures.BATIMENT;
 	
 	int x,y,w,h;
-	Panneau panElem;
 	Panneau panStructures;
+	Panneau panZones;
 	Panneau panRessources;
 	Panneau panOnglets;
-	int page =1;
+	OngletButton structPage;
+	OngletButton zonesPage;
 	
 	public Hud(){
 		try {
@@ -39,36 +39,43 @@ public class Hud {
 		
 		w=Component.width;
 		h=(Component.height/16)*4;
-		panElem = new Panneau(x,y-10,w,h,1);
 		panStructures = new Panneau(x,y-10,w,h,1);
-		panRessources = new Panneau(x+panElem.w,y,16,16,2);
+		panZones = new Panneau(x,y-10,w,h,1);
+		panRessources = new Panneau(x+panStructures.w,y,16,16,2);
 		panOnglets = new Panneau(x,y,w,10,2);
+		
+		structPage = new OngletButton("Structures");
+		zonesPage = new OngletButton("Zones");
+
+		structPage.select();
 	}
 	
 	public void init(){
 		for(TypeStructures e : TypeStructures.values()){
-			buttons.add(new ElemButton(e));				//Boutons d'élements
+			buttons.add(new StructButton(e));				//Boutons d'élements
 		}
 		
 		for(TypeRessources res : TypeRessources.values()){
 			ressources.add(res);
 		}
 		
-		for(TypeZones struct : TypeZones.values()){
-			structures.add(struct);
+		for(TypeZones zone : TypeZones.values()){
+			zones.add(zone);
 		}
 		
-		try {												//THIS WAS TAKING MEMORY
+		try {
 			font = new Font("res/stan0753.ttf", 8);
 		} catch (Exception e) {
 			System.err.println("Police non trouvée");
 			e.printStackTrace();
 		}
 		
-		for(ElemButton eb : buttons){
-			panElem.add(eb);
+		for(StructButton e : buttons){
+			panStructures.add(e);
 		}
 		
+		panOnglets.add(structPage);
+		panOnglets.add(zonesPage);
 
 	}
 	
@@ -85,20 +92,23 @@ public class Hud {
 			mouseOnHud=false;
 		}		
 		
-		panElem.update(x,(int)(y+(30/Component.scale)),w/4*3,(int)(h-(30/Component.scale)));
 		panStructures.update(x,(int)(y+(30/Component.scale)),w/4*3,(int)(h-(30/Component.scale)));
-		panRessources.update(x+panElem.w, y, w-panElem.w, h);
-		panOnglets.update(x, y, w, 10);
+		panZones.update(x,(int)(y+(30/Component.scale)),w/4*3,(int)(h-(30/Component.scale)));
+		panOnglets.update(x, y, w/4*3, 10);
+		panRessources.update(x+panStructures.w, y, w-panStructures.w, h);
 	}
 	
 	public void render(){
 		Renderer.renderQuad(x, y, w, h, new float[]{0,0,1,0.6f});
-		if(page==1)
-			panElem.render();
-		if(page==2)
+		if(structPage.isSelected()){
 			panStructures.render();
+		}
+		if(zonesPage.isSelected()){
+			panZones.render();
+		}
 		
 		panRessources.render();
+		panOnglets.render();
 	}
 		
 

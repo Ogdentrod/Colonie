@@ -43,4 +43,12 @@ public class Button extends Thing{
 			Renderer.renderQuad(x,y,w,h, new float[]{1,0,0,0.5f});
 		}
 	}
+	
+	public boolean isClicked(){
+		return clicked;
+	}
+	
+	public boolean isHovered(){
+		return hovered;
+	}
 }

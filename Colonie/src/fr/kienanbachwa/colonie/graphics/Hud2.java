@@ -8,13 +8,13 @@ import org.lwjgl.input.Mouse;
 import fr.benoitsepe.colonie.main.Gestion;
 import fr.benoitsepe.colonie.ressources.TypeRessources;
 import fr.benoitsepe.colonie.structures.TypeStructures;
-import fr.kienanbachwa.colonie.graphics.things.ElemButton;
+import fr.kienanbachwa.colonie.graphics.things.StructButton;
 import fr.kienanbachwa.colonie.jeu.Component;
 import fr.kienanbachwa.colonie.jeu.Game;
 
 public class Hud2 {
 	
-	List<ElemButton> buttons = new ArrayList<ElemButton>();
+	List<StructButton> buttons = new ArrayList<StructButton>();
 	List<TypeRessources> ressources = new ArrayList<TypeRessources>();
 	
 	private int sizeX, sizeY;	//Taille du hud
@@ -44,7 +44,7 @@ public class Hud2 {
 	
 	public void init(){
 		for(TypeStructures e : TypeStructures.values()){
-			buttons.add(new ElemButton(e));				//Boutons d'élements
+			buttons.add(new StructButton(e));				//Boutons d'élements
 		}
 		
 		for(TypeRessources res : TypeRessources.values()){
@@ -71,7 +71,7 @@ public class Hud2 {
 		//Position d'affichage des ressources
 		xRes = x0 +4+ TypeStructures.values().length*((sizeX-sizeRes)/TypeStructures.values().length);
 		
-		for(ElemButton b:buttons){
+		for(StructButton b:buttons){
 			b.update(x0 +4+ (buttons.indexOf(b))*((sizeX-sizeRes)/TypeStructures.values().length), y1+2, 16, 16);
 		}
 		
@@ -85,7 +85,7 @@ public class Hud2 {
 	public void render(){
 		Renderer.renderQuad(x0, y0, sizeX, sizeY, new float[]{0,0,1,0.6f});
 		
-		for(ElemButton b:buttons){
+		for(StructButton b:buttons){
 			b.getTexture().bind();
 			Renderer.renderQuad(x0 +4+ (buttons.indexOf(b))*((sizeX-sizeRes)/TypeStructures.values().length), y1+2, 16, 16, new float[]{1,1,1,1});
 			b.getTexture().unbind();
