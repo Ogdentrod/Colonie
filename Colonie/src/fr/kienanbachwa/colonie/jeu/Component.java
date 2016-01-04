@@ -1,20 +1,25 @@
 package fr.kienanbachwa.colonie.jeu;
 
 import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.util.glu.GLU;
+
+import fr.kienanbachwa.colonie.graphics.Hud;
 
 import static org.lwjgl.opengl.GL11.*;
 
 public class Component {
 	
-	public static int scale = 3;
-	public static int width = 720 / scale;
-	public static int height = 480 / scale;
+	public static float scale = 3;
+	public static int width = (int) (1024 / scale);
+	public static int height = (int) (576 / scale);
+		
 	public boolean running = false;
 	
-	DisplayMode mode = new DisplayMode(width * scale, height * scale);
+	DisplayMode mode = new DisplayMode((int)(width * scale), (int)(height * scale));
 	int time = 0;
 	
 	public static boolean tick = false;
@@ -23,10 +28,13 @@ public class Component {
 	public static String title = "TEH BEST GAME EVAH";
 	
 	Game game;
+	Hud hud;
+	private int wheel;
 	
 	public Component(){
 		display();
 		game = new Game();
+		hud = new Hud();
 	}
 	
 	public void display(){
@@ -43,7 +51,22 @@ public class Component {
 		}
 	}
 	private void view2D(int width, int height) {
-		glViewport(0, 0, width * scale, height * scale);
+		glViewport(0, (int)(height/4*scale), (int)(width * scale), (int)(height/4*3 * scale));
+		
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		GLU.gluOrtho2D(0, width, (int)(height/4*3), 0);
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		
+		glEnable(GL_TEXTURE_2D);
+		
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	}
+	
+	private void view2DHud(int width, int height) {
+		glViewport(0, 0, (int)(width * scale), (int)(height * scale));
 		
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
@@ -63,12 +86,14 @@ public class Component {
 	}
 	public void tick(){
 		time++;
-		game.tick();
+		game.update();
+		hud.update();		
 	}
 	
 	public void loop(){
 		
 		game.init();
+		hud.init();
 		
 		long timer = System.currentTimeMillis();
 		
@@ -83,8 +108,8 @@ public class Component {
 			if(Display.isCloseRequested()) stop();
 			Display.update();
 			
-			width = Display.getWidth() / scale;
-			height = Display.getHeight() / scale;
+			width = (int)(Display.getWidth() / scale);
+			height = (int)(Display.getHeight() / scale);
 			
 			tick = false;
 			render = false;
@@ -118,6 +143,9 @@ public class Component {
 		view2D(width , height);
 		glClear(GL_COLOR_BUFFER_BIT);
 		game.render();
+		
+		view2DHud(width, height);
+		hud.render();
 	}
 	
 	public void stop(){

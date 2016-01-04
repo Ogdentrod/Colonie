@@ -1,6 +1,17 @@
 TODO:
 
--Déplacement avec le clavier ou la souris sur la map
--Clic pour créer une structure
--Affichage des textures
--HUD pour choisir la structure et afficher les ressources
+creation de zone batiment -> K	DONE
+correction bug placement de bloc quand clic dans hud -> K DONE
+amélioration graphique du hud (ressources, onglets, positionnement, ...) -> K
+ajout d'onglets élements/structures dans le hud -> K
+creation des structures -> B
+gestion des ressources -> B
+augmenter vitesse déplacement avec clavier -> K
+augmenter taille de l'écran du jeu -> K
+creation personnages (ouvriers, ...) -> B
+ajout IA personnages (utilisation de l'IA de l'ancien projet)-> K
+ajout temps de construction -> B DONE
+amélioration des textures -> ?
+
+
+TO BE COMPLETED

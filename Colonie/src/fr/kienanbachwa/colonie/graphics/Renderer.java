@@ -17,14 +17,4 @@ public class Renderer {
 		glEnd();
 	}
 	
-	public static void renderBasicQuad(int x, int y, int w, int h, float[] color){
-		glBegin(GL_QUADS);
-			glColor4f(color[0], color[1], color[2], color[3]);
-			glVertex2f(x,y);
-			glVertex2f(x+w,y);
-			glVertex2f(x+w,y+h);
-			glVertex2f(x,y+h);
-		glEnd();
-	}
-	
 }
