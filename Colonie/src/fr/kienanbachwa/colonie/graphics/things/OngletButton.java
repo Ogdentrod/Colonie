@@ -55,6 +55,7 @@ public class OngletButton extends Button{
 	
 	public void deselect(){
 		isSelected=false;
+
 	}
 	
 	public boolean isSelected(){

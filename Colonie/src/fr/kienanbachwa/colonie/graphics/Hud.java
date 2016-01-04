@@ -18,6 +18,7 @@ public class Hud {
 	List<TypeRessources> ressources = new ArrayList<TypeRessources>();
 	List<TypeZones> zones = new ArrayList<TypeZones>();
 
+
 	public static boolean mouseOnHud;
 	public static TypeStructures elementClicked = TypeStructures.BATIMENT;
 	
@@ -36,7 +37,14 @@ public class Hud {
 		panZones = new Panneau(x,y-10,w,h,1);
 		panRessources = new Panneau(x+panStructures.w,y,16,16,2);
 		panOnglets = new Panneau(x,y,w,10,2);
-		
+
+		w=Component.width;
+		h=(Component.height/16)*4;
+		panStructures = new Panneau(x,y-10,w,h,1);
+		panZones = new Panneau(x,y-10,w,h,1);
+		panRessources = new Panneau(x+panStructures.w,y,16,16,2);
+		panOnglets = new Panneau(x,y,w,10,2);
+
 		structPage = new OngletButton("Structures");
 		zonesPage = new OngletButton("Zones");
 
@@ -46,7 +54,7 @@ public class Hud {
 	public void init(){
 		structPage.init();
 		zonesPage.init();
-		
+
 		for(TypeStructures e : TypeStructures.values()){
 			buttons.add(new StructButton(e));				//Boutons d'élements
 		}
