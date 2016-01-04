@@ -2,6 +2,7 @@ package fr.kienanbachwa.colonie.graphics;
 
 import java.util.ArrayList;
 
+import fr.kienanbachwa.colonie.graphics.things.OngletButton;
 import fr.kienanbachwa.colonie.graphics.things.Thing;
 import fr.kienanbachwa.colonie.jeu.Component;
 
@@ -40,6 +41,17 @@ public class Panneau {
 		if(type==2){
 			for(Thing b : array){
 				b.update(x + (w/array.size())*array.indexOf(b), y, w/array.size(), h);
+				
+				if(b.getClass() == OngletButton.class){		//
+					if(((OngletButton)b).isSelected()){
+						for(Thing c : array){
+							if(((OngletButton)b != ((OngletButton)c))){
+								((OngletButton)c).deselect();
+							}
+						}
+					}
+				}
+				
 			}
 		}
 	}

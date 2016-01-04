@@ -30,7 +30,6 @@ public class Hud {
 	OngletButton zonesPage;
 	
 	public Hud(){
-		
 		w=Component.width;
 		h=(Component.height/16)*4;
 		panStructures = new Panneau(x,y-10,w,h,1);
@@ -45,6 +44,9 @@ public class Hud {
 	}
 	
 	public void init(){
+		structPage.init();
+		zonesPage.init();
+		
 		for(TypeStructures e : TypeStructures.values()){
 			buttons.add(new StructButton(e));				//Boutons d'élements
 		}
