@@ -10,17 +10,32 @@ public class Panneau {
 	
 	public int x,y,w,h;			//Position x, y, largeur et hauteur
 	private int gridX=5, gridY=5;	//Colonnes(x) et lignes(y)
+	boolean grid = false;
 	ArrayList<Thing> array = new ArrayList<Thing>();	//Liste contenant tous les objets du panneau
 	Texture texture;
-	int type;	//Type 1: Les élements seront centrés au milieu du panneau en fonction de sa hauteur et de sa largeur
+	int type=1;	//Type 1: Les élements seront centrés au milieu du panneau en fonction de sa hauteur et de sa largeur
+	private int index;
 				//Type 2: Les élements prendront toute la place disponible
 				//Type 3: Les éléments sont disposés horizontalement
+	
 	public Panneau(int x, int y, int w, int h, int type){
 		this.x=x;
 		this.y=y;
 		this.w=w;
 		this.h=h;
 		this.type=type;
+		
+		this.texture=Texture.loadTexture("hudText");
+	}
+	
+	public Panneau(int x, int y, int w, int h, int gridX, int gridY){
+		this.x=x;
+		this.y=y;
+		this.w=w;
+		this.h=h;
+		this.gridX=gridX;
+		this.gridY=gridY;
+		this.grid=true;
 		
 		this.texture=Texture.loadTexture("hudText");
 	}
@@ -65,7 +80,11 @@ public class Panneau {
 			}
 		}
 		
-		
+		if(grid){	
+			for(Thing b : array){
+				b.update(x + array.indexOf(b)*(w/gridX), y, w/gridX, b.getW());
+			}
+		}
 	}
 	
 	public void render(){

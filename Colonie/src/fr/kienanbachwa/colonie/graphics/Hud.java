@@ -35,13 +35,7 @@ public class Hud {
 	public Hud(){
 		w=Component.width;
 		h=(Component.height/16)*4;
-		panStructures = new Panneau(x,y-10,w,h,1);
-		panZones = new Panneau(x,y-10,w,h,1);
-		panResources = new Panneau(x+panStructures.w,y,16,16,2);
-		panOnglets = new Panneau(x,y,w,10,2);
-
-		w=Component.width;
-		h=(Component.height/16)*4;
+		
 		panStructures = new Panneau(x,y-10,w,h,1);
 		panZones = new Panneau(x,y-10,w,h,1);
 		panResources = new Panneau(x+panStructures.w,y,16,16,3);
