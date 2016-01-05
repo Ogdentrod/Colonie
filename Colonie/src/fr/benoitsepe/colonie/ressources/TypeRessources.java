@@ -7,7 +7,7 @@ public enum TypeRessources {
 	WATER(),
 	OXYGEN(),
 	IRON(),
-	ELEC();
+	ELECTRICITY();
 	
 	private Texture texture;
 	

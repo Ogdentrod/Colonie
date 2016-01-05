@@ -9,6 +9,7 @@ import fr.benoitsepe.colonie.ressources.TypeRessources;
 import fr.benoitsepe.colonie.structures.TypeStructures;
 import fr.benoitsepe.colonie.zone.TypeZones;
 import fr.kienanbachwa.colonie.graphics.things.OngletButton;
+import fr.kienanbachwa.colonie.graphics.things.ResourceDisplayer;
 import fr.kienanbachwa.colonie.graphics.things.StructButton;
 import fr.kienanbachwa.colonie.jeu.Component;
 
@@ -25,24 +26,25 @@ public class Hud {
 	int x,y,w,h;
 	Panneau panStructures;
 	Panneau panZones;
-	Panneau panRessources;
+	Panneau panResources;
 	Panneau panOnglets;
 	OngletButton structPage;
 	OngletButton zonesPage;
+	
 	
 	public Hud(){
 		w=Component.width;
 		h=(Component.height/16)*4;
 		panStructures = new Panneau(x,y-10,w,h,1);
 		panZones = new Panneau(x,y-10,w,h,1);
-		panRessources = new Panneau(x+panStructures.w,y,16,16,2);
+		panResources = new Panneau(x+panStructures.w,y,16,16,2);
 		panOnglets = new Panneau(x,y,w,10,2);
 
 		w=Component.width;
 		h=(Component.height/16)*4;
 		panStructures = new Panneau(x,y-10,w,h,1);
 		panZones = new Panneau(x,y-10,w,h,1);
-		panRessources = new Panneau(x+panStructures.w,y,16,16,2);
+		panResources = new Panneau(x+panStructures.w,y,16,16,3);
 		panOnglets = new Panneau(x,y,w,10,2);
 
 		structPage = new OngletButton("Structures");
@@ -60,7 +62,7 @@ public class Hud {
 		}
 		
 		for(TypeRessources res : TypeRessources.values()){
-			ressources.add(res);
+			panResources.add(new ResourceDisplayer(res));
 		}
 		
 		for(TypeZones zone : TypeZones.values()){
@@ -73,6 +75,8 @@ public class Hud {
 		
 		panOnglets.add(structPage);
 		panOnglets.add(zonesPage);
+		
+		panResources.init();
 
 	}
 	
@@ -92,7 +96,7 @@ public class Hud {
 		panStructures.update(x,(int)(y+(30/Component.scale)),w/4*3,(int)(h-(30/Component.scale)));
 		panZones.update(x,(int)(y+(30/Component.scale)),w/4*3,(int)(h-(30/Component.scale)));
 		panOnglets.update(x, y, w/4*3, 10);
-		panRessources.update(x+panStructures.w, y, w-panStructures.w, h);
+		panResources.update(x+panStructures.w, y, w-panStructures.w, h);
 	}
 	
 	public void render(){
@@ -104,7 +108,7 @@ public class Hud {
 			panZones.render();
 		}
 		
-		panRessources.render();
+		panResources.render();
 		panOnglets.render();
 	}
 		

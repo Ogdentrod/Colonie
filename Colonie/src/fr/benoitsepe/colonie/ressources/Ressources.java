@@ -15,7 +15,7 @@ public class Ressources {
 	private int oxygen;
 	private int iron;
 	private int iron_ore;
-	private int elec;
+	private int electricity;
 	
 	
 	public Ressources() {
@@ -23,14 +23,14 @@ public class Ressources {
 		oxygen = 0;
 		iron = 50;
 		iron_ore = 0;
-		elec = 0;
+		electricity = 0;
 	}
 	
 	public Ressources(int water, int oxygen, int iron, int elec) {
 		this.water = water;
 		this.oxygen = oxygen;
 		this.iron = iron;
-		this.elec = elec;
+		this.electricity = elec;
 	}
 	
 	
@@ -50,7 +50,7 @@ public class Ressources {
 	 * @return true si le joueur a assez de ressources, false sinon
 	 */
 	public boolean canBuy(Ressources r) {
-		if (this.water >= r.getWater() && this.oxygen >= r.getOxygen() && this.iron >= r.getIron() && this.iron_ore >= r.getIron_ore() && this.elec >= r.getElec()) {
+		if (this.water >= r.getWater() && this.oxygen >= r.getOxygen() && this.iron >= r.getIron() && this.iron_ore >= r.getIron_ore() && this.electricity >= r.getElec()) {
 			return true;
 		} else {
 			return false;
@@ -60,11 +60,11 @@ public class Ressources {
 	
 	
 	public int getElec() {
-		return elec;
+		return electricity;
 	}
 
 	public void setElec(int elec) {
-		this.elec = elec;
+		this.electricity = elec;
 	}
 
 	public int getWater() {
@@ -97,6 +97,20 @@ public class Ressources {
 
 	public void setIron_ore(int iron_ore) {
 		this.iron_ore = iron_ore;
+	}
+	
+	public int getQuantity(TypeRessources typeRes){
+		int quantity=0;
+		if(typeRes==TypeRessources.ELECTRICITY)
+			quantity=electricity;
+		if(typeRes==TypeRessources.IRON)
+			quantity=iron;
+		if(typeRes==TypeRessources.OXYGEN)
+			quantity=oxygen;
+		if(typeRes==TypeRessources.WATER)
+			quantity=water;
+		return quantity;
+				
 	}
 	
 }

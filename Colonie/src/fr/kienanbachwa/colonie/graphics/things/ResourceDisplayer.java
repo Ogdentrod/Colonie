@@ -2,19 +2,28 @@ package fr.kienanbachwa.colonie.graphics.things;
 
 import java.awt.Font;
 import java.io.InputStream;
+import java.util.Locale;
 
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.util.ResourceLoader;
 
 import fr.benoitsepe.colonie.main.Gestion;
 import fr.benoitsepe.colonie.ressources.TypeRessources;
+import fr.kienanbachwa.colonie.graphics.Renderer;
+import fr.kienanbachwa.colonie.graphics.Texture;
 
 public class ResourceDisplayer extends Thing{
-
 	private TrueTypeFont font;
 	private TrueTypeFont font2;
+	String name;
+	String quantity;
+	Texture icon;
+	TypeRessources typeRes;
+	
 	public ResourceDisplayer(TypeRessources typeRes){
-		
+		this.typeRes=typeRes;
+		this.name=typeRes.toString().toLowerCase(Locale.FRENCH);
+		icon=typeRes.getTexture();
 	}
 	
 	public void init(){
@@ -30,13 +39,16 @@ public class ResourceDisplayer extends Thing{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		
+		
 	}
 	
 	public void render(){
-//		font.drawText(String.valueOf(Gestion.res.getWater()), xRes+1+sizeResIcon, y1+sizeResIcon*0);
-//		font.drawText(String.valueOf(Gestion.res.getOxygen()), xRes+1+sizeResIcon, y1+sizeResIcon*1);
-//		font.drawText(String.valueOf(Gestion.res.getIron()), xRes+1+sizeResIcon, y1+sizeResIcon*2);
-//		font.drawText(String.valueOf(Gestion.res.getElec()), xRes+1+sizeResIcon, y1+sizeResIcon*3);
+		icon.bind();
+		Renderer.renderQuad(x+5, y, h-2, h-2, new float[]{1,1,1,1});
+		icon.unbind();
+		
+		font2.drawString(x+h+5,y+h/2-font2.getHeight()/2, String.valueOf(Gestion.res.getQuantity(typeRes)));
 	}
 	
 	

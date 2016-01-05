@@ -14,6 +14,7 @@ public class Panneau {
 	Texture texture;
 	int type;	//Type 1: Les élements seront centrés au milieu du panneau en fonction de sa hauteur et de sa largeur
 				//Type 2: Les élements prendront toute la place disponible
+				//Type 3: Les éléments sont disposés horizontalement
 	public Panneau(int x, int y, int w, int h, int type){
 		this.x=x;
 		this.y=y;
@@ -25,6 +26,9 @@ public class Panneau {
 	}
 	
 	public void init(){
+		for(Thing b : array){
+			b.init();
+		}
 	}
 	
 	public void update(int x, int y, int w, int h){
@@ -42,7 +46,7 @@ public class Panneau {
 			for(Thing b : array){
 				b.update(x + (w/array.size())*array.indexOf(b), y, w/array.size(), h);
 				
-				if(b.getClass() == OngletButton.class){		//
+				if(b.getClass() == OngletButton.class){
 					if(((OngletButton)b).isSelected()){
 						for(Thing c : array){
 							if(((OngletButton)b != ((OngletButton)c))){
@@ -54,6 +58,14 @@ public class Panneau {
 				
 			}
 		}
+		
+		if(type==3){
+			for(Thing b : array){
+				b.update(x, y + array.indexOf(b)*(h/array.size()), w, h/array.size());
+			}
+		}
+		
+		
 	}
 	
 	public void render(){
@@ -73,5 +85,4 @@ public class Panneau {
 			array.add(o);
 		}
 	}
-
 }
