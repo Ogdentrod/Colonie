@@ -1,8 +1,8 @@
-package fr.kienanbachwa.colonie.graphics.things;
+package fr.kienanbachwa.colonie.graphics.hud.things;
 
 import fr.benoitsepe.colonie.structures.TypeStructures;
-import fr.kienanbachwa.colonie.graphics.Hud;
 import fr.kienanbachwa.colonie.graphics.Texture;
+import fr.kienanbachwa.colonie.graphics.hud.Hud;
 
 public class StructButton extends Button{
 

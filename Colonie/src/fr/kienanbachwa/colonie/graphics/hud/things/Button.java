@@ -1,4 +1,4 @@
-package fr.kienanbachwa.colonie.graphics.things;
+package fr.kienanbachwa.colonie.graphics.hud.things;
 
 import org.lwjgl.input.Mouse;
 

@@ -1,4 +1,4 @@
-package fr.kienanbachwa.colonie.graphics;
+package fr.kienanbachwa.colonie.graphics.hud;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +8,10 @@ import org.lwjgl.input.Mouse;
 import fr.benoitsepe.colonie.ressources.TypeRessources;
 import fr.benoitsepe.colonie.structures.TypeStructures;
 import fr.benoitsepe.colonie.zone.TypeZones;
-import fr.kienanbachwa.colonie.graphics.things.OngletButton;
-import fr.kienanbachwa.colonie.graphics.things.ResourceDisplayer;
-import fr.kienanbachwa.colonie.graphics.things.StructButton;
+import fr.kienanbachwa.colonie.graphics.Renderer;
+import fr.kienanbachwa.colonie.graphics.hud.things.OngletButton;
+import fr.kienanbachwa.colonie.graphics.hud.things.ResourceDisplayer;
+import fr.kienanbachwa.colonie.graphics.hud.things.StructButton;
 import fr.kienanbachwa.colonie.jeu.Component;
 
 public class Hud {

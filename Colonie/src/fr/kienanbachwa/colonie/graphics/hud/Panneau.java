@@ -1,9 +1,11 @@
-package fr.kienanbachwa.colonie.graphics;
+package fr.kienanbachwa.colonie.graphics.hud;
 
 import java.util.ArrayList;
 
-import fr.kienanbachwa.colonie.graphics.things.OngletButton;
-import fr.kienanbachwa.colonie.graphics.things.Thing;
+import fr.kienanbachwa.colonie.graphics.Renderer;
+import fr.kienanbachwa.colonie.graphics.Texture;
+import fr.kienanbachwa.colonie.graphics.hud.things.OngletButton;
+import fr.kienanbachwa.colonie.graphics.hud.things.Thing;
 import fr.kienanbachwa.colonie.jeu.Component;
 
 public class Panneau {

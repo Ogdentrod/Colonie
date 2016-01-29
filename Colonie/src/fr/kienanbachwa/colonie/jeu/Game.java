@@ -6,8 +6,8 @@ import org.lwjgl.opengl.GL11;
 
 import fr.benoitsepe.colonie.main.Gestion;
 import fr.benoitsepe.colonie.zone.Zone;
-import fr.kienanbachwa.colonie.graphics.Hud;
 import fr.kienanbachwa.colonie.graphics.Renderer;
+import fr.kienanbachwa.colonie.graphics.hud.Hud;
 
 public class Game {
 

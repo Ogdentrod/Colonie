@@ -8,10 +8,11 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="res"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Slick-util">
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/slickutil">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Colonie/lib/slick-util"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,4 +1,4 @@
-package fr.kienanbachwa.colonie.graphics.things;
+package fr.kienanbachwa.colonie.graphics.hud.things;
 
 import java.awt.Font;
 import java.io.InputStream;

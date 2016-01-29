@@ -19,8 +19,8 @@ import fr.benoitsepe.colonie.structures.TypeStructures;
 import fr.benoitsepe.colonie.structures.Vide;
 import fr.benoitsepe.colonie.zone.Zone;
 import fr.benoitsepe.colonie.zone.TypeZones;
-import fr.kienanbachwa.colonie.graphics.Hud;
 import fr.kienanbachwa.colonie.graphics.Renderer;
+import fr.kienanbachwa.colonie.graphics.hud.Hud;
 import fr.kienanbachwa.colonie.jeu.Component;
 import fr.kienanbachwa.colonie.jeu.Game;
 
@@ -38,7 +38,7 @@ public class Gestion {
 	private int dy2;
 	private int dx1;
 	private int dy1;
-	List<Structure> selectedTiles = new ArrayList<Structure>();
+	List<Structure> selectedTiles = new ArrayList<Structure>();	//Structures sélectionnées 
 	private int xMin;
 	private int yMin;
 	private int yMax;
@@ -191,7 +191,7 @@ public class Gestion {
 		yMin = (int) (-Game.yScroll / Zone.tileSize);
 
 		xMax = (((int) (-Game.xScroll / Zone.tileSize) + (Component.width / Zone.tileSize/Game.zoom)+ 3) >= structs.length) ? structs.length : (int) (-Game.xScroll / Zone.tileSize) + (int)(Component.width / Zone.tileSize/Game.zoom) + 3;
-		yMax = (((int) (-Game.yScroll / Zone.tileSize) + (Component.height / Zone.tileSize/Game.zoom)+ 3) >= structs[0].length) ? structs[0].length : (int) (-Game.yScroll / Zone.tileSize) + (int)(Component.height / Zone.tileSize/Game.zoom) + 2;
+		yMax = (((int) (-Game.yScroll / Zone.tileSize) + (Component.height / Zone.tileSize/Game.zoom)+ 3) >= structs[0].length) ? structs[0].length : (int) (-Game.yScroll / Zone.tileSize) + (int)(Component.height / Zone.tileSize/Game.zoom) + 3;
 
 		
 		for (int x = xMin; x < xMax; x++) {

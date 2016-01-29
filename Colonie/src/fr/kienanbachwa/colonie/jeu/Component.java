@@ -7,7 +7,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.util.glu.GLU;
 
-import fr.kienanbachwa.colonie.graphics.Hud;
+import fr.kienanbachwa.colonie.graphics.hud.Hud;
 
 import static org.lwjgl.opengl.GL11.*;
 
