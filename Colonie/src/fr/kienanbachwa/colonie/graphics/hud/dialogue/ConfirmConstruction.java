@@ -1,8 +1,8 @@
-package fr.kienanbachwa.colonie.graphics.IGHud;
+package fr.kienanbachwa.colonie.graphics.hud.dialogue;
 
 import fr.benoitsepe.colonie.ressources.Ressources;
 import fr.kienanbachwa.colonie.graphics.Texture;
-import fr.kienanbachwa.colonie.graphics.hud.things.Button;
+import fr.kienanbachwa.colonie.graphics.hud.panelObjects.Button;
 
 public class ConfirmConstruction extends DialogueBox{
 	
@@ -19,7 +19,12 @@ public class ConfirmConstruction extends DialogueBox{
 		
 		confirm.setTexture(confirmTexture);
 		cancel.setTexture(cancelTexture);
+		
+		this.add(confirm);
+		this.add(cancel);
 	}
+	
+	
 	
 	
 	

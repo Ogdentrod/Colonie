@@ -9,9 +9,13 @@ import fr.benoitsepe.colonie.ressources.TypeRessources;
 import fr.benoitsepe.colonie.structures.TypeStructures;
 import fr.benoitsepe.colonie.zone.TypeZones;
 import fr.kienanbachwa.colonie.graphics.Renderer;
-import fr.kienanbachwa.colonie.graphics.hud.things.OngletButton;
-import fr.kienanbachwa.colonie.graphics.hud.things.ResourceDisplayer;
-import fr.kienanbachwa.colonie.graphics.hud.things.StructButton;
+import fr.kienanbachwa.colonie.graphics.hud.panelObjects.OngletButton;
+import fr.kienanbachwa.colonie.graphics.hud.panelObjects.ResourceDisplayer;
+import fr.kienanbachwa.colonie.graphics.hud.panelObjects.StructButton;
+import fr.kienanbachwa.colonie.graphics.hud.panels.Panel;
+import fr.kienanbachwa.colonie.graphics.hud.panels.PanelGrid;
+import fr.kienanbachwa.colonie.graphics.hud.panels.PanelHorizontal;
+import fr.kienanbachwa.colonie.graphics.hud.panels.PanelVertical;
 import fr.kienanbachwa.colonie.jeu.Component;
 
 public class Hud {
@@ -25,22 +29,25 @@ public class Hud {
 	public static TypeStructures elementClicked = TypeStructures.BATIMENT;
 	
 	int x,y,w,h;
-	Panneau panStructures;
-	Panneau panZones;
-	Panneau panResources;
-	Panneau panOnglets;
+	PanelGrid panStructures;
+	PanelGrid panZones;
+	PanelVertical panResources;
+	PanelHorizontal panOnglets;
+	
 	OngletButton structPage;
 	OngletButton zonesPage;
+	
+	public static int hudTileSize = 16;
 	
 	
 	public Hud(){
 		w=Component.width;
 		h=(Component.height/16)*4;
 		
-		panStructures = new Panneau(x,y-10,w,h,1);
-		panZones = new Panneau(x,y-10,w,h,1);
-		panResources = new Panneau(x+panStructures.w,y,16,16,3);
-		panOnglets = new Panneau(x,y,w,10,2);
+		panStructures = new PanelGrid(x,y-10,w,h);
+		panZones = new PanelGrid(x,y-10,w,h);
+		panResources = new PanelVertical(x+panStructures.w,y,16,16);
+		panOnglets = new PanelHorizontal(x,y,w,10);
 
 		structPage = new OngletButton("Structures");
 		zonesPage = new OngletButton("Zones");
@@ -72,6 +79,9 @@ public class Hud {
 		panOnglets.add(zonesPage);
 		
 		panResources.init();
+		
+		panStructures.init();
+		panZones.init();
 
 	}
 	
@@ -88,8 +98,9 @@ public class Hud {
 			mouseOnHud=false;
 		}		
 		
-		panStructures.update(x,(int)(y+(30/Component.scale)),w/4*3,(int)(h-(30/Component.scale)));
-		panZones.update(x,(int)(y+(30/Component.scale)),w/4*3,(int)(h-(30/Component.scale)));
+		panStructures.update(x, y+10, w/4*3, (h-10));
+		panZones.update(x, y+10, w/4*3, (h-10));
+		
 		panOnglets.update(x, y, w/4*3, 10);
 		panResources.update(x+panStructures.w, y, w-panStructures.w, h);
 	}
@@ -102,7 +113,7 @@ public class Hud {
 		if(zonesPage.isSelected()){
 			panZones.render();
 		}
-		
+
 		panResources.render();
 		panOnglets.render();
 	}
