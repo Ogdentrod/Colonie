@@ -8,6 +8,7 @@ import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.util.ResourceLoader;
 
 import fr.kienanbachwa.colonie.graphics.Texture;
+import static org.lwjgl.opengl.GL11.*;
 
 public class OngletButton extends Button{
 
@@ -23,15 +24,16 @@ public class OngletButton extends Button{
 	}
 	
 	public void init(){
-		Font awtFont = new Font("Times New Roman",Font.BOLD,8);
+		Font awtFont = new Font("Times New Roman",Font.BOLD,10);
 		font = new TrueTypeFont(awtFont,false);
 		
 		try{
 			InputStream inputStream = ResourceLoader.getResourceAsStream("stan0753.ttf");
-			
 			Font awtFont2 = Font.createFont(Font.TRUETYPE_FONT, inputStream);
 			awtFont2 = awtFont2.deriveFont(8f);
+
 			font2 = new TrueTypeFont(awtFont2, true);
+		
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -46,7 +48,9 @@ public class OngletButton extends Button{
 	
 	public void render(){
 		super.render();
-		font2.drawString(x+w/2-font2.getWidth(name)/2, y, name);
+		
+		font2.drawString(x+w/2-font2.getWidth(name)/2, y + h/2 - font2.getHeight()/2, name);
+		
 	}
 	
 	public void select(){

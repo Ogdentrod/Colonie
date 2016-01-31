@@ -32,8 +32,8 @@ public class PanelGrid extends Panel {
 		int j = 0; //Position y dans la page
 		int p = 0; //Page
 		
-		nbObjectsX = (w - Hud.hudTileSize) / Hud.hudTileSize;
-		nbObjectsY = (h - Hud.hudTileSize) / Hud.hudTileSize;
+		//nbObjectsX = (w - Hud.hudTileSize) / Hud.hudTileSize;
+		//nbObjectsY = (h - Hud.hudTileSize) / Hud.hudTileSize;
 		
 		for (Thing b : array) {			
 			b.update(x + gridBorder/2 + i*(Hud.hudTileSize + gridBorder), y + j*(Hud.hudTileSize + gridBorder) , Hud.hudTileSize, Hud.hudTileSize);

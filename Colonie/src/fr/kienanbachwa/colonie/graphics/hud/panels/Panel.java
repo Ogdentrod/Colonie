@@ -35,10 +35,10 @@ public class Panel {
 		Renderer.renderQuad(x, y, w, h, new float[]{1,1,1,1});
 		this.texture.unbind();
 		
-		Renderer.renderQuad(x, y, w, 1, Color.BLACK);
-		Renderer.renderQuad(x, y, 1, h, Color.BLACK);
-		Renderer.renderQuad(x+w, y, w, 1, Color.BLACK);
-		Renderer.renderQuad(x, y+h, 1, h, Color.BLACK);
+		Renderer.renderQuadSimple(x, y, w, 1, Color.BLACK);
+		Renderer.renderQuadSimple(x, y, 1, h, Color.BLACK);
+		Renderer.renderQuadSimple(x+w, y, w, 1, Color.BLACK);
+		Renderer.renderQuadSimple(x, y+h, 1, h, Color.BLACK);
 
 		
 		for(Thing b : array){

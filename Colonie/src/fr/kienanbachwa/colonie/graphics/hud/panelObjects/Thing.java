@@ -19,9 +19,7 @@ public abstract class Thing {
 		this.h=h;	
 	}
 	
-	public void render(){
-		
-	}
+	public abstract void render();
 	
 	public void setTexture(Texture texture){
 		this.texture=texture;

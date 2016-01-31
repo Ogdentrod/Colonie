@@ -8,6 +8,7 @@ import org.lwjgl.input.Mouse;
 import fr.benoitsepe.colonie.ressources.TypeRessources;
 import fr.benoitsepe.colonie.structures.TypeStructures;
 import fr.benoitsepe.colonie.zone.TypeZones;
+import fr.kienanbachwa.colonie.graphics.Color;
 import fr.kienanbachwa.colonie.graphics.Renderer;
 import fr.kienanbachwa.colonie.graphics.hud.panelObjects.OngletButton;
 import fr.kienanbachwa.colonie.graphics.hud.panelObjects.ResourceDisplayer;
@@ -36,6 +37,7 @@ public class Hud {
 	
 	OngletButton structPage;
 	OngletButton zonesPage;
+	private boolean debug = true;;
 	
 	public static int hudTileSize = 16;
 	
@@ -47,7 +49,7 @@ public class Hud {
 		panStructures = new PanelGrid(x,y-10,w,h);
 		panZones = new PanelGrid(x,y-10,w,h);
 		panResources = new PanelVertical(x+panStructures.w,y,16,16);
-		panOnglets = new PanelHorizontal(x,y,w,10);
+		panOnglets = new PanelHorizontal(x,y,w,h-(Hud.hudTileSize+2)*2);
 
 		structPage = new OngletButton("Structures");
 		zonesPage = new OngletButton("Zones");
@@ -82,6 +84,9 @@ public class Hud {
 		
 		panStructures.init();
 		panZones.init();
+		
+		this.debug();
+
 
 	}
 	
@@ -98,14 +103,15 @@ public class Hud {
 			mouseOnHud=false;
 		}		
 		
-		panStructures.update(x, y+10, w/4*3, (h-10));
-		panZones.update(x, y+10, w/4*3, (h-10));
+		panStructures.update(x, y+h-(Hud.hudTileSize+1)*2, (Hud.hudTileSize+2)*14, h- (h-(Hud.hudTileSize+1)*2));
+		panZones.update(x, y+h-(Hud.hudTileSize+1)*2, (Hud.hudTileSize+2)*14, h - (h-(Hud.hudTileSize+1)*2) );
 		
-		panOnglets.update(x, y, w/4*3, 10);
+		panOnglets.update(x, y, (Hud.hudTileSize+1)*14, h-(Hud.hudTileSize+1)*2);
 		panResources.update(x+panStructures.w, y, w-panStructures.w, h);
 	}
 	
 	public void render(){
+
 		Renderer.renderQuad(x, y, w, h, new float[]{0,0,1,0.6f});
 		if(structPage.isSelected()){
 			panStructures.render();
@@ -116,6 +122,20 @@ public class Hud {
 
 		panResources.render();
 		panOnglets.render();
+		
+		Renderer.renderQuadSimple(x, y, w, h, Color.RED);
+
+		if(debug){
+			Renderer.renderQuadSimple(x, y, w, 1, Color.RED);
+			Renderer.renderQuadSimple(x, y, 1, h, Color.RED);
+			Renderer.renderQuadSimple(x+w, y, 1, h, Color.RED);
+			Renderer.renderQuadSimple(x, y+h, w, 1, Color.RED);
+		}
+		
+	}
+	
+	public void debug(){
+		debug = true;
 	}
 		
 

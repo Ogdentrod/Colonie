@@ -7,8 +7,8 @@ import fr.kienanbachwa.colonie.jeu.Component;
 
 public class Button extends Thing{
 
-	boolean clicked = false;
-	boolean hovered = false;
+	public boolean clicked = false;
+	public boolean hovered = false;
 	
 	public Button(){
 		super();

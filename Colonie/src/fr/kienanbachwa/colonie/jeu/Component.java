@@ -52,7 +52,6 @@ public class Component {
 	}
 	private void view2D(int width, int height) {
 		glViewport(0, (int)(height/4*scale), (int)(width * scale), (int)(height/4*3 * scale));
-
 		
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
