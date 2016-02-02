@@ -36,7 +36,7 @@ public class PanelGrid extends Panel {
 		//nbObjectsY = (h - Hud.hudTileSize) / Hud.hudTileSize;
 		
 		for (Thing b : array) {			
-			b.update(x + gridBorder/2 + i*(Hud.hudTileSize + gridBorder), y + j*(Hud.hudTileSize + gridBorder) , Hud.hudTileSize, Hud.hudTileSize);
+			b.update(x + gridBorder/2 +1 + i*(Hud.hudTileSize + gridBorder), y + 2+ j*(Hud.hudTileSize + gridBorder) , Hud.hudTileSize-2, Hud.hudTileSize -2);
 			
 			i++;
 			if(i>nbObjectsX){
@@ -56,15 +56,15 @@ public class PanelGrid extends Panel {
 		super.render();
 		
 		int j = 0;
-		while( (j+gridBorder+Hud.hudTileSize) < h){
+		while( (j+gridBorder) < h){
 			Renderer.renderQuad(x , y+j, w, gridBorder/2, new float[]{0.2f,0.2f,0.2f,1} );
 			Renderer.renderQuad(x , y+j+Hud.hudTileSize+gridBorder/2, w, gridBorder/2, new float[]{0.8f,0.8f,0.8f,1} );
-			j += (Hud.hudTileSize);
+			j += (Hud.hudTileSize + gridBorder);
 		}
 		
 		int i = 0;
-		while( (i+gridBorder+Hud.hudTileSize) < w){
-			Renderer.renderQuad(x+i , y, gridBorder/2, h, new float[]{0.2f,0.2f,0.2f,1} );
+		while( (i+gridBorder) < w){
+			Renderer.renderQuad(x+i, y, gridBorder/2, h, new float[]{0.2f,0.2f,0.2f,1} );
 			Renderer.renderQuad(x+i+Hud.hudTileSize+gridBorder/2 , y, gridBorder/2, h, new float[]{0.8f,0.8f,0.8f,1} );
 			i += (Hud.hudTileSize + gridBorder);
 		}

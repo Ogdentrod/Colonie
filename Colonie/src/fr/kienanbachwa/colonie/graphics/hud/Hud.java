@@ -95,6 +95,28 @@ public class Hud {
 		x = 0;		
 		y =Component.height-h;	
 		w=Component.width;
+		
+		int wHuge = 550;
+		int hHuge = 75;
+		
+		int wBig = 430;
+		int hBig = 60;
+		
+		int wMiddle = 341;
+		int hMiddle = 48;
+		
+		int wTiny = 250;
+		int hTiny = 35;
+		
+		System.out.println("w: "+w+" h: "+h+" hudTileSize: "+hudTileSize);
+
+		if( (w < wTiny) || ( h < hTiny) ){ hudTileSize = 8; }
+		else if( (w >= wTiny && w < wMiddle) || (h >= hTiny && h < hMiddle) ){ hudTileSize = 12; }
+		else if( (w >= wMiddle && w < wBig) || (h >= hMiddle && h < hBig) ){ hudTileSize = 16; }
+		else if( (w >= wBig && w < wHuge) || (h >= hBig && h < hHuge) ){ hudTileSize = 24; }
+		else{ hudTileSize = 32; }
+
+		
 
 		
 		if(Mouse.getX() > x*Component.scale && Mouse.getX()<(x+w)*Component.scale && Mouse.getY() < (Component.height-y)*Component.scale && Mouse.getY()> (Component.height-y-h)*Component.scale){

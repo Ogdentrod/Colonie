@@ -1,6 +1,5 @@
 package fr.kienanbachwa.colonie.graphics.hud.panelObjects;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.io.InputStream;
 
@@ -8,7 +7,6 @@ import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.util.ResourceLoader;
 
 import fr.kienanbachwa.colonie.graphics.Texture;
-import static org.lwjgl.opengl.GL11.*;
 
 public class OngletButton extends Button{
 
