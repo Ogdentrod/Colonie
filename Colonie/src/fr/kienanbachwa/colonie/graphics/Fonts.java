@@ -3,7 +3,7 @@ package fr.kienanbachwa.colonie.graphics;
 import java.awt.Font;
 import java.io.InputStream;
 
-import org.newdawn.slick.TrueTypeFont;
+import fr.kienanbachwa.colonie.graphics.TrueTypeFont;
 import org.newdawn.slick.util.ResourceLoader;
 
 public class Fonts {
