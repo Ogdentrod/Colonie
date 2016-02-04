@@ -1,50 +1,32 @@
 package fr.kienanbachwa.colonie.graphics.hud.dialogue;
 
-import java.util.ArrayList;
+import org.lwjgl.input.Mouse;
+import org.newdawn.slick.TrueTypeFont;
 
+import fr.kienanbachwa.colonie.graphics.Color;
+import fr.kienanbachwa.colonie.graphics.Fonts;
 import fr.kienanbachwa.colonie.graphics.Renderer;
-import fr.kienanbachwa.colonie.graphics.Texture;
-import fr.kienanbachwa.colonie.graphics.hud.panelObjects.Thing;
+import fr.kienanbachwa.colonie.jeu.Component;
 
-public class DialogueBox {
+public class DialogueBox {	
+	static TrueTypeFont font = new Fonts("fonts/stan0753.ttf", 8f).getFont();
 
-	public int x,y,w,h;			//Position x, y, largeur et hauteur
-	ArrayList<Thing> array = new ArrayList<Thing>();	//Liste contenant tous les objets du panneau
-	Texture texture;
 	
-	public DialogueBox(int x, int y, int w, int h){
-		this.x=x;
-		this.y=y;
-		this.w=w;
-		this.h=h;
+	public static void showInfo(String text, int x, int y){
+//		boolean right = true; //if true, la bulle s'affichera vers la droite
+//		boolean up = true;	//Pareil mais vers le haut
+//		
+//		if( font.getWidth(text)+x > Component.width ){
+//			right=false;
+//		}
+//		if( font.getHeight(text)+y > Component.height){
+//			up=false;
+//		}
 		
-		this.texture=Texture.loadTexture("hudText");
-	}
-	
-	public void init(){
-		for(Thing b : array){
-			b.init();
-		}
-	}
-	
-	public void update(int x, int y, int w, int h){
-		this.x = x;		
-		this.y = y;
-		this.w=w;
-		this.h=h;
-	}
-	
-	public void render(){
-		this.texture.bind();
-		Renderer.renderQuad(x, y, w, h, new float[]{1,1,1,1});
-		this.texture.unbind();
+			Renderer.renderQuadSimple((int)(Mouse.getX()/Component.scale), (int)(Component.height-(Mouse.getY()/Component.scale)), font.getWidth(text)+10, font.getHeight(text)+10, Color.BLUE);
 		
-		for(Thing b : array){
-			b.render();
-		}
+			font.drawString(Mouse.getX()/Component.scale +5, Component.height-(Mouse.getY()/Component.scale) +5, text);
+			//Renderer.quadData(x+5, y+5, font.getWidth(text), font.getHeight(text), Color.BLACK);
 	}
 	
-	public void add(Thing o){
-		array.add(o);		
-	}
 }

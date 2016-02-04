@@ -13,7 +13,6 @@ import fr.kienanbachwa.colonie.graphics.Renderer;
 import fr.kienanbachwa.colonie.graphics.hud.panelObjects.OngletButton;
 import fr.kienanbachwa.colonie.graphics.hud.panelObjects.ResourceDisplayer;
 import fr.kienanbachwa.colonie.graphics.hud.panelObjects.StructButton;
-import fr.kienanbachwa.colonie.graphics.hud.panels.Panel;
 import fr.kienanbachwa.colonie.graphics.hud.panels.PanelGrid;
 import fr.kienanbachwa.colonie.graphics.hud.panels.PanelHorizontal;
 import fr.kienanbachwa.colonie.graphics.hud.panels.PanelVertical;
@@ -37,7 +36,7 @@ public class Hud {
 	
 	OngletButton structPage;
 	OngletButton zonesPage;
-	private boolean debug = true;;
+	private boolean debug = false;;
 	
 	public static int hudTileSize = 16;
 	
@@ -82,11 +81,12 @@ public class Hud {
 		
 		panResources.init();
 		
+		panZones.add(buttons.get(0));
+		
 		panStructures.init();
 		panZones.init();
 		
-		this.debug();
-
+		
 
 	}
 	
@@ -108,8 +108,6 @@ public class Hud {
 		int wTiny = 250;
 		int hTiny = 35;
 		
-		System.out.println("w: "+w+" h: "+h+" hudTileSize: "+hudTileSize);
-
 		if( (w < wTiny) || ( h < hTiny) ){ hudTileSize = 8; }
 		else if( (w >= wTiny && w < wMiddle) || (h >= hTiny && h < hMiddle) ){ hudTileSize = 12; }
 		else if( (w >= wMiddle && w < wBig) || (h >= hMiddle && h < hBig) ){ hudTileSize = 16; }
@@ -128,13 +126,13 @@ public class Hud {
 		panStructures.update(x, y+h-(Hud.hudTileSize+1)*2, (Hud.hudTileSize+2)*14, h- (h-(Hud.hudTileSize+1)*2));
 		panZones.update(x, y+h-(Hud.hudTileSize+1)*2, (Hud.hudTileSize+2)*14, h - (h-(Hud.hudTileSize+1)*2) );
 		
-		panOnglets.update(x, y, (Hud.hudTileSize+1)*14, h-(Hud.hudTileSize+1)*2);
+		panOnglets.update(x, y, (Hud.hudTileSize+2)*14, h-(Hud.hudTileSize+1)*2);
 		panResources.update(x+panStructures.w, y, w-panStructures.w, h);
 	}
 	
 	public void render(){
 
-		Renderer.renderQuad(x, y, w, h, new float[]{0,0,1,0.6f});
+		//Renderer.renderQuad(x, y, w, h, new float[]{0,0,1,0.6f});
 		if(structPage.isSelected()){
 			panStructures.render();
 		}
@@ -145,7 +143,6 @@ public class Hud {
 		panResources.render();
 		panOnglets.render();
 		
-		Renderer.renderQuadSimple(x, y, w, h, Color.RED);
 
 		if(debug){
 			Renderer.renderQuadSimple(x, y, w, 1, Color.RED);

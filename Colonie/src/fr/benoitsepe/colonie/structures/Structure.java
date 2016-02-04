@@ -1,9 +1,8 @@
 package fr.benoitsepe.colonie.structures;
 
-import static org.lwjgl.opengl.GL11.*;
-
-
-import java.util.Random;
+import static org.lwjgl.opengl.GL11.GL_QUADS;
+import static org.lwjgl.opengl.GL11.glBegin;
+import static org.lwjgl.opengl.GL11.glEnd;
 
 import fr.kienanbachwa.colonie.graphics.Renderer;
 import fr.kienanbachwa.colonie.graphics.Texture;

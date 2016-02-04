@@ -7,7 +7,6 @@ import org.lwjgl.opengl.GL11;
 import fr.benoitsepe.colonie.main.Gestion;
 import fr.benoitsepe.colonie.zone.Zone;
 import fr.kienanbachwa.colonie.graphics.Renderer;
-import fr.kienanbachwa.colonie.graphics.hud.Hud;
 
 public class Game {
 
@@ -25,8 +24,6 @@ public class Game {
 	private int ya;
 	private int wheel;
 	public static float zoom=1;
-	private int middleX;
-	private int middleY;
 	private int speed=2;
 	
 	public Game(){
@@ -47,9 +44,6 @@ public class Game {
 	}
 	
 	public void render(){
-		middleX = Component.width/2;
-		middleY = Component.height/2;
-
 		zoom();
 
 		GL11.glTranslatef(xScroll, yScroll, 0);

@@ -18,24 +18,27 @@ public class PanelHorizontal extends Panel{
 		this.h=h;
 
 		for(Thing b : array){
+			super.update();
 			b.update(x +1 + array.indexOf(b)* (w/array.size()), y+1, w / array.size() -1, h -1);
-	
-			if( ((OngletButton)b).isClicked() ){
-				for(Thing c : array){
-					if(c != b)
-					((OngletButton)c).deselect();
-				}
-			}	
+
+//			if( ((OngletButton)b).isClicked() ){
+//				for(Thing c : array){
+//					if(c != b)
+//					((OngletButton)c).deselect();
+//				}
+//			}	
 			
 		}
 		
 	}
 	
 	public void render(){
-		super.render();
-		for(Thing b : array){
-			Renderer.renderQuadSimple(x+ (w/array.size())*array.indexOf(b), y, 2, h, Color.BLACK);
-		}
 		Renderer.renderQuadSimple(x, y, w, h, Color.WHITE);
+		super.render();
+		
+		for(Thing b : array){
+			Renderer.renderQuadSimple(x+(w/array.size())*array.indexOf(b) , y, 1, h+5, Color.BLACK);
+		}
+		
 	}
 }

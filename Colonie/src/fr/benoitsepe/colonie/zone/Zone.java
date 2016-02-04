@@ -1,6 +1,8 @@
 package fr.benoitsepe.colonie.zone;
 
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.GL_QUADS;
+import static org.lwjgl.opengl.GL11.glBegin;
+import static org.lwjgl.opengl.GL11.glEnd;
 
 import java.util.List;
 import java.util.Random;

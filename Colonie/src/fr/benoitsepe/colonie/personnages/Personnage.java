@@ -1,7 +1,5 @@
 package fr.benoitsepe.colonie.personnages;
 
-import fr.benoitsepe.colonie.structures.Structure;
-
 public class Personnage {
 
 	private int vie;

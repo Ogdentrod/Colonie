@@ -1,14 +1,15 @@
 package fr.kienanbachwa.colonie.graphics.hud.panels;
 
-import fr.kienanbachwa.colonie.graphics.Renderer;
 import fr.kienanbachwa.colonie.graphics.hud.Hud;
+import fr.kienanbachwa.colonie.graphics.hud.dialogue.DialogueBox;
+import fr.kienanbachwa.colonie.graphics.hud.panelObjects.Button;
+import fr.kienanbachwa.colonie.graphics.hud.panelObjects.StructButton;
 import fr.kienanbachwa.colonie.graphics.hud.panelObjects.Thing;
 
 public class PanelGrid extends Panel {
 
 	public int gridX;
 	public int gridY;
-	public int gridBorder = 2;
 
 	public int nbObjectsX = 8;
 	public int nbObjectsY = 2;
@@ -16,13 +17,18 @@ public class PanelGrid extends Panel {
 	
 	public PanelGrid(int x, int y, int w, int h) {
 		super(x, y, w, h);
+		this.isGrid=true;
 	}
 
 	public void init() {
 		super.init();
+		((Button)array.get(0)).select();
 	}
 
 	public void update(int x, int y, int w, int h) {
+		super.update();
+
+		
 		this.x = x;
 		this.y = y;
 		this.w = w;
@@ -30,10 +36,6 @@ public class PanelGrid extends Panel {
 		
 		int i = 0; //Position x dans la page
 		int j = 0; //Position y dans la page
-		int p = 0; //Page
-		
-		//nbObjectsX = (w - Hud.hudTileSize) / Hud.hudTileSize;
-		//nbObjectsY = (h - Hud.hudTileSize) / Hud.hudTileSize;
 		
 		for (Thing b : array) {			
 			b.update(x + gridBorder/2 +1 + i*(Hud.hudTileSize + gridBorder), y + 2+ j*(Hud.hudTileSize + gridBorder) , Hud.hudTileSize-2, Hud.hudTileSize -2);
@@ -46,7 +48,6 @@ public class PanelGrid extends Panel {
 			if(j>nbObjectsY){
 				i=0;
 				j=0;
-				p++;
 			}
 			
 		}
@@ -55,19 +56,12 @@ public class PanelGrid extends Panel {
 	public void render(){
 		super.render();
 		
-		int j = 0;
-		while( (j+gridBorder) < h){
-			Renderer.renderQuad(x , y+j, w, gridBorder/2, new float[]{0.2f,0.2f,0.2f,1} );
-			Renderer.renderQuad(x , y+j+Hud.hudTileSize+gridBorder/2, w, gridBorder/2, new float[]{0.8f,0.8f,0.8f,1} );
-			j += (Hud.hudTileSize + gridBorder);
+		for(Thing b : array){
+			if(((StructButton)b).hovered){
+				DialogueBox.showInfo(((StructButton)b).getTypeStructure().name(), x+Hud.hudTileSize, y+Hud.hudTileSize);
+			}
 		}
 		
-		int i = 0;
-		while( (i+gridBorder) < w){
-			Renderer.renderQuad(x+i, y, gridBorder/2, h, new float[]{0.2f,0.2f,0.2f,1} );
-			Renderer.renderQuad(x+i+Hud.hudTileSize+gridBorder/2 , y, gridBorder/2, h, new float[]{0.8f,0.8f,0.8f,1} );
-			i += (Hud.hudTileSize + gridBorder);
-		}
 	}
 
 }

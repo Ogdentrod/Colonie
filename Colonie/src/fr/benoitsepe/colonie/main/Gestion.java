@@ -2,23 +2,21 @@ package fr.benoitsepe.colonie.main;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.lwjgl.input.Mouse;
 
 import fr.benoitsepe.colonie.ressources.Ressources;
 import fr.benoitsepe.colonie.structures.Batiment;
-import fr.benoitsepe.colonie.structures.Structure;
 import fr.benoitsepe.colonie.structures.Etat;
 import fr.benoitsepe.colonie.structures.Mur;
 import fr.benoitsepe.colonie.structures.Porte;
 import fr.benoitsepe.colonie.structures.Sol;
+import fr.benoitsepe.colonie.structures.Structure;
 import fr.benoitsepe.colonie.structures.TypeStructures;
 import fr.benoitsepe.colonie.structures.Vide;
-import fr.benoitsepe.colonie.zone.Zone;
 import fr.benoitsepe.colonie.zone.TypeZones;
+import fr.benoitsepe.colonie.zone.Zone;
 import fr.kienanbachwa.colonie.graphics.Renderer;
 import fr.kienanbachwa.colonie.graphics.hud.Hud;
 import fr.kienanbachwa.colonie.jeu.Component;
