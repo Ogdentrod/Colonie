@@ -5,6 +5,7 @@ import org.lwjgl.input.Mouse;
 
 import fr.kienanbachwa.colonie.graphics.Renderer;
 import fr.kienanbachwa.colonie.graphics.Texture;
+import fr.kienanbachwa.colonie.graphics.hud.Hud;
 import fr.kienanbachwa.colonie.jeu.Component;
 import fr.kienanbachwa.colonie.graphics.Color;
 
@@ -14,6 +15,7 @@ public class Button extends Thing{
 	public boolean clicked = false;
 	public boolean hovered = false;
 	protected boolean isSelected;
+	Texture icon;
 	
 	public Button(){
 		super();
@@ -55,6 +57,11 @@ public class Button extends Thing{
 			Renderer.renderQuad(x,y,w,h, new float[]{0,0,0,0.4f});
 		}
 		
+		if(icon!=null){
+			icon.bind();
+			Renderer.renderQuad(w/2 + icon.getWidth()/2, h/2 + icon.getHeight()/2, Hud.hudTileSize, Hud.hudTileSize, Color.WHITE);
+		}
+		
 	}
 	
 	public boolean isClicked(){
@@ -76,5 +83,9 @@ public class Button extends Thing{
 	
 	public boolean isSelected(){
 		return isSelected;
+	}
+	
+	public void setIcon(Texture texture){
+		this.icon=texture;
 	}
 }

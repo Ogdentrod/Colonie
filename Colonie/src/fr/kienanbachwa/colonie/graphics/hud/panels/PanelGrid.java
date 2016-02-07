@@ -1,10 +1,13 @@
 package fr.kienanbachwa.colonie.graphics.hud.panels;
 
+import org.lwjgl.input.Mouse;
+
 import fr.kienanbachwa.colonie.graphics.hud.Hud;
 import fr.kienanbachwa.colonie.graphics.hud.dialogue.DialogueBox;
 import fr.kienanbachwa.colonie.graphics.hud.panelObjects.Button;
 import fr.kienanbachwa.colonie.graphics.hud.panelObjects.StructButton;
 import fr.kienanbachwa.colonie.graphics.hud.panelObjects.Thing;
+import fr.kienanbachwa.colonie.jeu.Component;
 
 public class PanelGrid extends Panel {
 
@@ -58,7 +61,7 @@ public class PanelGrid extends Panel {
 		
 		for(Thing b : array){
 			if(((StructButton)b).hovered){
-				DialogueBox.showInfo(((StructButton)b).getTypeStructure().name(), x+Hud.hudTileSize, y+Hud.hudTileSize);
+				DialogueBox.showInfo(((StructButton)b).getTypeStructure().name(), (int)(Mouse.getX()/Component.scale) +4, (int)(Component.height-(Mouse.getY()/Component.scale)));
 			}
 		}
 		

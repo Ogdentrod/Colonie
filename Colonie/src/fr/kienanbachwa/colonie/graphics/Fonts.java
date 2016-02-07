@@ -28,6 +28,13 @@ public class Fonts {
 			e.printStackTrace();
 
 		}
-		return new TrueTypeFont(awtFont, true);		
+		return new TrueTypeFont(awtFont, false);		
+	}
+	
+	public static String toWord(String txt){
+		txt = txt.toLowerCase();
+		txt = txt.substring(0, 1).toUpperCase() + txt.substring(1);
+		
+		return txt;
 	}
 }
