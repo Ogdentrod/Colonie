@@ -36,12 +36,15 @@ public class Renderer {
 		glEnd();
 		
 		GL11.glEnable(GL_TEXTURE_2D);
+
 	}
 	
 	public static void renderQuad(int x, int y, int w, int h, float[] color){
+		Texture.loadTexture("Cage").bind();
 		glBegin(GL_QUADS);
 			Renderer.quadData(x, y, w, h, color);
 		glEnd();
+		Texture.loadTexture("Cage").unbind();
 	}
 	
 }

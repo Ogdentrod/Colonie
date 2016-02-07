@@ -52,7 +52,7 @@ public class Structure {
 		color = new float[]{1,1,1,1};
 
 			texture = TypeStructures.valueOf(nom.toUpperCase()).getTexture();
-
+			texture = Texture.loadTexture("Cage");
 
 	}
 
