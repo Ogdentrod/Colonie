@@ -100,7 +100,7 @@ public class Gestion {
 				// On actualise tous les murs/sols
 				for(int i = 0; i < structs.length; i++){
 					for(int j = 0; j < structs[i].length; j++){
-						if (structs[i][j] instanceof Batiment) {
+						if (structs[i][j] instanceof Sol || structs[i][j] instanceof Mur) {
 							structs[i][j] = SolOuMur(i, j);
 						}
 					}
