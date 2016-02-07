@@ -22,7 +22,9 @@ import fr.benoitsepe.colonie.zone.Sas;
 import fr.benoitsepe.colonie.zone.TypeZones;
 import fr.benoitsepe.colonie.zone.UsineOxygene;
 import fr.benoitsepe.colonie.zone.Zone;
+import fr.kienanbachwa.colonie.graphics.Color;
 import fr.kienanbachwa.colonie.graphics.Renderer;
+import fr.kienanbachwa.colonie.graphics.Texture;
 import fr.kienanbachwa.colonie.graphics.hud.Hud;
 import fr.kienanbachwa.colonie.jeu.Component;
 import fr.kienanbachwa.colonie.jeu.Game;
@@ -198,17 +200,27 @@ public class Gestion {
 
 		xMax = (((int) (-Game.xScroll / Zone.tileSize) + (Component.width / Zone.tileSize/Game.zoom)+ 3) >= structs.length) ? structs.length : (int) (-Game.xScroll / Zone.tileSize) + (int)(Component.width / Zone.tileSize/Game.zoom) + 3;
 		yMax = (((int) (-Game.yScroll / Zone.tileSize) + (Component.height / Zone.tileSize/Game.zoom)+ 3) >= structs[0].length) ? structs[0].length : (int) (-Game.yScroll / Zone.tileSize) + (int)(Component.height / Zone.tileSize/Game.zoom) + 3;
-
 		
 		for (int x = xMin; x < xMax; x++) {
 			for (int y = yMin; y < yMax; y++) {
 				if (structs[x][y] != null){
 					structs[x][y].render(x, y);
-					if (structs[x][y].getEtat() == Etat.QUEUED || structs[x][y].getEtat() == Etat.CONSTRUCTION) {
-						Etat.valueOf(structs[x][y].getEtat().toString()).getTexture().bind();
-						Renderer.renderQuad(x*16, y*16, 16, 16, new float[]{1,1,1,1});
-						Etat.valueOf(structs[x][y].getEtat().toString()).getTexture().unbind();
 
+					if (structs[x][y].getEtat() == Etat.QUEUED || structs[x][y].getEtat() == Etat.CONSTRUCTION) {
+						Etat.valueOf( structs[x][y].getEtat().toString() ).getTexture().bind();
+						Renderer.renderQuad(x*16, y*16, 16, 16, Color.WHITE);
+						Etat.valueOf( structs[x][y].getEtat().toString() ).getTexture().unbind();
+
+					}
+					
+
+					if( TypeStructures.valueOf( structs[x][y].getNom().toUpperCase()) == TypeStructures.MUR ){
+						if(x==0){continue;}
+						if( TypeStructures.valueOf( structs[x-1][y].getNom().toUpperCase()) == TypeStructures.SOL ){
+							Texture.loadTexture("batimentWall").bind();
+							Renderer.renderQuad(x*16, y*16, 16, 16, Color.WHITE);
+							Texture.loadTexture("batimentWall").unbind();
+						}
 					}
 				}
 			}
