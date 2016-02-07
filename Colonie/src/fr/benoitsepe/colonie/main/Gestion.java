@@ -15,7 +15,12 @@ import fr.benoitsepe.colonie.structures.Sol;
 import fr.benoitsepe.colonie.structures.Structure;
 import fr.benoitsepe.colonie.structures.TypeStructures;
 import fr.benoitsepe.colonie.structures.Vide;
+import fr.benoitsepe.colonie.zone.Eolienne;
+import fr.benoitsepe.colonie.zone.PanneauSolaire;
+import fr.benoitsepe.colonie.zone.Refectoire;
+import fr.benoitsepe.colonie.zone.Sas;
 import fr.benoitsepe.colonie.zone.TypeZones;
+import fr.benoitsepe.colonie.zone.UsineOxygene;
 import fr.benoitsepe.colonie.zone.Zone;
 import fr.kienanbachwa.colonie.graphics.Renderer;
 import fr.kienanbachwa.colonie.graphics.hud.Hud;
@@ -31,6 +36,7 @@ public class Gestion {
 
 	public static Ressources res = new Ressources();
 	Structure[][] structs;
+	Zone[][] zones;
 	private boolean clicked;
 	private int dx2;
 	private int dy2;
@@ -48,6 +54,7 @@ public class Gestion {
 
 	public Gestion(int sizeX, int sizeY) {
 		structs = new Structure[sizeX][sizeY];
+		zones = new Zone[sizeX][sizeY];
 		
 		queue = new LinkedBlockingQueue<Structure>();
 		time = 0;
@@ -109,49 +116,46 @@ public class Gestion {
 		}
 	}
 
-	// CHANGEMENTS EN COURS
-	/*
-	public void creerStruct(TypeStructures struct, List<Coordonnees> coos) {
+
+	public void creerZone(TypeZones zone, List<Coordonnees> coos) {
 
 		if (coos.size() >= 4) {
 
-			Structure structCree;
+			Zone zoneCree;
 
-			switch (struct) {
+			switch (zone) {
 			case EOLIENNE:
-				structCree = new Eolienne(coos);
+				zoneCree = new Eolienne(coos);
 				break;
 			case PANNEAUSOLAIRE:
-				structCree = new PanneauSolaire(coos);
+				zoneCree = new PanneauSolaire(coos);
 				break;
 			case REFECTOIRE:
-				structCree = new Refectoire(coos);
+				zoneCree = new Refectoire(coos);
 				break;
 			case SAS:
-				structCree = new Sas(coos);
+				zoneCree = new Sas(coos);
 				break;
 			case USINEOXYGENE:
-				structCree = new UsineOxygene(coos);
+				zoneCree = new UsineOxygene(coos);
 				break;
 			default:
-				System.out.println("ERREUR : Structure non implémentée !");
-				structCree = null;
+				System.out.println("ERREUR : Zone non implémentée !");
+				zoneCree = null;
 				break;
 
 			}
+			
+			for (Coordonnees coo : coos) {
+				zones[coo.getX()][coo.getY()] = zoneCree;
+			}
 
-			structures[posX][posY] = structCree;
-			structCree.setX(posX);
-			structCree.setY(posY);
-
-			Affichage.afficherStruct(structCree); // instruction temporaire pour
-													// affichage
 		} else {
 			System.out.println("Pas assez de cases");
 		}
 
 	}
-	*/
+
 	public boolean verifRessources(Ressources res, TypeZones typeZone) {
 		Ressources besoin = typeZone.getRes();
 
@@ -176,6 +180,10 @@ public class Gestion {
 
 	public Structure[][] getStructures() {
 		return structs;
+	}
+
+	public Zone[][] getZones() {
+		return zones;
 	}
 
 	public void render() {

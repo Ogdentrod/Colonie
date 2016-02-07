@@ -31,6 +31,11 @@ public class Personnage {
 	public void utiliser() {
 		System.out.println("Personnage non implémenté");
 	}
+
+
+	public int getVie() {
+		return vie;
+	}
 	
 	
 }
