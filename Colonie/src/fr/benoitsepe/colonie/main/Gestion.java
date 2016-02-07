@@ -216,10 +216,10 @@ public class Gestion {
 
 					if( TypeStructures.valueOf( structs[x][y].getNom().toUpperCase()) == TypeStructures.MUR ){
 						if(x==0){continue;}
-						if( TypeStructures.valueOf( structs[x-1][y].getNom().toUpperCase()) == TypeStructures.SOL ){
-							Texture.loadTexture("batimentWall").bind();
-							Renderer.renderQuad(x*16, y*16, 16, 16, Color.WHITE);
-							Texture.loadTexture("batimentWall").unbind();
+						if( TypeStructures.valueOf( structs[x-1][y].getNom().toUpperCase()) == TypeStructures.VIDE ){
+							Texture.loadTexture("batiment").bind();
+							Renderer.renderQuadSheet(x*16, y*16, 16, 16, Color.WHITE, 0, 1);
+							Texture.loadTexture("batiment").unbind();
 						}
 					}
 				}
