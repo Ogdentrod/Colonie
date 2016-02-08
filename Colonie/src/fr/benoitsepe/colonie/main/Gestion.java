@@ -213,15 +213,111 @@ public class Gestion {
 
 					}
 					
+					/*
+						[ul][uu][ur]
+						[ml][XY][mr]
+						[dl][dd][dr]				
+					*/
+					
+				if( TypeStructures.valueOf( structs[x][y].getNom().toUpperCase()) == TypeStructures.MUR ){
 
-					if( TypeStructures.valueOf( structs[x][y].getNom().toUpperCase()) == TypeStructures.MUR ){
-						if(x==0){continue;}
-						if( TypeStructures.valueOf( structs[x-1][y].getNom().toUpperCase()) == TypeStructures.VIDE ){
-							Texture.loadTexture("batiment").bind();
+					if(x==0){
+						structs[x][y].getTexture().bind();
+						Renderer.renderQuadSheet(x*16, y*16, 16, 16, Color.WHITE, 0, 1);
+						structs[x][y].getTexture().unbind();
+						continue;
+					}
+					if(y==0){
+						structs[x][y].getTexture().bind();
+						Renderer.renderQuadSheet(x*16, y*16, 16, 16, Color.WHITE, 0, 1);
+						structs[x][y].getTexture().unbind();
+						continue;
+					}
+					if(x==structs.length){
+						structs[x][y].getTexture().bind();
+						Renderer.renderQuadSheet(x*16, y*16, 16, 16, Color.WHITE, 0, 1);
+						structs[x][y].getTexture().unbind();
+						continue;
+					}
+					if(y==structs[0].length){
+						structs[x][y].getTexture().bind();
+						Renderer.renderQuadSheet(x*16, y*16, 16, 16, Color.WHITE, 0, 1);
+						structs[x][y].getTexture().unbind();
+						continue;
+					}
+					
+					boolean ul=false, uu=false, ur=false, ml=false, mr=false, dl=false, dd=false, dr=false;
+					if(TypeStructures.valueOf(structs[x-1][y-1].getNom().toUpperCase()) == TypeStructures.MUR || TypeStructures.valueOf(structs[x-1][y-1].getNom().toUpperCase()) == TypeStructures.PORTE)
+						ul=true;
+					
+					if(TypeStructures.valueOf(structs[x][y-1].getNom().toUpperCase()) == TypeStructures.MUR || TypeStructures.valueOf(structs[x][y-1].getNom().toUpperCase()) == TypeStructures.PORTE)
+						uu=true;
+					
+					if(TypeStructures.valueOf(structs[x+1][y-1].getNom().toUpperCase()) == TypeStructures.MUR || TypeStructures.valueOf(structs[x+1][y-1].getNom().toUpperCase()) == TypeStructures.PORTE)
+						ur=true;
+					
+					if(TypeStructures.valueOf(structs[x-1][y].getNom().toUpperCase()) == TypeStructures.MUR || TypeStructures.valueOf(structs[x-1][y].getNom().toUpperCase()) == TypeStructures.PORTE)
+						ml=true;
+					
+					if(TypeStructures.valueOf(structs[x+1][y].getNom().toUpperCase()) == TypeStructures.MUR || TypeStructures.valueOf(structs[x+1][y].getNom().toUpperCase()) == TypeStructures.PORTE)
+						mr=true;
+					
+					if(TypeStructures.valueOf(structs[x-1][y+1].getNom().toUpperCase()) == TypeStructures.MUR || TypeStructures.valueOf(structs[x-1][y+1].getNom().toUpperCase()) == TypeStructures.PORTE)
+						dl=true;
+					
+					if(TypeStructures.valueOf(structs[x][y+1].getNom().toUpperCase()) == TypeStructures.MUR || TypeStructures.valueOf(structs[x][y+1].getNom().toUpperCase()) == TypeStructures.PORTE)
+						dd=true;
+					
+					if(TypeStructures.valueOf(structs[x+1][y+1].getNom().toUpperCase()) == TypeStructures.MUR || TypeStructures.valueOf(structs[x+1][y+1].getNom().toUpperCase()) == TypeStructures.PORTE)
+						dr=true;
+					
+					
+
+						
+						if( uu ){
+							structs[x][y].getTexture().bind();
 							Renderer.renderQuadSheet(x*16, y*16, 16, 16, Color.WHITE, 0, 1);
-							Texture.loadTexture("batiment").unbind();
+							structs[x][y].getTexture().unbind();
+						}
+						if( dd ){
+							structs[x][y].getTexture().bind();
+							Renderer.renderQuadSheet(x*16, y*16, 16, 16, Color.WHITE, 2, 1);
+							structs[x][y].getTexture().unbind();
+						}
+						if( mr ){
+							structs[x][y].getTexture().bind();
+							Renderer.renderQuadSheet(x*16, y*16, 16, 16, Color.WHITE, 1, 0);
+							structs[x][y].getTexture().unbind();
+						}
+						if( ml ){
+							structs[x][y].getTexture().bind();
+							Renderer.renderQuadSheet(x*16, y*16, 16, 16, Color.WHITE, 1, 2);
+							structs[x][y].getTexture().unbind();
+						}
+						
+						if( dd && mr ){
+							structs[x][y].getTexture().bind();
+							Renderer.renderQuadSheet(x*16, y*16, 16, 16, Color.WHITE, 0, 0);
+							structs[x][y].getTexture().unbind();
+						}
+						if( dd && ml ){
+							structs[x][y].getTexture().bind();
+							Renderer.renderQuadSheet(x*16, y*16, 16, 16, Color.WHITE, 2, 0);
+							structs[x][y].getTexture().unbind();
+						}
+						if( uu && mr ){
+							structs[x][y].getTexture().bind();
+							Renderer.renderQuadSheet(x*16, y*16, 16, 16, Color.WHITE, 0, 2);
+							structs[x][y].getTexture().unbind();
+						}
+						if( uu && ml ){
+							structs[x][y].getTexture().bind();
+							Renderer.renderQuadSheet(x*16, y*16, 16, 16, Color.WHITE, 2, 2);
+							structs[x][y].getTexture().unbind();
 						}
 					}
+					
+					
 				}
 			}
 		}
