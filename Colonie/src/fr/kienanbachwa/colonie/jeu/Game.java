@@ -12,6 +12,7 @@ import fr.benoitsepe.colonie.zone.Zone;
 import fr.kienanbachwa.colonie.graphics.Color;
 import fr.kienanbachwa.colonie.graphics.Renderer;
 import fr.kienanbachwa.colonie.graphics.hud.Hud;
+import fr.kienanbachwa.colonie.graphics.hud.dialogue.DialogueConfirm;
 
 public class Game {
 
@@ -37,7 +38,8 @@ public class Game {
 	private int xMax;
 	
 	private Structure[][] structs;
-	
+	DialogueConfirm confirm;
+
 	public Game(){
 		gestion = new Gestion(sizeMap,sizeMap);
 	}
@@ -53,6 +55,7 @@ public class Game {
 		mouseYGrid = (int) ( ( Component.height*Component.scale - Mouse.getY() + (-yScroll * Component.scale*zoom)) /Zone.tileSize/Component.scale/zoom);
 		mouseXGrid = (int) ((Mouse.getX() + (-xScroll * Component.scale*zoom))/Zone.tileSize/Component.scale/zoom);
 		
+		
 	}
 	
 	public void render(){
@@ -63,6 +66,19 @@ public class Game {
 		render_game();
 		drawSelect(Mouse.getX(),Mouse.getY());	
 		
+		if(!gestion.getSelectedTiles().isEmpty()){
+			if(confirm==null)
+				confirm = new DialogueConfirm("Prout", 1, 1);
+			
+			int confirmResult = confirm.update(1, 1);
+			
+			if( confirmResult == 1){
+				System.out.println("KONSTRWIR");
+				gestion.getSelectedTiles().clear();
+			}else if( confirmResult == -1){
+				gestion.getSelectedTiles().clear();
+			}
+		}
 	}
 	
 	public void render_game() {
@@ -206,7 +222,8 @@ public class Game {
 	}
 	
 	public void renderSelectedTiles(){
-		if(Mouse.isButtonDown(0) && !Hud.mouseOnHud){			
+		//if(Mouse.isButtonDown(0) && !Hud.mouseOnHud){	
+		if(!gestion.getSelectedTiles().isEmpty()){
 			for(Structure e : gestion.getSelectedTiles()){
 				Hud.elementClicked.getTexture().bind();
 				Renderer.renderQuad(e.getX()*16, e.getY()*16, 16, 16, new float[]{0,0,1,0.5f});

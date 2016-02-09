@@ -36,34 +36,4 @@ public class DialogueBox {
 			font.drawString(x, y + h/2, Fonts.toWord(text), 0.5f, -0.5f);
 	}
 	
-	public static boolean showConfirm(String text, int x, int y){
-		int h = font.getHeight(text);
-		int w = font.getWidth(text);
-		Renderer.renderQuadSimple(x, y, w/4 +7, h/2, Color.DARKERRED);
-		
-		glColor4f(1, 1, 1, 1);
-		font.drawString(x, y + h/2, Fonts.toWord(text), 0.5f, -0.5f);
-
-		confirm.setIcon(confirmTexture);
-		cancel.setIcon(cancelTexture);
-		
-		confirm.init();
-		cancel.init();
-		
-		confirm.update(x, y+h-10, (w/4 +7)/2, 10);
-		cancel.update(x+((w/4 +7)/2), y+h-10, (w/4 +7)/2, 10);
-		
-		confirm.render();
-		cancel.render();
-		
-		if(confirm.clicked){
-			return true;
-		}
-		
-		if(cancel.clicked){
-			return false;
-		}
-		return false;
-	}
-	
 }

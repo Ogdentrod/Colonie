@@ -109,7 +109,7 @@ public class Component {
 		
 		long before = System.nanoTime();
 		double elapsed = 0;
-		double nanoSeconds = 1000000000.0/120.0;
+		double nanoSeconds = 1000000000.0/60.0;
 		
 		int ticks = 0;
 		int frames = 0;

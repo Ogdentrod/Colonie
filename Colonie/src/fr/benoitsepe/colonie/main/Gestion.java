@@ -24,12 +24,8 @@ import fr.benoitsepe.colonie.zone.Sas;
 import fr.benoitsepe.colonie.zone.TypeZones;
 import fr.benoitsepe.colonie.zone.UsineOxygene;
 import fr.benoitsepe.colonie.zone.Zone;
-import fr.kienanbachwa.colonie.graphics.Color;
-import fr.kienanbachwa.colonie.graphics.Renderer;
-import fr.kienanbachwa.colonie.graphics.Texture;
 import fr.kienanbachwa.colonie.graphics.hud.Hud;
-import fr.kienanbachwa.colonie.graphics.hud.dialogue.DialogueBox;
-import fr.kienanbachwa.colonie.jeu.Component;
+import fr.kienanbachwa.colonie.graphics.hud.dialogue.DialogueConfirm;
 import fr.kienanbachwa.colonie.jeu.Game;
 
 /**
@@ -38,7 +34,7 @@ import fr.kienanbachwa.colonie.jeu.Game;
  *              ressources
  */
 public class Gestion {
-
+	
 	public static Ressources res = new Ressources();
 	
 	Structure[][] structs;
@@ -260,20 +256,25 @@ public class Gestion {
 		
 		if(Mouse.isButtonDown(0) && !Hud.mouseOnHud){
 			clicked=true;
-			selectTiles();
-
+			selectTiles();			
+			
 		}else{
 			clicked=false;
 			dx2 = Game.mouseXGrid;
 			dy2 = Game.mouseYGrid;
 			
-			ConfirmationConstruction confirm = new ConfirmationConstruction(selectedTiles);
-			confirm.start();
+			//ConfirmationConstruction confirm = new ConfirmationConstruction(selectedTiles);
+			//confirm.start();
 			
-			selectedTiles.clear();
+
+			
+			//selectedTiles.clear();
 		}
 		
+
+		
 	}
+	
 	
 	private void selectTiles(){
 		selectedTiles.clear();
@@ -359,23 +360,23 @@ public class Gestion {
 		}
 	}
 	
-	public class ConfirmationConstruction extends Thread {
-		
-		private List<Structure> selectedTiles;
-
-		 
-		public ConfirmationConstruction(List<Structure> selectedTiles) {
-			this.selectedTiles = selectedTiles;
-		}
-		public void run() {
-		    boolean construire = DialogueBox.showConfirm("Voulez vous construire ça ? (à améliorer)", 0, 0);
-		    if (construire) {
-		    	for(Structure e : selectedTiles){
-					creerStruct(Hud.elementClicked, e.getX(), e.getY());
-				}
-		    }
-		}
-	}
+//	public class ConfirmationConstruction extends Thread {
+//		
+//		private List<Structure> selectedTiles;
+//
+//		 
+//		public ConfirmationConstruction(List<Structure> selectedTiles) {
+//			this.selectedTiles = selectedTiles;
+//		}
+//		public void run() {
+//		    boolean construire = DialogueBox.showConfirm("Voulez vous construire ça ? (à améliorer)", 0, 0);
+//		    if (construire) {
+//		    	for(Structure e : selectedTiles){
+//					creerStruct(Hud.elementClicked, e.getX(), e.getY());
+//				}
+//		    }
+//		}
+//	}
 	
 
 }

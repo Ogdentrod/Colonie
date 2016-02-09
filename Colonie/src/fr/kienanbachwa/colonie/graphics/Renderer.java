@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL11;
 public class Renderer {
 	
 	static float nbTexturesSheet = 3.0f;
-	
+
 	public static void quadDataSheet(int x, int y, int w, int h, float[] color, int xo, int yo){
 		glColor4f(color[0], color[1], color[2], color[3]);
 		glTexCoord2f( (0+xo) / nbTexturesSheet, (0+yo) / nbTexturesSheet); glVertex2f(x,y);
