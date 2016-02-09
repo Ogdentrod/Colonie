@@ -53,13 +53,9 @@ public class Gestion {
 	private int dx1;
 	private int dy1;
 	List<Structure> selectedTiles = new ArrayList<Structure>();	//Structures sélectionnées 
-	private int xMin;
-	private int yMin;
-	private int yMax;
-	private int xMax;
+
 	private LinkedBlockingQueue<Structure> queue;
-	private long time;
-	private Structure enConstruction = null;
+
 	
 
 	public Gestion(int sizeX, int sizeY) {
@@ -75,7 +71,6 @@ public class Gestion {
 	
 		
 		queue = new LinkedBlockingQueue<Structure>();
-		time = 0;
 		
 		res.setIron(100000);
 		res.setElec(100000);
@@ -272,9 +267,8 @@ public class Gestion {
 			dx2 = Game.mouseXGrid;
 			dy2 = Game.mouseYGrid;
 			
-			for(Structure e : selectedTiles){
-				creerStruct(Hud.elementClicked, e.getX(), e.getY());
-			}
+			ConfirmationConstruction confirm = new ConfirmationConstruction(selectedTiles);
+			confirm.start();
 			
 			selectedTiles.clear();
 		}
@@ -362,6 +356,24 @@ public class Gestion {
 			} else {
 				return new Mur(x, y);
 			}
+		}
+	}
+	
+	public class ConfirmationConstruction extends Thread {
+		
+		private List<Structure> selectedTiles;
+
+		 
+		public ConfirmationConstruction(List<Structure> selectedTiles) {
+			this.selectedTiles = selectedTiles;
+		}
+		public void run() {
+		    boolean construire = DialogueBox.showConfirm("Voulez vous construire ça ? (à améliorer)", 0, 0);
+		    if (construire) {
+		    	for(Structure e : selectedTiles){
+					creerStruct(Hud.elementClicked, e.getX(), e.getY());
+				}
+		    }
 		}
 	}
 	
