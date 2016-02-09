@@ -1,11 +1,13 @@
 package fr.benoitsepe.colonie.main;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.lwjgl.input.Mouse;
 
+import fr.benoitsepe.colonie.personnages.Ouvrier;
 import fr.benoitsepe.colonie.ressources.Ressources;
 import fr.benoitsepe.colonie.structures.Batiment;
 import fr.benoitsepe.colonie.structures.Etat;
@@ -38,8 +40,13 @@ import fr.kienanbachwa.colonie.jeu.Game;
 public class Gestion {
 
 	public static Ressources res = new Ressources();
+	
 	Structure[][] structs;
 	Zone[][] zones;
+	
+	List<Ouvrier> ouvriersOccupes;
+	private LinkedBlockingQueue<Ouvrier> ouvriersLibre;
+	
 	private boolean clicked;
 	private int dx2;
 	private int dy2;
@@ -58,6 +65,13 @@ public class Gestion {
 	public Gestion(int sizeX, int sizeY) {
 		structs = new Structure[sizeX][sizeY];
 		zones = new Zone[sizeX][sizeY];
+		
+		ouvriersOccupes = new ArrayList<Ouvrier>();
+		ouvriersLibre = new LinkedBlockingQueue<Ouvrier>();
+		
+		 // AJOUT DE D'UN OUVRIER POUR LES CONSTRUCTION TEMPORAIREMENT
+		ouvriersLibre.offer(new Ouvrier());
+	
 		
 		queue = new LinkedBlockingQueue<Structure>();
 		time = 0;
@@ -339,24 +353,47 @@ public class Gestion {
 
 	public void update() {
 		
+		// Nouveau systéme de construction avec ouvriers
+		// /!\ RISQUE DE BUG
 		
-		// CONSTRUCTION
-		if(!queue.isEmpty() || enConstruction != null) {
-			
-			// On a toujours pas commencé la construction (élément ajouté à l'instant)
-			if(enConstruction == null) {
-				time = System.currentTimeMillis();
-				enConstruction = queue.poll();
-				structs[enConstruction.getX()][enConstruction.getY()].setEtat(Etat.CONSTRUCTION);
-			} else {
-				if(System.currentTimeMillis() - time > enConstruction.getTempsConstruction()) { // Si le temps de construction est fini
-					structs[enConstruction.getX()][enConstruction.getY()].setEtat(Etat.OPERATIONNAL);
-					enConstruction = null;
-				}
-			}
-			
-			
+		if (!queue.isEmpty() && !ouvriersLibre.isEmpty()) {
+			Ouvrier constructeur = ouvriersLibre.poll();
+			Structure aConstruire = queue.poll();
+			constructeur.setOccupation(aConstruire);
+			ouvriersOccupes.add(constructeur);
+			structs[aConstruire.getX()][aConstruire.getY()].setEtat(Etat.CONSTRUCTION);
 		}
+		
+		for (Iterator<Ouvrier> iter = ouvriersOccupes.listIterator(); iter.hasNext();) {
+			Ouvrier ouvr = iter.next();
+			if (ouvr.utiliser()) {
+				structs[ouvr.getOccupation().getX()][ouvr.getOccupation().getY()].setEtat(Etat.OPERATIONNAL);
+				ouvr.setOccupation(null);
+				ouvriersLibre.offer(ouvr);
+				iter.remove();	
+			}
+		}
+		
+		
+//	ANCIEN SYSTEME DE CONSTRUCTION
+//		if(!queue.isEmpty() || enConstruction != null) {
+//			
+//			// On a toujours pas commencé la construction (élément ajouté à l'instant)
+//			if(enConstruction == null) {
+//				time = System.currentTimeMillis();
+//				enConstruction = queue.poll();
+//				structs[enConstruction.getX()][enConstruction.getY()].setEtat(Etat.CONSTRUCTION);
+//			} else {
+//				if(System.currentTimeMillis() - time > enConstruction.getTickConstruction()) { // Si le temps de construction est fini
+//					structs[enConstruction.getX()][enConstruction.getY()].setEtat(Etat.OPERATIONNAL);
+//					enConstruction = null;
+//				}
+//			}
+//			
+//			
+//		}
+		
+		
 
 		/*
 		 * for (Structure sousTab[] : structures) { for (Structure str :
