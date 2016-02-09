@@ -61,7 +61,7 @@ public class PanelGrid extends Panel {
 		
 		for(Thing b : array){
 			if(((StructButton)b).hovered){
-				DialogueBox.showInfo(((StructButton)b).getTypeStructure().name(), (int)(Mouse.getX()/Component.scale) +4, (int)(Component.height-(Mouse.getY()/Component.scale)));
+				DialogueBox.showConfirm(((StructButton)b).getTypeStructure().name(), (int)(Mouse.getX()/Component.scale) +4, (int)(Component.height-(Mouse.getY()/Component.scale)));
 			}
 		}
 		

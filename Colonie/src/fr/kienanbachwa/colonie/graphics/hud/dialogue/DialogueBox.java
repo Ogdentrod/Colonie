@@ -15,6 +15,10 @@ import fr.kienanbachwa.colonie.jeu.Component;
 public class DialogueBox {	
 	static TrueTypeFont font = new Fonts("fonts/stan0753.ttf", 12f).getFont();
 
+	static Button confirm = new Button();
+	static Button cancel = new Button();
+	static Texture confirmTexture = Texture.loadTexture("check");
+	static Texture cancelTexture = Texture.loadTexture("cross");
 	
 	public static void showInfo(String text, int x, int y){
 		int h = font.getHeight(text);
@@ -43,12 +47,6 @@ public class DialogueBox {
 		glColor4f(1, 1, 1, 1);
 		font.drawString(x, y + h/2, Fonts.toWord(text), 0.5f, -0.5f);
 
-		Button confirm = new Button();
-		Button cancel = new Button();
-		
-		Texture confirmTexture = Texture.loadTexture("check");
-		Texture cancelTexture = Texture.loadTexture("cross");
-		
 		confirm.setIcon(confirmTexture);
 		cancel.setIcon(cancelTexture);
 		
@@ -57,6 +55,9 @@ public class DialogueBox {
 		
 		confirm.update(x, y+h-10, w/2, 10);
 		cancel.update(x+w/2, y+h-10, w/2, 10);
+		
+		confirm.render();
+		cancel.render();
 		
 		if(confirm.clicked){
 			return true;

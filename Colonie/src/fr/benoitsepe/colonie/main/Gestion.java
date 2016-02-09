@@ -26,6 +26,7 @@ import fr.kienanbachwa.colonie.graphics.Color;
 import fr.kienanbachwa.colonie.graphics.Renderer;
 import fr.kienanbachwa.colonie.graphics.Texture;
 import fr.kienanbachwa.colonie.graphics.hud.Hud;
+import fr.kienanbachwa.colonie.graphics.hud.dialogue.DialogueBox;
 import fr.kienanbachwa.colonie.jeu.Component;
 import fr.kienanbachwa.colonie.jeu.Game;
 
@@ -204,20 +205,8 @@ public class Gestion {
 		for (int x = xMin; x < xMax; x++) {
 			for (int y = yMin; y < yMax; y++) {
 				if (structs[x][y] != null){
-					structs[x][y].render(x, y);
+					structs[x][y].render(x, y);			
 
-					if (structs[x][y].getEtat() == Etat.QUEUED || structs[x][y].getEtat() == Etat.CONSTRUCTION) {
-						Etat.valueOf( structs[x][y].getEtat().toString() ).getTexture().bind();
-						Renderer.renderQuad(x*16, y*16, 16, 16, Color.WHITE);
-						Etat.valueOf( structs[x][y].getEtat().toString() ).getTexture().unbind();
-
-					}
-					
-					/*
-						[ul][uu][ur]
-						[ml][XY][mr]
-						[dl][dd][dr]				
-					*/
 					
 				if( TypeStructures.valueOf( structs[x][y].getNom().toUpperCase()) == TypeStructures.MUR ){
 
@@ -245,6 +234,12 @@ public class Gestion {
 						structs[x][y].getTexture().unbind();
 						continue;
 					}
+					
+					/*
+					[ul][uu][ur]
+					[ml][XY][mr]
+					[dl][dd][dr]				
+					 */
 					
 					boolean ul=false, uu=false, ur=false, ml=false, mr=false, dl=false, dd=false, dr=false;
 					if(TypeStructures.valueOf(structs[x-1][y-1].getNom().toUpperCase()) == TypeStructures.MUR || TypeStructures.valueOf(structs[x-1][y-1].getNom().toUpperCase()) == TypeStructures.PORTE)
@@ -317,6 +312,12 @@ public class Gestion {
 						}
 					}
 					
+				if (structs[x][y].getEtat() == Etat.QUEUED || structs[x][y].getEtat() == Etat.CONSTRUCTION) {
+					Etat.valueOf( structs[x][y].getEtat().toString() ).getTexture().bind();
+					Renderer.renderQuad(x*16, y*16, 16, 16, Color.WHITE);
+					Etat.valueOf( structs[x][y].getEtat().toString() ).getTexture().unbind();
+
+				}
 					
 				}
 			}

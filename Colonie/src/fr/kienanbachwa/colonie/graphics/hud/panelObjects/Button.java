@@ -59,7 +59,8 @@ public class Button extends Thing{
 		
 		if(icon!=null){
 			icon.bind();
-			Renderer.renderQuad(w/2 + icon.getWidth()/2, h/2 + icon.getHeight()/2, Hud.hudTileSize, Hud.hudTileSize, Color.WHITE);
+			Renderer.renderQuad(x + w/2, y + h/2, Hud.hudTileSize, Hud.hudTileSize, Color.WHITE);
+			icon.unbind();
 		}
 		
 	}
