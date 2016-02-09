@@ -10,8 +10,22 @@ public class Ouvrier extends Personnage{
 		super();
 	}
 	
-	public void utiliser(Structure tache) {
-		
+	public boolean utiliser() {
+		if(occupation.construire()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
+
+
+	public Structure getOccupation() {
+		return occupation;
+	}
+
+	public void setOccupation(Structure occupation) {
+		this.occupation = occupation;
+	}
+	
 	
 }

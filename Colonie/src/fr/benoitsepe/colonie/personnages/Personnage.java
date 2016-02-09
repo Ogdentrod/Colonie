@@ -28,8 +28,9 @@ public class Personnage {
 	}
 	
 	// A OVERRIDE
-	public void utiliser() {
+	public boolean utiliser() {
 		System.out.println("Personnage non implémenté");
+		return false;
 	}
 
 

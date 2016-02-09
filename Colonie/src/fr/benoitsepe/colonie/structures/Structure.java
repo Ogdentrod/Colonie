@@ -20,7 +20,7 @@ public class Structure {
 	protected int maintenance; // 0 = cassé, 100=neuf
 	protected String nom; // nom de
 	protected Etat etat;
-	protected long tempsConstruction;
+	protected long tickConstruction;
 
 
 
@@ -37,11 +37,11 @@ public class Structure {
 	 * Le constructeur doit être appelé depuis la classe fille avec comme paramétre le nom du la structure
 	 * Constructeur sans image: une image par défaut est chargée pour l'affichage
 	 */
-	public Structure(String nom, long tempsConstruction, int posX, int posY, Etat etat) {
+	public Structure(String nom, long tickConstruction, int posX, int posY, Etat etat) {
 		this.nom = nom;
 		this.x = posX;
 		this.y = posY;
-		this.tempsConstruction = tempsConstruction;
+		this.tickConstruction = tickConstruction;
 
 		this.maintenance = 100;
 
@@ -51,12 +51,19 @@ public class Structure {
 
 		color = new float[]{1,1,1,1};
 
-			texture = TypeStructures.valueOf(nom.toUpperCase()).getTexture();
-			//texture = Texture.loadTexture("Cage");
+		texture = TypeStructures.valueOf(nom.toUpperCase()).getTexture();
+		//texture = Texture.loadTexture("Cage");
 
 	}
 
-
+	public boolean construire() {
+		tickConstruction--;
+		if (tickConstruction == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 
 	/**
@@ -141,8 +148,8 @@ public class Structure {
 	/**
 	 * @return the tempsConstruction
 	 */
-	public long getTempsConstruction() {
-		return tempsConstruction;
+	public long getTickConstruction() {
+		return tickConstruction;
 	}
 
 	public void setY(int y) {
