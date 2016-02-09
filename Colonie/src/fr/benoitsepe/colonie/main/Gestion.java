@@ -70,7 +70,8 @@ public class Gestion {
 		ouvriersLibre = new LinkedBlockingQueue<Ouvrier>();
 		
 		 // AJOUT DE D'UN OUVRIER POUR LES CONSTRUCTION TEMPORAIREMENT
-		ouvriersLibre.offer(new Ouvrier());
+		for(int i = 0; i<10; i++)
+			ouvriersLibre.offer(new Ouvrier());
 	
 		
 		queue = new LinkedBlockingQueue<Structure>();

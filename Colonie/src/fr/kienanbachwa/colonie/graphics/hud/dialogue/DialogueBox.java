@@ -2,15 +2,12 @@ package fr.kienanbachwa.colonie.graphics.hud.dialogue;
 
 import static org.lwjgl.opengl.GL11.glColor4f;
 
-import org.lwjgl.input.Mouse;
-
 import fr.kienanbachwa.colonie.graphics.Color;
 import fr.kienanbachwa.colonie.graphics.Fonts;
 import fr.kienanbachwa.colonie.graphics.Renderer;
 import fr.kienanbachwa.colonie.graphics.Texture;
 import fr.kienanbachwa.colonie.graphics.TrueTypeFont;
 import fr.kienanbachwa.colonie.graphics.hud.panelObjects.Button;
-import fr.kienanbachwa.colonie.jeu.Component;
 
 public class DialogueBox {	
 	static TrueTypeFont font = new Fonts("fonts/stan0753.ttf", 12f).getFont();
@@ -53,8 +50,8 @@ public class DialogueBox {
 		confirm.init();
 		cancel.init();
 		
-		confirm.update(x, y+h-10, w/2, 10);
-		cancel.update(x+w/2, y+h-10, w/2, 10);
+		confirm.update(x, y+h-10, (w/4 +7)/2, 10);
+		cancel.update(x+((w/4 +7)/2), y+h-10, (w/4 +7)/2, 10);
 		
 		confirm.render();
 		cancel.render();
