@@ -110,6 +110,7 @@ public class Game {
 		render_game();
 		drawSelect(Mouse.getX(),Mouse.getY());	
 		
+		
 		if(confirm!=null)confirm.render();
 	}
 	
