@@ -99,6 +99,7 @@ public class Game {
 				confirmResult=0;
 				showConfirmDialogue=false;
 			}
+			
 		}
 	}
 	
