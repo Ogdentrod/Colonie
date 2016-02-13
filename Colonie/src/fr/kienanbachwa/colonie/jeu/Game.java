@@ -66,9 +66,9 @@ public class Game {
 		render_game();
 		drawSelect(Mouse.getX(),Mouse.getY());	
 		
-		if(!gestion.getSelectedTiles().isEmpty()){
-			if(confirm==null)
-				confirm = new DialogueConfirm("Prout", 1, 1);
+		if(!gestion.getSelectedTiles().isEmpty()) {
+			if(confirm == null)
+				confirm = new DialogueConfirm("Confirmation construction", 1, 1);
 			
 			int confirmResult = confirm.update(1, 1);
 			
