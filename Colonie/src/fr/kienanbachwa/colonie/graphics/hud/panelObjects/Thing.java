@@ -3,7 +3,7 @@ package fr.kienanbachwa.colonie.graphics.hud.panelObjects;
 import fr.kienanbachwa.colonie.graphics.Texture;
 
 public abstract class Thing {
-	Texture texture;
+	protected Texture texture;
 	protected int x;
 	protected int y;
 	protected int w;

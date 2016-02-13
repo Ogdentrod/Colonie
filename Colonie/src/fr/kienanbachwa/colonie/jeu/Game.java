@@ -39,9 +39,13 @@ public class Game {
 	
 	private Structure[][] structs;
 	DialogueConfirm confirm;
-
+	int confirmResult=0;
+	private boolean showConfirmDialogue=false;
+	
 	public Game(){
 		gestion = new Gestion(sizeMap,sizeMap);
+		confirm = new DialogueConfirm("Prout", 1, 1);
+
 	}
 	
 	public void init(){
@@ -55,7 +59,47 @@ public class Game {
 		mouseYGrid = (int) ( ( Component.height*Component.scale - Mouse.getY() + (-yScroll * Component.scale*zoom)) /Zone.tileSize/Component.scale/zoom);
 		mouseXGrid = (int) ((Mouse.getX() + (-xScroll * Component.scale*zoom))/Zone.tileSize/Component.scale/zoom);
 		
-		
+		if(!gestion.getSelectedTiles().isEmpty()){
+			if(confirm==null){
+			}
+			int posX=0;
+			int posY=0;
+			
+			int rankY=0, rankX=0;
+			for(Structure e : gestion.getSelectedTiles()){
+				if( e.getX() > gestion.getSelectedTiles().get(rankX).getX() ){
+					rankX = gestion.getSelectedTiles().indexOf(e);
+				}
+			}
+			
+			for(Structure e : gestion.getSelectedTiles()){
+				if( e.getY() > gestion.getSelectedTiles().get(rankY).getY() ){
+					rankY = gestion.getSelectedTiles().indexOf(e);
+				}
+			}
+			
+			try{
+			posX = gestion.getSelectedTiles().get(0).getX()*Zone.tileSize + (gestion.getSelectedTiles().get(rankX).getX()*Zone.tileSize - gestion.getSelectedTiles().get(0).getX()*Zone.tileSize) /2;
+			posY = gestion.getSelectedTiles().get(0).getY()*Zone.tileSize + (gestion.getSelectedTiles().get(rankY).getY()*Zone.tileSize - gestion.getSelectedTiles().get(0).getY()*Zone.tileSize) /2;
+			}catch(IndexOutOfBoundsException e){
+				
+			}
+			confirmResult = confirm.update(posX, posY);
+			
+			if( confirmResult == 1){
+				System.out.println("KONSTRWIR");
+				for(Structure e : gestion.getSelectedTiles()){
+					gestion.creerStruct(Hud.elementClicked, e.getX(), e.getY());
+				}
+				gestion.getSelectedTiles().clear();
+				confirmResult=0;
+				showConfirmDialogue=false;
+			}else if( confirmResult == -1){
+				gestion.getSelectedTiles().clear();
+				confirmResult=0;
+				showConfirmDialogue=false;
+			}
+		}
 	}
 	
 	public void render(){
@@ -66,19 +110,7 @@ public class Game {
 		render_game();
 		drawSelect(Mouse.getX(),Mouse.getY());	
 		
-		if(!gestion.getSelectedTiles().isEmpty()){
-			if(confirm==null)
-				confirm = new DialogueConfirm("Prout", 1, 1);
-			
-			int confirmResult = confirm.update(1, 1);
-			
-			if( confirmResult == 1){
-				System.out.println("KONSTRWIR");
-				gestion.getSelectedTiles().clear();
-			}else if( confirmResult == -1){
-				gestion.getSelectedTiles().clear();
-			}
-		}
+		if(confirm!=null)confirm.render();
 	}
 	
 	public void render_game() {

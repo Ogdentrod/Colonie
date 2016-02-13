@@ -9,7 +9,7 @@ import org.newdawn.slick.util.ResourceLoader;
 import fr.kienanbachwa.colonie.graphics.Fonts;
 import fr.kienanbachwa.colonie.graphics.Texture;
 
-public class OngletButton extends Button{
+public class OngletButton extends ButtonHud{
 
 	boolean isSelected=false;
 	String name;
