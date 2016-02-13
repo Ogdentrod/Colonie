@@ -110,7 +110,23 @@ public class Game {
 		render_game();
 		drawSelect(Mouse.getX(),Mouse.getY());	
 		
+<<<<<<< Upstream, based on origin/withoutSlick
 		if(confirm!=null)confirm.render();
+=======
+		if(!gestion.getSelectedTiles().isEmpty()){
+			if(confirm==null)
+				confirm = new DialogueConfirm("Prout", 1, 1);
+			
+			int confirmResult = confirm.update(1, 1);
+			
+			if( confirmResult == 1){
+				System.out.println("KONSTRWIR");
+				gestion.getSelectedTiles().clear();
+			} else if( confirmResult == -1){
+				gestion.getSelectedTiles().clear();
+			}
+		}
+>>>>>>> 79cb830 NOTHING
 	}
 	
 	public void render_game() {
