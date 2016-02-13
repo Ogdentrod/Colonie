@@ -44,7 +44,6 @@ public class Game {
 	
 	public Game(){
 		gestion = new Gestion(sizeMap,sizeMap);
-		confirm = new DialogueConfirm("Prout", 1, 1);
 
 	}
 	
@@ -59,6 +58,17 @@ public class Game {
 		mouseYGrid = (int) ( ( Component.height*Component.scale - Mouse.getY() + (-yScroll * Component.scale*zoom)) /Zone.tileSize/Component.scale/zoom);
 		mouseXGrid = (int) ((Mouse.getX() + (-xScroll * Component.scale*zoom))/Zone.tileSize/Component.scale/zoom);
 		
+
+	}
+	
+	public void render(){
+		zoom();
+
+		GL11.glTranslatef(xScroll, yScroll, 0);
+		
+		render_game();
+		drawSelect(Mouse.getX(),Mouse.getY());	
+		
 		if(!gestion.getSelectedTiles().isEmpty()){
 			if(confirm==null){
 			}
@@ -66,28 +76,29 @@ public class Game {
 			int posY=0;
 			
 			int rankY=0, rankX=0;
-			for(Structure e : gestion.getSelectedTiles()){
-				if( e.getX() > gestion.getSelectedTiles().get(rankX).getX() ){
-					rankX = gestion.getSelectedTiles().indexOf(e);
-				}
-			}
-			
-			for(Structure e : gestion.getSelectedTiles()){
-				if( e.getY() > gestion.getSelectedTiles().get(rankY).getY() ){
-					rankY = gestion.getSelectedTiles().indexOf(e);
-				}
-			}
+//			for(Structure e : gestion.getSelectedTiles()){
+//				if( e.getX() > gestion.getSelectedTiles().get(rankX).getX() ){
+//					rankX = gestion.getSelectedTiles().indexOf(e);
+//				}
+//			}
+//			
+//			for(Structure e : gestion.getSelectedTiles()){
+//				if( e.getY() > gestion.getSelectedTiles().get(rankY).getY() ){
+//					rankY = gestion.getSelectedTiles().indexOf(e);
+//				}
+//			}
 			
 			try{
-			posX = gestion.getSelectedTiles().get(0).getX()*Zone.tileSize + (gestion.getSelectedTiles().get(rankX).getX()*Zone.tileSize - gestion.getSelectedTiles().get(0).getX()*Zone.tileSize) /2;
-			posY = gestion.getSelectedTiles().get(0).getY()*Zone.tileSize + (gestion.getSelectedTiles().get(rankY).getY()*Zone.tileSize - gestion.getSelectedTiles().get(0).getY()*Zone.tileSize) /2;
+			//posX = gestion.getSelectedTiles().get(0).getX()*Zone.tileSize + (gestion.getSelectedTiles().get(rankX).getX()*Zone.tileSize - gestion.getSelectedTiles().get(0).getX()*Zone.tileSize) /2;
+			//posY = gestion.getSelectedTiles().get(0).getY()*Zone.tileSize + (gestion.getSelectedTiles().get(rankY).getY()*Zone.tileSize - gestion.getSelectedTiles().get(0).getY()*Zone.tileSize) /2;
+			posX = gestion.getSelectedTiles().get(0).getX()*Zone.tileSize;
+			posY = gestion.getSelectedTiles().get(0).getY()*Zone.tileSize;
 			}catch(IndexOutOfBoundsException e){
 				
 			}
-			confirmResult = confirm.update(posX, posY);
+			confirmResult = DialogueConfirm.update("Prout",posX, posY);
 			
 			if( confirmResult == 1){
-				System.out.println("KONSTRWIR");
 				for(Structure e : gestion.getSelectedTiles()){
 					gestion.creerStruct(Hud.elementClicked, e.getX(), e.getY());
 				}
@@ -101,18 +112,6 @@ public class Game {
 			}
 			
 		}
-	}
-	
-	public void render(){
-		zoom();
-
-		GL11.glTranslatef(xScroll, yScroll, 0);
-		
-		render_game();
-		drawSelect(Mouse.getX(),Mouse.getY());	
-		
-		
-		if(confirm!=null)confirm.render();
 	}
 	
 	public void render_game() {

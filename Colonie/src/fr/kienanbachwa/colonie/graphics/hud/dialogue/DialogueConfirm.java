@@ -22,33 +22,9 @@ public class DialogueConfirm {
 	static Texture cancelTexture = Texture.loadTexture("cross");
 	boolean mouseOnDialogue = false;
 	
-	int h;
-	int w;
 	String text;
-
-	private int x;
-
-	private int y;
 	
-	public DialogueConfirm(String text, int x, int y){
-		this.text=text;
-		this.h = font.getHeight(text);
-		this.w = font.getWidth(text);
-		
-		glColor4f(1, 1, 1, 1);
-
-		confirm.setIcon(confirmTexture);
-		cancel.setIcon(cancelTexture);
-		
-		confirm.init();
-		cancel.init();
-		
-
-		
-
-	}
-	
-	public int update(int x, int y){
+	public static int update(String text, int x, int y){
 
 //		if(Mouse.getX() > x*Component.scale && Mouse.getX()<(x+w)*Component.scale && Mouse.getY() < (Component.height-y)*Component.scale && Mouse.getY()> (Component.height-y-h)*Component.scale){
 //			mouseOnDialogue=true;
@@ -56,13 +32,19 @@ public class DialogueConfirm {
 //			mouseOnDialogue=false;
 //		}
 		
-		this.x=x;
-		this.y=y;
+		int h = font.getHeight(text);
+		int w = font.getWidth(text);
+		confirm.setIcon(confirmTexture);
+		cancel.setIcon(cancelTexture);
 		
 		confirm.update(x, y+h-10, (w/4 +7)/2, 10);
 		cancel.update(x+((w/4 +7)/2), y+h-10, (w/4 +7)/2, 10);
 
-
+		Renderer.renderQuadSimple(x, y, w/4 +7, h/2, Color.DARKERRED);
+		font.drawString(x, y + h/2, Fonts.toWord(text), 0.5f, -0.5f);
+		
+		confirm.render();
+		cancel.render();
 		
 		if(confirm.clicked){
 			return 1;
@@ -72,14 +54,5 @@ public class DialogueConfirm {
 			return -1;
 		}
 		return 0;
-	}
-	
-	public void render(){
-		Renderer.renderQuadSimple(x, y, w/4 +7, h/2, Color.DARKERRED);
-		font.drawString(x, y + h/2, Fonts.toWord(text), 0.5f, -0.5f);
-		
-		confirm.render();
-		cancel.render();
-	}
-	
+	}	
 }
