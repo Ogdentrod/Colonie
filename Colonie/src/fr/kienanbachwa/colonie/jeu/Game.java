@@ -75,7 +75,7 @@ public class Game {
 			if( confirmResult == 1){
 				System.out.println("KONSTRWIR");
 				gestion.getSelectedTiles().clear();
-			}else if( confirmResult == -1){
+			} else if( confirmResult == -1){
 				gestion.getSelectedTiles().clear();
 			}
 		}
