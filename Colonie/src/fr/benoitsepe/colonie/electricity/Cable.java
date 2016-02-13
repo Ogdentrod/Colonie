@@ -1,5 +1,6 @@
 package fr.benoitsepe.colonie.electricity;
 
+<<<<<<< HEAD
 public class Cable extends Elec {
 	
 	protected double resistanceLigne;
@@ -19,5 +20,8 @@ public class Cable extends Elec {
 		
 		return intensite;
 	}
+=======
+public class Cable {
+>>>>>>> branch 'withoutSlick' of https://misterbenoit@bitbucket.org/misterbenoit/colonie.git
 
 }

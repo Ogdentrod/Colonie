@@ -2,6 +2,7 @@ package fr.benoitsepe.colonie.electricity;
 
 public class Elec {
 	
+<<<<<<< HEAD
 	protected double tension;
 	protected double intensite;
 	
@@ -31,5 +32,9 @@ public class Elec {
 	}
 
 
+=======
+	protected int resistance_ligne;
+	protected int section;
+>>>>>>> branch 'withoutSlick' of https://misterbenoit@bitbucket.org/misterbenoit/colonie.git
 	
 }

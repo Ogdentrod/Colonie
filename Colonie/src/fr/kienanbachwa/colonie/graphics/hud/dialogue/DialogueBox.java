@@ -7,13 +7,13 @@ import fr.kienanbachwa.colonie.graphics.Fonts;
 import fr.kienanbachwa.colonie.graphics.Renderer;
 import fr.kienanbachwa.colonie.graphics.Texture;
 import fr.kienanbachwa.colonie.graphics.TrueTypeFont;
-import fr.kienanbachwa.colonie.graphics.hud.panelObjects.Button;
+import fr.kienanbachwa.colonie.graphics.hud.panelObjects.ButtonHud;
 
 public class DialogueBox {	
 	static TrueTypeFont font = new Fonts("fonts/stan0753.ttf", 12f).getFont();
 
-	static Button confirm = new Button();
-	static Button cancel = new Button();
+	static ButtonHud confirm = new ButtonHud();
+	static ButtonHud cancel = new ButtonHud();
 	static Texture confirmTexture = Texture.loadTexture("check");
 	static Texture cancelTexture = Texture.loadTexture("cross");
 	

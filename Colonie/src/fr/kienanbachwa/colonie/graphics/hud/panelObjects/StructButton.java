@@ -7,7 +7,7 @@ import fr.kienanbachwa.colonie.graphics.Texture;
 import fr.kienanbachwa.colonie.graphics.hud.Hud;
 import fr.kienanbachwa.colonie.graphics.hud.dialogue.DialogueBox;
 
-public class StructButton extends Button{
+public class StructButton extends ButtonHud{
 
 	Texture texture;
 	private TypeStructures typeStructure;

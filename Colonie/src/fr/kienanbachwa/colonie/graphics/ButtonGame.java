@@ -1,23 +1,20 @@
-package fr.kienanbachwa.colonie.graphics.hud.panelObjects;
-
+package fr.kienanbachwa.colonie.graphics;
 
 import org.lwjgl.input.Mouse;
 
-import fr.kienanbachwa.colonie.graphics.Renderer;
-import fr.kienanbachwa.colonie.graphics.Texture;
 import fr.kienanbachwa.colonie.graphics.hud.Hud;
+import fr.kienanbachwa.colonie.graphics.hud.panelObjects.Thing;
 import fr.kienanbachwa.colonie.jeu.Component;
-import fr.kienanbachwa.colonie.graphics.Color;
+import fr.kienanbachwa.colonie.jeu.Game;
 
-
-public class Button extends Thing{
+public class ButtonGame extends Thing{
 
 	public boolean clicked = false;
 	public boolean hovered = false;
 	protected boolean isSelected;
 	Texture icon;
 	
-	public Button(){
+	public ButtonGame(){
 		super();
 		this.texture=Texture.loadTexture("buttonText");
 	}
@@ -25,7 +22,7 @@ public class Button extends Thing{
 	public void update(int x, int y, int w, int h){
 		super.update(x, y, w, h);
 		
-		if(Mouse.getX()/Component.scale>x && Mouse.getX()/Component.scale<x+w && Component.height-(Mouse.getY()/Component.scale)>y && Component.height-(Mouse.getY()/Component.scale)<y+h){
+		if( ((Mouse.getX() + (-Game.xScroll * Component.scale*Game.zoom))/Component.scale/Game.zoom)>x && ((Mouse.getX() + (-Game.xScroll * Component.scale*Game.zoom))/Component.scale/Game.zoom)<x+w && ( ( Component.height*Component.scale - Mouse.getY() + (-Game.yScroll * Component.scale*Game.zoom))/Component.scale/Game.zoom)>y && ( ( Component.height*Component.scale - Mouse.getY() + (-Game.yScroll * Component.scale*Game.zoom))/Component.scale/Game.zoom) <y+h){
 			hovered=true;
 		}else{
 			hovered=false;

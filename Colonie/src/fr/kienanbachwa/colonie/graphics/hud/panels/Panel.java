@@ -8,7 +8,7 @@ import fr.kienanbachwa.colonie.graphics.Texture;
 import fr.kienanbachwa.colonie.graphics.hud.panelObjects.OngletButton;
 import fr.kienanbachwa.colonie.graphics.hud.panelObjects.Thing;
 import fr.kienanbachwa.colonie.graphics.hud.Hud;
-import fr.kienanbachwa.colonie.graphics.hud.panelObjects.Button;
+import fr.kienanbachwa.colonie.graphics.hud.panelObjects.ButtonHud;
 
 
 public class Panel {
@@ -37,10 +37,10 @@ public class Panel {
 	
 	public void update(){
 		for(Thing b : array){
-			if( ((Button)b).isClicked() ){
+			if( ((ButtonHud)b).isClicked() ){
 				for(Thing c : array){
 					if(c != b)
-					((Button)c).deselect();
+					((ButtonHud)c).deselect();
 				}
 			}
 		}

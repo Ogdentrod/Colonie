@@ -4,7 +4,7 @@ import org.lwjgl.input.Mouse;
 
 import fr.kienanbachwa.colonie.graphics.hud.Hud;
 import fr.kienanbachwa.colonie.graphics.hud.dialogue.DialogueBox;
-import fr.kienanbachwa.colonie.graphics.hud.panelObjects.Button;
+import fr.kienanbachwa.colonie.graphics.hud.panelObjects.ButtonHud;
 import fr.kienanbachwa.colonie.graphics.hud.panelObjects.StructButton;
 import fr.kienanbachwa.colonie.graphics.hud.panelObjects.Thing;
 import fr.kienanbachwa.colonie.jeu.Component;
@@ -25,7 +25,7 @@ public class PanelGrid extends Panel {
 
 	public void init() {
 		super.init();
-		((Button)array.get(0)).select();
+		((ButtonHud)array.get(0)).select();
 	}
 
 	public void update(int x, int y, int w, int h) {
