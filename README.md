@@ -1,2 +1,2 @@
 # Colonie
-BEST GAME EVER
+Jeu 2D (non terminé) de simulation d'une colonie spatiale
